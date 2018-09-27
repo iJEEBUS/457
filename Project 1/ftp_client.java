@@ -16,33 +16,13 @@
 import java.net.*;
 
 public class ftp_client {
-
 	/**
-   * Create instance of client and connect to the server
-   *
-	 * @param args
-	 */
+	* Creates an instance of a client and connects to the server
+	* that is hardcoded into the program.
+	*
+	* @param args
+	*/
 	public static void main(String[] args) {}
-  
-  /**
-   * Lists all of the files that are in the current directory of the 
-   * users location in the servers file system
-   */
-  private void listFiles() {}
-  
-  /**
-   * Retrieves the specified file from the server and outputs
-   * the contents to the users console.
-   */
-  private void retrieveFile(String filename) {}
-  
-  /**
-   * Retrieves the specified file from the client and stores
-   * it onto the server with the same filename
-   * 
-   * NOTE: BEWARE OF DUPLICATE FILENAMES
-   */
-  private void storeFile(String filename) {}
  
   /**
    * Terminates the connection with the server
