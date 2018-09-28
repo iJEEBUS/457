@@ -7,7 +7,6 @@
  */
 import java.io.*;
 import java.net.*; // for Socket, ServerSocket, and InetAddress
-import java.util.Scanner;
 
 public class ftp_server {
 
@@ -31,7 +30,7 @@ public class ftp_server {
 
         int messageSize;
         byte[] buffer = new byte[BUFSIZE];
-        byte[] output_buffer;
+        byte[] output_buffer = new byte[BUFSIZE];
 
 
         // Keep server up and listening for new connections
@@ -43,82 +42,54 @@ public class ftp_server {
             CLIENT_CONNECTED = true;
             System.out.println("Client from " + client.getInetAddress() + " connected");
 
+
+            DataOutputStream out = new DataOutputStream(new BufferedOutputStream(client.getOutputStream()));
+            DataInputStream in = new DataInputStream(new BufferedInputStream(client.getInputStream()));
+
             while (CLIENT_CONNECTED) {
 
                 // Print command
-                DataOutputStream out = new DataOutputStream(new BufferedOutputStream(client.getOutputStream()));
-                DataInputStream in = new DataInputStream(new BufferedInputStream(client.getInputStream()));
 
                 while (in.read(buffer) != -1) {
 
                     String full_command = new String(buffer, "ISO-8859-1").toLowerCase();
-//                    String function = new String(full_command.split(" ")[0]);
-//                    String filename = (full_command.split(" ").length > 1) ? new String(full_command.split(" ")[1]) : "";
 
                     if (full_command.contains("quit")) {
-                        System.out.println("Closing connection");
-                        CLIENT_CONNECTED = false;
+                        CLIENT_CONNECTED = quit();
+
                     } else if (full_command.contains("list")) {
-                        System.out.println("Command: " + full_command);
-                        String cwd = ".";
-                        String final_files = "";
-                        File dir = new File(cwd);
-                        File[] files = dir.listFiles();
-
-                        if (files.length == 0) {
-                            System.out.println("This directory is empty");
-                        } else {
-                            for (File f : files) {
-                                final_files += f.getName() + "\n";
-                            }
-
-                            output_buffer = final_files.getBytes("ISO-8859-1");
-                            out.write(output_buffer, 0, output_buffer.length);
-                            out.flush();
-                        }
-
-
-
-                    } else {
-                        System.out.println("Command: " + full_command);
-                        buffer = new byte[BUFSIZE];
-
+                        listFiles(out, output_buffer);
                     }
-
-
-
-
-
                 }
 
             }
-
-
-
-
         }
     }
-
-
-    /**
-     * A helper method that converts the bytes from the data input stream into
-     * a string that we can use to control the flow of the program based on the
-     * users input.
-     *
-     * @param is - DataInputStream : the byte data received from client
-     * @return String - : the decoded version of the byte data
-     */
-    private static String convertStreamToString(DataInputStream is) throws IOException {
-	    String full_command = "";
-	    return full_command;
-    }
-
 
   /**
    * Lists all of the files that are in the current directory of the 
    * server
    */
-  private void listFiles() {}
+  private static void listFiles(DataOutputStream os, byte[] out_buffer) throws IOException {
+      System.out.println("Listing files.");
+      String cwd = ".";
+      String final_files = "";
+      File dir = new File(cwd);
+      File[] files = dir.listFiles();
+
+      if (files.length == 0) {
+          System.out.println("This directory is empty");
+      } else {
+          for (File f : files) {
+              final_files += f.getName() + "\n";
+          }
+
+          out_buffer = new byte[final_files.getBytes("ISO-8859-1").length];
+          out_buffer = final_files.getBytes("ISO-8859-1");
+          os.write(out_buffer, 0, out_buffer.length);
+          os.flush();
+      }
+  }
   
   /**
    * Retrieves the specified file and sends it to the client
@@ -136,5 +107,8 @@ public class ftp_server {
   /**
    * Terminates the connection with the client
    */
-   private void quit() {}
+   private static Boolean quit() {
+       System.out.println("Closing connection");
+       return false;
+   }
 }

@@ -15,7 +15,6 @@
  */
 import java.io.*;
 import java.net.*;
-import java.util.Date;
 import java.util.Scanner;
 
 public class ftp_client {
@@ -40,6 +39,10 @@ public class ftp_client {
 		Socket server = new Socket("127.0.0.1", 1234);
 		server.setKeepAlive(true);
 
+		// Setup data connection
+		DataOutputStream out = new DataOutputStream(new BufferedOutputStream(server.getOutputStream()));
+		DataInputStream in  = new DataInputStream(new BufferedInputStream(server.getInputStream()));
+
 		System.out.println("Connected to " + server.getInetAddress());
 
 		// input and output buffers
@@ -48,12 +51,8 @@ public class ftp_client {
 
 		boolean KEEP_ALIVE = true;
 
-
 		while (KEEP_ALIVE) {
 
-			// Setup data connection
-			DataOutputStream out = new DataOutputStream(new BufferedOutputStream(server.getOutputStream()));
-			DataInputStream in  = new DataInputStream(new BufferedInputStream(server.getInputStream()));
 
 			// Prompt user for input
 			Scanner scan = new Scanner(System.in);
@@ -76,9 +75,6 @@ public class ftp_client {
 			} else if (input.contains("list")) {
 
 				listFiles(out, output_buffer, in, input_buffer);
-				System.out.print("Loop exit");
-
-
 
 			} else {
 
@@ -87,25 +83,38 @@ public class ftp_client {
 			}
 
 		}
-
-
-
 	}
 
+	/**
+	 * Displays the files in the current directory that the user is in
+	 * on the server.
+	 *
+	 * @param os
+	 * @param out_buffer
+	 * @param is
+	 * @param in_buffer
+	 * @throws IOException
+	 */
 	private static void listFiles(DataOutputStream os, byte[] out_buffer, DataInputStream is, byte[] in_buffer) throws IOException {
 
 		// send list request to server
 		os.write(out_buffer, 0, out_buffer.length);
 		os.flush();
 
-		// print out response from server
-		while (is.read(in_buffer) != -1) {
-			if (in_buffer[]) {}
-			String response = new String(in_buffer, "ISO-8859-1");
-			System.out.print(response);
-			in_buffer = new byte[BUFSIZE];
+
+		// Read the incoming data stream and print out each filename.
+		// Print out response.
+		int bytesRead = 0;
+		while ((bytesRead = is.read(in_buffer)) >= 0) {
+				String response = new String(in_buffer, "ISO-8859-1");
+				System.out.print(response);
+				in_buffer = new byte[BUFSIZE];
+
+			// Breaks loop when the amt of data read in is less
+			// than the buffer can handle
+			if (bytesRead < in_buffer.length) {
+				break;
+			}
 		}
 	}
-
-
 }

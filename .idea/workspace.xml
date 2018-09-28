@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="056c5d52-7487-4960-848f-20b7383f6982" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Project 1/ftp_client.class" afterPath="$PROJECT_DIR$/Project 1/ftp_client.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Project 1/ftp_server.class" afterPath="$PROJECT_DIR$/Project 1/ftp_server.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Lab 3/src/IPFinder2.java" afterPath="$PROJECT_DIR$/Lab 3/src/IPFinder2.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Project 1/ftp_client.java" afterPath="$PROJECT_DIR$/Project 1/ftp_client.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Project 1/ftp_server.java" afterPath="$PROJECT_DIR$/Project 1/ftp_server.java" />
     </list>
@@ -25,11 +22,12 @@
             <file leaf-file-name="ftp_server.java" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/Project 1/ftp_server.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="-1020">
-                    <caret line="15" column="41" lean-forward="false" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
+                  <state relative-caret-position="120">
+                    <caret line="8" column="63" lean-forward="false" selection-start-line="8" selection-start-column="63" selection-end-line="8" selection-end-column="63" />
                     <folding>
                       <element signature="n#!!doc" expanded="true" />
                       <element signature="imports" expanded="true" />
+                      <element signature="method#quit#0;class#ftp_server#0" expanded="false" />
                     </folding>
                   </state>
                 </provider>
@@ -45,8 +43,8 @@
       <file leaf-file-name="ftp_client.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Project 1/ftp_client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="964">
-              <caret line="102" column="26" lean-forward="false" selection-start-line="102" selection-start-column="26" selection-end-line="102" selection-end-column="26" />
+            <state relative-caret-position="375">
+              <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -73,8 +71,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Project 1/ftp_server.java" />
         <option value="$PROJECT_DIR$/Project 1/ftp_client.java" />
+        <option value="$PROJECT_DIR$/Project 1/ftp_server.java" />
       </list>
     </option>
   </component>
@@ -85,7 +83,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1081" />
+    <option name="x" value="-997" />
     <option name="y" value="22" />
     <option name="width" value="1024" />
     <option name="height" value="1028" />
@@ -267,15 +265,15 @@
       <option name="presentableId" value="Default" />
       <updated>1538067703627</updated>
       <workItem from="1538067704954" duration="6333000" />
-      <workItem from="1538091179873" duration="12173000" />
+      <workItem from="1538091179873" duration="17178000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18506000" />
+    <option name="totallyTimeSpent" value="23511000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1081" y="22" width="1024" height="1028" extended-state="0" />
+    <frame x="-997" y="22" width="1024" height="1028" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -336,25 +334,27 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="method#quit#0;class#ftp_server#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Project 1/ftp_server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1020">
-          <caret line="15" column="41" lean-forward="false" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
+        <state relative-caret-position="120">
+          <caret line="8" column="63" lean-forward="false" selection-start-line="8" selection-start-column="63" selection-end-line="8" selection-end-column="63" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="method#quit#0;class#ftp_server#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Project 1/ftp_client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="964">
-          <caret line="102" column="26" lean-forward="false" selection-start-line="102" selection-start-column="26" selection-end-line="102" selection-end-column="26" />
+        <state relative-caret-position="375">
+          <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
