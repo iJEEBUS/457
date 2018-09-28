@@ -1,13 +1,21 @@
+/*****************************************************************************
+ * This class with allow the user to input multiple host names as arguments
+ * via the command line. It will then retrieve and present the user with all
+ * of the IP addresses that are associated with that host name.
+ *
+ * @author
+ * @version 9.25.2018
+ *****************************************************************************/
 import java.net.InetAddress;
 
 public class IPFinder2 {
 
-	/**
+	/*****************************************************************************
 	 * Takes the hosts that the use inputs as arguments and returns all of their
 	 * associated IP addresses.
 	 *
 	 * @param args - hostname(s) - the hosts to scan for IP addresses
-	 */
+	 *****************************************************************************/
 	public static void main(String[] args) {
 		
 		try {
@@ -50,3 +58,8 @@ public class IPFinder2 {
 		System.out.println("\n");
 	}
 }
+
+
+
+
+

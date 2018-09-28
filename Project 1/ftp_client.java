@@ -20,6 +20,10 @@ import java.util.Scanner;
 
 public class ftp_client {
 
+	private static final int BUFSIZE = 32;
+
+
+
 	/**
 	* Creates an instance of a client and connects to the server
 	* that is hardcoded into the program.
@@ -28,31 +32,80 @@ public class ftp_client {
 	*/
 	public static void main(String[] args) throws IOException {
 
-		// connect to server and setup data connection
+
+		int messageSize;
+
+
+		// connect to server
 		Socket server = new Socket("127.0.0.1", 1234);
+		server.setKeepAlive(true);
+
 		System.out.println("Connected to " + server.getInetAddress());
-		DataOutputStream out = new DataOutputStream(new BufferedOutputStream(server.getOutputStream()));
 
-		// Prompt user for input
-		Scanner scan = new Scanner(System.in);
-		System.out.print("Enter a command: ");
-		String input = scan.nextLine();
-		byte[] buffer = input.getBytes();
+		// input and output buffers
+		byte[] input_buffer = new byte[BUFSIZE];
+		byte[] output_buffer;
+
+		boolean KEEP_ALIVE = true;
 
 
-		// Send the string to buffer then server
-		out.write(buffer, 0, buffer.length);
-		out.flush();
+		while (KEEP_ALIVE) {
+
+			// Setup data connection
+			DataOutputStream out = new DataOutputStream(new BufferedOutputStream(server.getOutputStream()));
+			DataInputStream in  = new DataInputStream(new BufferedInputStream(server.getInputStream()));
+
+			// Prompt user for input
+			Scanner scan = new Scanner(System.in);
+			System.out.print("Enter a command: ");
+			String input = scan.nextLine();
+			output_buffer = input.getBytes("ISO-8859-1");
+
+
+			// Close connection if QUIT command is entered
+			if (input.equalsIgnoreCase("quit")) {
+
+				// Send the string to output_buffer then server
+				out.write(output_buffer, 0, output_buffer.length);
+				out.flush();
+				scan.close();
+				server.close();
+				KEEP_ALIVE = false;
+				System.out.println("Connection closed.");
+
+			} else if (input.contains("list")) {
+
+				listFiles(out, output_buffer, in, input_buffer);
+				System.out.print("Loop exit");
+
+
+
+			} else {
+
+				// unknown commands
+				System.out.println("Not a valid command.");
+			}
+
+		}
 
 
 
 	}
- 
-  /**
-   * Terminates the connection with the server
-   */
-   private void quit(DataOutputStream dos) throws IOException {
-   	dos.close();
 
-   }
+	private static void listFiles(DataOutputStream os, byte[] out_buffer, DataInputStream is, byte[] in_buffer) throws IOException {
+
+		// send list request to server
+		os.write(out_buffer, 0, out_buffer.length);
+		os.flush();
+
+		// print out response from server
+		while (is.read(in_buffer) != -1) {
+			if (in_buffer[]) {}
+			String response = new String(in_buffer, "ISO-8859-1");
+			System.out.print(response);
+			in_buffer = new byte[BUFSIZE];
+		}
+	}
+
+
 }
