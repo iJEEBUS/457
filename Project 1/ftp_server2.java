@@ -4,29 +4,50 @@ import java.util.*;
 
 class ftp_server2 {
 
+    private static final int BUFSIZE = 32;
+
     public static void main(String[] args) throws IOException {
 
+	boolean CLIENT_CONNECTED = false;
         int port;
-        String fromClient;
-        String clientCommand;
-        byte[] buffer;
+        byte[] inputBuffer;
+	byte[] outputBuffer;
 
-        // setup welcome socket for client to handshake
-        ServerSocket welcomeSocket = new ServerSocket(12000);
+        // Create a socket that handles all connections requests
+	// (port number is hardcoded)
+	port = 1234; 
+        ServerSocket welcomeSocket = new ServerSocket(port);
 
+	// Create buffers for reading in and writing out data
+	inputBuffer = new byte[BUFSIZE];
+	outputBuffer = new byte[BUFSIZE];
+
+	// Have the server up and listening forever
         while(true) {
-            Socket controlSocket = welcomeSocket.accept();
+	    
+	   System.out.println("Waiting for client to connect...");	
+	
+	    // When a connection is attempted, accept it
+            Socket clientControlSocket = welcomeSocket.accept();
 
-            DataOutputStream sendData = new DataOutputStream(controlSocket.getOutputStream());
-            BufferedReader clientInput = new BufferedReader(new InputStreamReader(controlSocket.getInputStream()));
+	    System.out.println("Client from " + clientControlSocket.getInetAddress() + " connected");
+	    CLIENT_CONNECTED = true;		
 
-            fromClient = clientInput.readLine();
-
-            StringTokenizer tokens = new StringTokenizer(fromClient);
-
-            clientCommand = tokens.nextToken();
-
-
+	    while (CLIENT_CONNECTED) {
+		System.out.println("Processing command....");
+		// Create the data streams to send and receive data to connected client
+            	DataOutputStream outputData = new DataOutputStream(clientControlSocket.getOutputStream());
+            	DataInputStream inputData = new DataInputStream(new BufferedInputStream(clientControlSocket.getInputStream()));
+		
+		while (inputData.read(inputBuffer) != -1) {
+		    // Read the client message and extract the command
+            	    String clientMessage = new String(inputBuffer, "ISO-8859-1");
+		
+		    System.out.println(clientMessage);
+		}    
+		
+	    }
+	    
         }
     }
 }
