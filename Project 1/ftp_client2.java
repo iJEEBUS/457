@@ -7,8 +7,8 @@ import javax.swing.*;
 
 class ftp_client2 {
 
-   private static int BUFSIZE = 32;
-
+    private static int BUFSIZE = 32;
+    
     public static void main(String[] argv) throws Exception {
         String sentence;
         String modifiedSentence;
@@ -30,7 +30,6 @@ class ftp_client2 {
 	    // Create connection to the specified server IP and port number
 //        if(sentence.startsWith("connect")) {
 	if (true) {	   
-	    String localSentence;
 	    String userCommand;
 		    
 	    // Extract server IP and port number
@@ -65,12 +64,11 @@ class ftp_client2 {
 		
 		// Read the users newly inputted message and
 		// load its bytes into the buffer
-                localSentence = inFromUser.readLine();
-		outputBuffer = localSentence.getBytes("ISO-8859-1");
+		outputBuffer = sentence.getBytes("ISO-8859-1");
 
 		// Execute commands of the user		
 		// Close the connection
-		if (localSentence.equalsIgnoreCase("quit")) {
+		if (sentence.equalsIgnoreCase("quit")) {
 		 
 		    // Send the string "quit" to the server
 		    outToServer.write(outputBuffer, 0, outputBuffer.length);
@@ -79,7 +77,7 @@ class ftp_client2 {
 		    inFromServer.close();
 		    System.out.println("Thank you for visiting.\nThis connection is now closed.");
 		    connectionOpen = false;  
-		} else if (localSentence.contains("list")) {
+		} else if (sentence.contains("list")) {
 		    listFiles(outToServer, outputBuffer, inFromServer, inputBuffer);
 		}
 
@@ -110,29 +108,38 @@ class ftp_client2 {
 	byte[] tempInputBuffer = inputBuff;
 
 	// Send the list command to the server
-	out.write(tempOutputBuffer, 0, tempOutputBuffer.length);
+	out.write(outputBuff, 0, outputBuff.length);
 	out.flush();
 	
+	System.out.println(outputBuff.);
 	// Read the response from the server
 	// This prints the list of the files in the current directory of the server
 	int bytesRead = 0;
 
-	// While there is data to read
-	while ((bytesRead = in.read(inputBuff)) >= 0) {
+	StringBuffer inputLine = new StringBuffer();
+	String tmp;
+	while ((tmp = in.readLine()) != null) {
+	  inputLine.append(tmp);
+	}
 
+	// While there is data to read
+	while (in.read(inputBuff) >= 0) {
+	    
+		   System.out.println("About to list the files!");
+	   	
 	    // Create and print data to screen
-	    String response = new String(tempInputBuffer, "ISO-8859-1");
+	    String response = new String(inputBuff, "ISO-8859-1");
 	    System.out.print(response);
 	    
 	    // Clear the buffer
-	    tempInputBuffer = new byte[BUFSIZE];
+	    inputBuff = new byte[BUFSIZE];
 
 	    // Break the loop if the number of bytesRead is 
 	    // less than what the buffer supports. This means
 	    // the message has reached the end of its transmission.
-	    if (bytesRead < tempInputBuffer.length) {
-	        break;
-	    }
+	    //if (bytesRead < BUFSIZE) {
+	    //    break;
+	    //}
 	}
 
     }

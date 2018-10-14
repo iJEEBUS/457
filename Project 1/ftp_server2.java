@@ -36,12 +36,12 @@ class ftp_server2 {
 	    System.out.println("Client from " + client.getInetAddress() + " connected");
 	    CLIENT_CONNECTED = true;		
 
+	    DataInputStream inFromClient = new DataInputStream(client.getInputStream());
+	    DataOutputStream outToClient = new DataOutputStream(client.getOutputStream());
 	    // This is where the connected clients get moved to
 	    // their own threads
-	    ClientHandler handler = new ClientHandler(client);
-	    handler.run();
-	    
-	    
+	    ClientHandler handler = new ClientHandler(client, inFromClient, outToClient);
+	    handler.start(); 
         }
     }
 }

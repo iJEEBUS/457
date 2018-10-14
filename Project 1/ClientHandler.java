@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-class ClientHandler implements Runnable {
+class ClientHandler extends Thread {
   private Socket client;
   private DataInputStream inFromClient;
   private DataOutputStream outToClient;
@@ -10,21 +10,20 @@ class ClientHandler implements Runnable {
   private byte[] outputBuffer;
   private final int BUFSIZE = 32;
   
-  public ClientHandler (Socket socket, DataInputStream in, DataOutputStream out, ) {
+  public ClientHandler (Socket socket, 
+		  DataInputStream in, 
+		  DataOutputStream out ) {
     // Set up the referenece socket
     client = socket;
-  
-    try {
+   Thread clientThread = new Thread(); 
       System.out.println("Creating buffers...");
       inputBuffer = new byte[BUFSIZE];
       outputBuffer = new byte[BUFSIZE];
       System.out.println("Creating Data connections.....");  
-      inFromClient = new DataInputStream(client.getInputStream());
-      outToClient = new DataOutputStream(client.getOutputStream());
+      inFromClient = in;
+      outToClient = out;
       System.out.println("Multithreading success.....");
 
-    } catch (IOException io) {
-      io.printStackTrace();}
   }
   
   public void run(){
