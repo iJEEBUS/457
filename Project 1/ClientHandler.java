@@ -36,6 +36,8 @@ class ClientHandler extends Thread {
 			break;
 		else if (full_command.contains("list"))
 			listFiles(outToClient, outputBuffer);
+		else if (full_command.contains("stor"))
+			writeFile(outToClient, outputBuffer, "test.txt");
 
 	}
 	}
@@ -66,5 +68,13 @@ private static void listFiles(DataOutputStream os, byte[] out_buffer) throws IOE
 	out_buffer = final_files.getBytes("ISO-8859-1");
 	os.write(out_buffer, 0, out_buffer.length);
 	os.flush();
+	}
+
+private static void writeFile(DataOutputStream os, byte[] out_buffer, String fileName) throws IOException{
+	System.out.print("Writing Files.");
+	FileOutputStream foStream = new FileOutputStream(fileName);
+	foStream.write(out_buffer);
+	foStream.close();
+	
 }
 }

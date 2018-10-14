@@ -52,6 +52,7 @@ class ftp_client2 {
 		    BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
             	    sentence = inFromUser.readLine();
             	    StringTokenizer tokens = new StringTokenizer(sentence);
+		    tokens.nextToken();
 
 	
 		// Create the buffer spaces
@@ -79,7 +80,10 @@ class ftp_client2 {
 		    connectionOpen = false;  
 		} else if (sentence.contains("list")) {
 		    listFiles(outToServer, outputBuffer, inFromServer, inputBuffer);
+		}else if (sentence.contains("stor")){
+			writeFile(outToServer, outputBuffer, inputBuffer, tokens.nextToken());
 		}
+
 
 
             }
@@ -118,7 +122,6 @@ class ftp_client2 {
 	// While there is data to read
 	while ((bytesRead = in.read(inputBuff)) != -1) {
 	    
-		   System.out.println("About to list the files!");
 	   	
 	    // Create and print data to screen
 	    String response = new String(inputBuff, "ISO-8859-1");
@@ -138,6 +141,22 @@ class ftp_client2 {
 	}
 	
     }
+
+	private static void writeFile(DataOutputStream os, byte[] outputBuff, byte[] inputBuff, String fileName) throws IOException{
+		System.out.println("Writing Files.");
+		FileOutputStream fiStream = new FileOutputStream(fileName);
+		os.write(outputBuff, 0, outputBuff.length);
+		os.flush();
+
+		int bytesRead = 0;
+		while ((bytesRead = fiStream.read(inputBuff)) != -1){
+			out.write(bytesRead);
+		}
+		out.flush();
+
+	
+
+	}
 
 
 }
