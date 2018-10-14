@@ -3,6 +3,9 @@ import java.net.*;
 import java.util.*;
 
 class ftp_server2 {
+    DataInputStream inFromClient;
+    DataOutputStream outToClient;
+    Socket dataSocket;
 
     private static final int BUFSIZE = 32;
 
