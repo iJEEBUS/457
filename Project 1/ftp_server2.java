@@ -1,7 +1,6 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import ./ClientHandler;
 
 class ftp_server2 {
 
@@ -29,29 +28,16 @@ class ftp_server2 {
 	   System.out.println("Waiting for client to connect...");	
 	
 	    // When a connection is attempted, accept it
-            Socket clientControlSocket = welcomeSocket.accept();
+            Socket client = welcomeSocket.accept();
 
-	    System.out.println("Client from " + clientControlSocket.getInetAddress() + " connected");
+	    System.out.println("Client from " + client.getInetAddress() + " connected");
 	    CLIENT_CONNECTED = true;		
 
 	    // This is where the connected clients get moved to
 	    // their own threads
 	    ClientHandler handler = new ClientHandler(client);
-	    handler.start();
-	    while (CLIENT_CONNECTED) {
-		System.out.println("Processing command....");
-		// Create the data streams to send and receive data to connected client
-            	DataOutputStream outputData = new DataOutputStream(clientControlSocket.getOutputStream());
-            	DataInputStream inputData = new DataInputStream(new BufferedInputStream(clientControlSocket.getInputStream()));
-		
-		while (inputData.read(inputBuffer) != -1) {
-		    // Read the client message and extract the command
-            	    String clientMessage = new String(inputBuffer, "ISO-8859-1");
-		
-		    System.out.println(clientMessage);
-		}    
-		
-	    }
+	    handler.run();
+	    
 	    
         }
     }

@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-class ClientHandler extends Thread{
+class ClientHandler implements Runnable {
   private Socket client;
   private Scanner input;
   private PrintWriter output;
@@ -15,6 +15,7 @@ class ClientHandler extends Thread{
       System.out.println("Multithreading success.....");
       input = new Scanner(client.getInputStream());
       output = new PrintWriter(client.getOutputStream(), true);
+      System.out.println("Thread created....leaving now");
     } catch (IOException io) {
       io.printStackTrace();}
   }
@@ -23,14 +24,21 @@ class ClientHandler extends Thread{
    String received;
    
    do {
+     
+     // See that this is getting executed
+     System.out.println("Waiting for command: ");
+
      // Accept the message from the client
      received = input.nextLine();
-
+ 
+     if (received.equals("LIST")) {
+       output.println("ECHO: " + received);  
+     }
       // Echo the message back to the client
       output.println("ECHO: " + received);
 
       // Repeat until 'QUIT' is sent by client
-   } while (!received.equals("QUIT"));
+   } while (!received.toLowerCase().equals("quit"));
   
     // Close the connection if the client disconnects
     try {
@@ -42,6 +50,4 @@ class ClientHandler extends Thread{
       System.out.println("Unable to disconnect!");
     }
   }
- 
-
-}
+} 

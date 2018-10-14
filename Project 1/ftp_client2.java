@@ -35,8 +35,13 @@ class ftp_client2 {
 		    
 	    // Extract server IP and port number
             String serverIP = tokens.nextToken(); // skip connect command
-            serverIP = tokens.nextToken();
-            int port = Integer.parseInt(tokens.nextToken());
+            //serverIP = tokens.nextToken();
+            //int port = Integer.parseInt(tokens.nextToken());
+
+	    // Hardcoding server connection
+	    serverIP = "35.39.165.118";
+	    int port = 1234;
+
 
             System.out.println("Connecting to " + serverIP + " on port " + port);
 		 
