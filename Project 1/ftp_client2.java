@@ -37,7 +37,7 @@ class ftp_client2 {
            // serverIP = tokens.nextToken();
            // int port = Integer.parseInt(tokens.nextToken());
 
-	    String serverIP = "35.39.165.118";
+	    String serverIP = "35.39.165.117";
 	    int port = 1234;
             System.out.println("Connecting to " + serverIP + " on port " + port);
 		 
@@ -111,19 +111,12 @@ class ftp_client2 {
 	out.write(outputBuff, 0, outputBuff.length);
 	out.flush();
 	
-	System.out.println(outputBuff.);
+	//System.out.println(outputBuff);
 	// Read the response from the server
 	// This prints the list of the files in the current directory of the server
 	int bytesRead = 0;
-
-	StringBuffer inputLine = new StringBuffer();
-	String tmp;
-	while ((tmp = in.readLine()) != null) {
-	  inputLine.append(tmp);
-	}
-
 	// While there is data to read
-	while (in.read(inputBuff) >= 0) {
+	while ((bytesRead = in.read(inputBuff)) != -1) {
 	    
 		   System.out.println("About to list the files!");
 	   	
@@ -140,8 +133,10 @@ class ftp_client2 {
 	    //if (bytesRead < BUFSIZE) {
 	    //    break;
 	    //}
+	if(bytesRead < inputBuff.length)
+		break;
 	}
-
+	
     }
 
 

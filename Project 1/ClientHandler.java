@@ -29,29 +29,42 @@ class ClientHandler extends Thread {
   public void run(){
    
 // Close the connection if the client disconnects
-   try {
-	String message = "";
-     do { 
-      message = ""; 
-       while (inFromClient.read(inputBuffer) != -1) {
-         message = new String(inputBuffer, "ISO-8859-1");
-         System.out.println(message);
-       }
-     
-       if (message.equals("LIST")) {
-  	// Echo the message back to the client
-        System.out.println("ECHO: " + message);  
-       }
-      
-       // Repeat until 'QUIT' is sent by client
-     } while (!message.toLowerCase().equals("quit"));
-  
-       if (client != null) {
-         System.out.println("Closing down connection...");
-	 client.close();
-      }
-   } catch (IOException io) {
-     System.out.println("Unable to disconnect!");
-    }
+	try{
+ 	while(inFromClient.read(inputBuffer) != -1){
+		String full_command = new String(inputBuffer, "ISO-8859-1").toLowerCase();
+		if (full_command.contains("quit"))
+			break;
+		else if (full_command.contains("list"))
+			listFiles(outToClient, outputBuffer);
+
+	}
+	}
+	catch (IOException io){
+		System.out.println("error.");
+	}
+	  
+	  
+
   }
-} 
+ 
+
+private static void listFiles(DataOutputStream os, byte[] out_buffer) throws IOException{
+	System.out.println("Listing files.");
+	String cwd = ".";
+	String final_files = "";
+	File dir = new File(cwd);
+	File[] files = dir.listFiles();
+
+	if (files.length == 0)
+		System.out.println("This directory is empty.");
+	else{
+		for(File f : files)
+			final_files += f.getName() + "\n";
+	}
+
+	out_buffer = new byte[final_files.getBytes("ISO-8859-1").length];
+	out_buffer = final_files.getBytes("ISO-8859-1");
+	os.write(out_buffer, 0, out_buffer.length);
+	os.flush();
+}
+}
