@@ -22,27 +22,24 @@ class ftp_client2 {
 	    // Prompt user for a command
 	    // Note: you must connect to a specific IP address and port number
 	    // 	     before any other commands will work 
-            System.out.print("Command: ");
-            BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-            sentence = inFromUser.readLine();
-            StringTokenizer tokens = new StringTokenizer(sentence);
+            //System.out.print("Command: ");
+            //BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+            //sentence = inFromUser.readLine();
+            //StringTokenizer tokens = new StringTokenizer(sentence);
 
 	    // Create connection to the specified server IP and port number
-        if(sentence.startsWith("connect")) {
-	   
+//        if(sentence.startsWith("connect")) {
+	if (true) {	   
 	    String localSentence;
 	    String userCommand;
 		    
 	    // Extract server IP and port number
-            String serverIP = tokens.nextToken(); // skip connect command
-            //serverIP = tokens.nextToken();
-            //int port = Integer.parseInt(tokens.nextToken());
+           // String serverIP = tokens.nextToken(); // skip connect command
+           // serverIP = tokens.nextToken();
+           // int port = Integer.parseInt(tokens.nextToken());
 
-	    // Hardcoding server connection
-	    serverIP = "35.39.165.118";
+	    String serverIP = "35.39.165.118";
 	    int port = 1234;
-
-
             System.out.println("Connecting to " + serverIP + " on port " + port);
 		 
 	    // Create the socket and keep the connection alive
@@ -51,8 +48,13 @@ class ftp_client2 {
 	    connectionOpen = true;
 
             // While this connection exists, run this code
-            while (connectionOpen) {
-		
+            while (connectionOpen){ 
+		    System.out.print("Command: ");
+		    BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+            	    sentence = inFromUser.readLine();
+            	    StringTokenizer tokens = new StringTokenizer(sentence);
+
+	
 		// Create the buffer spaces
 		byte[] inputBuffer = new byte[BUFSIZE];
 		byte[] outputBuffer = new byte[BUFSIZE];
