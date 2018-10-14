@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import ./ClientHandler;
 
 class ftp_server2 {
 
@@ -33,6 +34,10 @@ class ftp_server2 {
 	    System.out.println("Client from " + clientControlSocket.getInetAddress() + " connected");
 	    CLIENT_CONNECTED = true;		
 
+	    // This is where the connected clients get moved to
+	    // their own threads
+	    ClientHandler handler = new ClientHandler(client);
+	    handler.start();
 	    while (CLIENT_CONNECTED) {
 		System.out.println("Processing command....");
 		// Create the data streams to send and receive data to connected client
