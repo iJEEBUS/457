@@ -115,7 +115,6 @@ class ftp_client2 {
 	out.write(outputBuff, 0, outputBuff.length);
 	out.flush();
 	
-	//System.out.println(outputBuff);
 	// Read the response from the server
 	// This prints the list of the files in the current directory of the server
 	int bytesRead = 0;
@@ -141,19 +140,41 @@ class ftp_client2 {
 	}
 	
     }
-
+	//Method to write a files contents to a fileoutputstream, and to send it to the server
 	private static void writeFile(DataOutputStream os, byte[] outputBuff, byte[] inputBuff, String fileName) throws IOException{
-		System.out.println("Writing Files.");
-		FileOutputStream fiStream = new FileOutputStream(fileName);
+		System.out.println("Writing File" + fileName);
+		//Send the stor command to the server
 		os.write(outputBuff, 0, outputBuff.length);
 		os.flush();
+		outputBuff = new byte[BUFSIZE];
+		//Turn filename into a file.
+		File storFile = new File(fileName);
+		//Create new dataInputStream with target provided from client in fileName
+		FileInputStream fiStream = new FileInputStream(fileName);
 
 		int bytesRead = 0;
-		while ((bytesRead = fiStream.read(inputBuff)) != -1){
-			out.write(bytesRead);
+		//Read bytes from the file into the output buff
+		while((bytesRead = fiStream.read(outputBuff)) != -1){ 
+			//Write to the outstream from the output buff
+			//
+			os.write(outputBuff, 0, outputBuff.length);
+			os.flush();
+			inputBuff = new byte[BUFSIZE];
+			if (bytesRead < outputBuff.length)
+				break;
 		}
-		out.flush();
 
+/**
+		//Write to the outputBuff, to the le
+		os.write(outputBuff, 0, outputBuff.length);
+	//	os.flush();
+
+		int bytesRead = 0;
+		while((bytesRead = fiStream.read(inputBuff)) != -1){
+			os.write(bytesRead);
+		}
+		os.flush();
+*/
 	
 
 	}

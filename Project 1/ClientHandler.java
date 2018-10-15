@@ -37,7 +37,7 @@ class ClientHandler extends Thread {
 		else if (full_command.contains("list"))
 			listFiles(outToClient, outputBuffer);
 		else if (full_command.contains("stor"))
-			writeFile(outToClient, outputBuffer, "test.txt");
+			writeFile(outToClient, inFromClient, outputBuffer, inputBuffer, "test.txt");
 
 	}
 	}
@@ -70,10 +70,20 @@ private static void listFiles(DataOutputStream os, byte[] out_buffer) throws IOE
 	os.flush();
 	}
 
-private static void writeFile(DataOutputStream os, byte[] out_buffer, String fileName) throws IOException{
-	System.out.print("Writing Files.");
+private static void writeFile(DataOutputStream os,DataInputStream in, byte[] out_buffer, byte[] in_buffer, String fileName) throws IOException{
+	System.out.println("Writing Files.");
 	FileOutputStream foStream = new FileOutputStream(fileName);
-	foStream.write(out_buffer);
+	int bytesRead = 0;
+
+
+
+	/**while((bytesRead = bytesRead = in.read(in_buffer)) != -1){
+		foStream.write(in_buffer);
+		foStream.flush();
+		if(bytesRead < in_buffer.length)
+			break;
+	}*/
+//	foStream.write(out_buffer);
 	foStream.close();
 	
 }
