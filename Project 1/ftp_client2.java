@@ -84,8 +84,9 @@ class ftp_client2 {
 
 			outToServer.write(outputBuffer, 0, outputBuffer.length);
 			outToServer.flush();
-			ServerSocket fileSocket = new ServerSocket(port+2);
-			Socket fileDataSocket = fileSocket.accept();
+			Socket fileDataSocket = new Socket(serverIP, 1237);
+		//	ServerSocket fileSocket = new ServerSocket(port+2);
+		//	Socket fileDataSocket = fileSocket.accept();
 			writeFile(fileDataSocket, outputBuffer, inputBuffer, tokens.nextToken());
 		}
 
