@@ -87,8 +87,14 @@ class ftp_client2 {
                         outToServer.write(outputBuffer, 0, outputBuffer.length);
                         outToServer.flush();
                         Socket fileDataSocket = new Socket(serverIP, 1236);
-                        writeFile(fileDataSocket, outputBuffer, inputBuffer, tokens.nextToken());
+                        writeFromFile(fileDataSocket, outputBuffer, inputBuffer, tokens.nextToken());
+                    } else if (sentence.contains("retr")) {
+                        outToServer.write(outputBuffer, 0, outputBuffer.length);
+                        outToServer.flush();
+                        Socket fileDataSocket = new Socket(serverIP, 1236);
+                        writeToFile(fileDataSocket, inputBuffer, "testretr.txt");
                     }
+
 
 
                 }
@@ -144,8 +150,8 @@ class ftp_client2 {
     }
 
     //Method to write a files contents to a fileoutputstream, and to send it to the server
-    private static void writeFile(Socket fileSocket, byte[] outputBuff, byte[] inputBuff, String fileName) throws IOException {
-        DataOutputStream os = new DataOutputStream(fileSocket.getOutputStream());
+    private static void writeFromFile(Socket fileDataSocket, byte[] outputBuff, byte[] inputBuff, String fileName) throws IOException {
+        DataOutputStream os = new DataOutputStream(fileDataSocket.getOutputStream());
         System.out.println("Writing File" + fileName);
         //Send the stor command to the server
 
@@ -168,7 +174,30 @@ class ftp_client2 {
         }
         os.close();
         fiStream.close();
-        fileSocket.close();
+        fileDataSocket.close();
+
+
+    }
+
+    private static void writeToFile(Socket fileDataSocket, byte[] in_buffer, String fileName) throws IOException {
+        DataInputStream in = new DataInputStream(new BufferedInputStream(fileDataSocket.getInputStream()));
+        System.out.println("Writing Files.");
+
+        //Clears the file without actually deleting the file.
+        PrintWriter pw = new PrintWriter(fileName);
+        pw.write("");
+        pw.close();
+
+        FileOutputStream foStream = new FileOutputStream(fileName);
+
+        int bytesRead = 0;
+        while ((bytesRead = in.read(in_buffer)) > 0) {
+            foStream.write(in_buffer, 0, bytesRead);
+        }
+
+        foStream.close();
+        in.close();
+        fileDataSocket.close();
 
 
     }

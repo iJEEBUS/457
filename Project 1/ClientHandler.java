@@ -38,7 +38,7 @@ class ClientHandler extends Thread {
     /**
      * Buffer size
      */
-    private final int BUFSIZE = 32;
+    private static int BUFSIZE = 32;
 
     /**
      * Port Number
@@ -83,7 +83,13 @@ class ClientHandler extends Thread {
                 } else if (full_command.contains("stor")) {
                     ServerSocket fileSocket = new ServerSocket(PORT + 2);
                     Socket fileDataSocket = fileSocket.accept();
-                    writeFile(fileDataSocket, inputBuffer, "test.txt");
+                    writeToFile(fileDataSocket, inputBuffer, "test.txt");
+                    fileDataSocket.close();
+                    fileSocket.close();
+                }else if (full_command.contains("retr")) {
+                    ServerSocket fileSocket = new ServerSocket(PORT + 2);
+                    Socket fileDataSocket = fileSocket.accept();
+                    writeFromFile(fileDataSocket, outputBuffer, inputBuffer, "test.txt");
                     fileDataSocket.close();
                     fileSocket.close();
                 }
@@ -118,7 +124,7 @@ class ClientHandler extends Thread {
         os.flush();
     }
 
-    private static void writeFile(Socket fileDataSocket, byte[] in_buffer, String fileName) throws IOException {
+    private static void writeToFile(Socket fileDataSocket, byte[] in_buffer, String fileName) throws IOException {
         DataInputStream in = new DataInputStream(new BufferedInputStream(fileDataSocket.getInputStream()));
         System.out.println("Writing Files.");
 
@@ -139,4 +145,32 @@ class ClientHandler extends Thread {
 
 
     }
+    private static void writeFromFile(Socket fileDataSocket, byte[] outputBuff, byte[] inputBuff, String fileName) throws IOException {
+        DataOutputStream os = new DataOutputStream(fileDataSocket.getOutputStream());
+        System.out.println("Writing File" + fileName);
+        //Send the stor command to the server
+
+        outputBuff = new byte[BUFSIZE];
+        //Turn filename into a file.
+        File storFile = new File(fileName);
+        //Create new dataInputStream with target provided from client in fileName
+        FileInputStream fiStream = new FileInputStream(fileName);
+
+        int bytesRead = 0;
+        //Read bytes from the file into the output buff
+        while ((bytesRead = fiStream.read(outputBuff)) != -1) {
+            //Write to the outstream from the output buff
+            //
+            os.write(outputBuff, 0, bytesRead);
+            os.flush();
+            outputBuff = new byte[BUFSIZE];
+            if (bytesRead < outputBuff.length)
+                break;
+        }
+        os.close();
+        fiStream.close();
+
+
+    }
+
 }
