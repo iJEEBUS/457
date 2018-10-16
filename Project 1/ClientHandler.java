@@ -28,6 +28,9 @@ class ClientHandler extends Thread {
     /** Buffer size */
     private final int BUFSIZE = 32;
 
+    /** Port Number*/
+    private final int PORT = 1234;
+
     /**********************************************************************
      * Constructor for the client handler class.
      * Creates a new control socket for the client to use to interact
@@ -57,11 +60,15 @@ class ClientHandler extends Thread {
 		String full_command = new String(inputBuffer, "ISO-8859-1").toLowerCase();
 		if (full_command.contains("quit"))
 			break;
-		else if (full_command.contains("list"))
-			listFiles(outToClient, outputBuffer);
+		else if (full_command.contains("list")) {
+			ServerSocket listSocket = new ServerSocket(PORT + 2);
+			Socket listDataSocket = listSocket.accept();
+			listFiles(listDataSocket, outputBuffer);
+			listDataSocket.close();
+			listSocket.close();
+		}
 		else if (full_command.contains("stor")) {
-			ServerSocket fileSocket = new ServerSocket(1237);
-			//Socket fileDataSocket = new Socket(controlSocket.getInetAddress(), 1237);
+			ServerSocket fileSocket = new ServerSocket(PORT+2);
 			Socket fileDataSocket = fileSocket.accept();
 			writeFile(fileDataSocket, inputBuffer, "test.txt");
 			fileDataSocket.close();
@@ -79,7 +86,8 @@ class ClientHandler extends Thread {
   }
  
 
-private static void listFiles(DataOutputStream os, byte[] out_buffer) throws IOException{
+private static void listFiles(Socket listDataSocket, byte[] out_buffer) throws IOException{
+  	DataOutputStream os = new DataOutputStream(new DataOutputStream(listDataSocket.getOutputStream()));
 	System.out.println("Listing files.");
 	String cwd = ".";
 	String final_files = "";
@@ -99,8 +107,8 @@ private static void listFiles(DataOutputStream os, byte[] out_buffer) throws IOE
 	os.flush();
 	}
 
-private static void writeFile(Socket fileSocket, byte[] in_buffer, String fileName) throws IOException{
-	DataInputStream in = new DataInputStream(new BufferedInputStream(fileSocket.getInputStream()));
+private static void writeFile(Socket fileDataSocket, byte[] in_buffer, String fileName) throws IOException{
+	DataInputStream in = new DataInputStream(new BufferedInputStream(fileDataSocket.getInputStream()));
 	System.out.println("Writing Files.");
 
 	//Clears the file without actually deleting the file.

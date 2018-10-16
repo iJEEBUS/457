@@ -79,14 +79,14 @@ class ftp_client2 {
 		    System.out.println("Thank you for visiting.\nThis connection is now closed.");
 		    connectionOpen = false;  
 		} else if (sentence.contains("list")) {
-		    listFiles(outToServer, outputBuffer, inFromServer, inputBuffer);
-		}else if (sentence.contains("stor")){
-
 			outToServer.write(outputBuffer, 0, outputBuffer.length);
 			outToServer.flush();
-			Socket fileDataSocket = new Socket(serverIP, 1237);
-		//	ServerSocket fileSocket = new ServerSocket(port+2);
-		//	Socket fileDataSocket = fileSocket.accept();
+			Socket listDataSocket = new Socket(serverIP, 1236);
+		    listFiles(listDataSocket, outputBuffer, inputBuffer);
+		}else if (sentence.contains("stor")){
+			outToServer.write(outputBuffer, 0, outputBuffer.length);
+			outToServer.flush();
+			Socket fileDataSocket = new Socket(serverIP, 1236);
 			writeFile(fileDataSocket, outputBuffer, inputBuffer, tokens.nextToken());
 		}
 
@@ -109,18 +109,16 @@ class ftp_client2 {
     * @param inputBuff
     * @throws IOException 
     */
-    private static void listFiles(DataOutputStream out,
-				  byte[] outputBuff, 
-				  DataInputStream in,
+    private static void listFiles(Socket listDataSocket,
+				  byte[] outputBuff,
 				  byte[] inputBuff) throws IOException {
         // Temporary buffers
 	byte[] tempOutputBuffer = outputBuff;
 	byte[] tempInputBuffer = inputBuff;
+		DataInputStream in = new DataInputStream(new BufferedInputStream(listDataSocket.getInputStream()));
 
-	// Send the list command to the server
-	out.write(outputBuff, 0, outputBuff.length);
-	out.flush();
-	
+
+
 	// Read the response from the server
 	// This prints the list of the files in the current directory of the server
 	int bytesRead = 0;
