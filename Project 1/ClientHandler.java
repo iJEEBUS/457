@@ -64,6 +64,8 @@ class ClientHandler extends Thread {
 			//Socket fileDataSocket = new Socket(controlSocket.getInetAddress(), 1237);
 			Socket fileDataSocket = fileSocket.accept();
 			writeFile(fileDataSocket, inputBuffer, "test.txt");
+			fileDataSocket.close();
+			fileSocket.close();
 		}
 
 	}
@@ -102,7 +104,9 @@ private static void writeFile(Socket fileSocket, byte[] in_buffer, String fileNa
 	System.out.println("Writing Files.");
 
 	//Clears the file without actually deleting the file.
-//
+	PrintWriter pw = new PrintWriter(fileName);
+	pw.write("");
+	pw.close();
 
 	FileOutputStream foStream = new FileOutputStream(fileName);
 
@@ -113,7 +117,7 @@ private static void writeFile(Socket fileSocket, byte[] in_buffer, String fileNa
 
 	foStream.close();
 	in.close();
-	fileSocket.close();
+
 	
 }
 }
