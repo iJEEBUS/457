@@ -1,30 +1,53 @@
 import java.io.*;
 import java.net.*;
-import java.util.*;
 
+/**********************************************************************
+ * A thread of this class will be created when a new user attempts
+ * to connect to the server.
+ *
+ * @author Ron Rounsifer, Bryce Hutton
+ * @version 10.16.2018 :: (9.24.2018)
+ *********************************************************************/
 class ClientHandler extends Thread {
-  private Socket client;
-  private DataInputStream inFromClient;
-  private DataOutputStream outToClient;
-  private byte[] inputBuffer;
-  private byte[] outputBuffer;
-  private final int BUFSIZE = 32;
-  
-  public ClientHandler (Socket socket, 
-		  DataInputStream in, 
-		  DataOutputStream out ) {
-    // Set up the referenece socket
-    client = socket;
-   Thread clientThread = new Thread(); 
-      System.out.println("Creating buffers...");
-      inputBuffer = new byte[BUFSIZE];
-      outputBuffer = new byte[BUFSIZE];
-      System.out.println("Creating Data connections.....");  
-      inFromClient = in;
-      outToClient = out;
-      System.out.println("Multithreading success.....");
 
-  }
+    /** Control socket to read commands from the client */
+    private Socket controlSocket;
+
+    /** Stream to read commands from the client */
+    private DataInputStream inFromClient;
+
+    /** Stream to write information back to the client */
+    private DataOutputStream outToClient;
+
+    /** Buffer for data input stream */
+    private byte[] inputBuffer;
+
+    /** Buffer for data output stream */
+    private byte[] outputBuffer;
+
+    /** Buffer size */
+    private final int BUFSIZE = 32;
+
+    /**********************************************************************
+     * Constructor for the client handler class.
+     * Creates a new control socket for the client to use to interact
+     * with the server.
+     *
+     * @param socket - the current client connection
+     * @param in
+     * @param out
+     *********************************************************************/
+    public ClientHandler (Socket socket, int port) {
+        try {
+            controlSocket = socket;
+            inputBuffer = new byte[BUFSIZE];
+            outputBuffer = new byte[BUFSIZE];
+            inFromClient = new DataInputStream(new BufferedInputStream(this.controlSocket.getInputStream()));
+            outToClient = new DataOutputStream(new DataOutputStream(this.controlSocket.getOutputStream()));
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+    }
   
   public void run(){
    

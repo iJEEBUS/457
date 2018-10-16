@@ -37,7 +37,7 @@ class ftp_client2 {
            // serverIP = tokens.nextToken();
            // int port = Integer.parseInt(tokens.nextToken());
 
-	    String serverIP = "192.168.1.8";
+	    String serverIP = "127.0.0.1";
 	    int port = 1234;
             System.out.println("Connecting to " + serverIP + " on port " + port);
 		 
