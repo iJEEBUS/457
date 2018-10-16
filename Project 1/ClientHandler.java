@@ -74,8 +74,11 @@ private static void writeFile(DataOutputStream os,DataInputStream in, byte[] out
 	System.out.println("Writing Files.");
 	FileOutputStream foStream = new FileOutputStream(fileName);
 	int bytesRead = 0;
-
-
+	while ((bytesRead = in.read(in_buffer)) > 0){
+		foStream.write(in_buffer, 0, bytesRead);
+	}
+	foStream.close();
+	//in.close();
 
 	/**while((bytesRead = bytesRead = in.read(in_buffer)) != -1){
 		foStream.write(in_buffer);
@@ -84,7 +87,6 @@ private static void writeFile(DataOutputStream os,DataInputStream in, byte[] out
 			break;
 	}*/
 //	foStream.write(out_buffer);
-	foStream.close();
 	
 }
 }

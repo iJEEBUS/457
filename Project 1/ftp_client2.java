@@ -37,7 +37,7 @@ class ftp_client2 {
            // serverIP = tokens.nextToken();
            // int port = Integer.parseInt(tokens.nextToken());
 
-	    String serverIP = "35.39.165.117";
+	    String serverIP = "192.168.1.8";
 	    int port = 1234;
             System.out.println("Connecting to " + serverIP + " on port " + port);
 		 
@@ -157,13 +157,14 @@ class ftp_client2 {
 		while((bytesRead = fiStream.read(outputBuff)) != -1){ 
 			//Write to the outstream from the output buff
 			//
-			os.write(outputBuff, 0, outputBuff.length);
+			os.write(outputBuff, 0, bytesRead);
 			os.flush();
 			inputBuff = new byte[BUFSIZE];
 			if (bytesRead < outputBuff.length)
 				break;
 		}
-
+		//os.close();
+		fiStream.close();
 /**
 		//Write to the outputBuff, to the le
 		os.write(outputBuff, 0, outputBuff.length);
