@@ -159,23 +159,14 @@ class ftp_client2 {
 			//
 			os.write(outputBuff, 0, bytesRead);
 			os.flush();
-			inputBuff = new byte[BUFSIZE];
+			outputBuff = new byte[BUFSIZE];
 			if (bytesRead < outputBuff.length)
 				break;
 		}
 		//os.close();
 		fiStream.close();
-/**
-		//Write to the outputBuff, to the le
-		os.write(outputBuff, 0, outputBuff.length);
-	//	os.flush();
 
-		int bytesRead = 0;
-		while((bytesRead = fiStream.read(inputBuff)) != -1){
-			os.write(bytesRead);
-		}
-		os.flush();
-*/
+
 	
 
 	}

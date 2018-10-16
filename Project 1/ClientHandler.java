@@ -72,21 +72,21 @@ private static void listFiles(DataOutputStream os, byte[] out_buffer) throws IOE
 
 private static void writeFile(DataOutputStream os,DataInputStream in, byte[] out_buffer, byte[] in_buffer, String fileName) throws IOException{
 	System.out.println("Writing Files.");
+
+	//Clears the file without actually deleting the file.
+	PrintWriter pw = new PrintWriter(fileName);
+	pw.write("");
+	pw.close();
+
 	FileOutputStream foStream = new FileOutputStream(fileName);
+
 	int bytesRead = 0;
 	while ((bytesRead = in.read(in_buffer)) > 0){
 		foStream.write(in_buffer, 0, bytesRead);
 	}
-	foStream.close();
-	//in.close();
 
-	/**while((bytesRead = bytesRead = in.read(in_buffer)) != -1){
-		foStream.write(in_buffer);
-		foStream.flush();
-		if(bytesRead < in_buffer.length)
-			break;
-	}*/
-//	foStream.write(out_buffer);
+	foStream.close();
+	in.close();
 	
 }
 }
