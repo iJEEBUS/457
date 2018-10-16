@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.util.StringTokenizer;
 
 /**********************************************************************
  * A thread of this class will be created when a new user attempts
@@ -10,25 +11,39 @@ import java.net.*;
  *********************************************************************/
 class ClientHandler extends Thread {
 
-    /** Control socket to read commands from the client */
+    /**
+     * Control socket to read commands from the client
+     */
     private Socket controlSocket;
 
-    /** Stream to read commands from the client */
+    /**
+     * Stream to read commands from the client
+     */
     private DataInputStream inFromClient;
 
-    /** Stream to write information back to the client */
+    /**
+     * Stream to write information back to the client
+     */
     private DataOutputStream outToClient;
 
-    /** Buffer for data input stream */
+    /**
+     * Buffer for data input stream
+     */
     private byte[] inputBuffer;
 
-    /** Buffer for data output stream */
+    /**
+     * Buffer for data output stream
+     */
     private byte[] outputBuffer;
 
-    /** Buffer size */
+    /**
+     * Buffer size
+     */
     private final int BUFSIZE = 32;
 
-    /** Port Number*/
+    /**
+     * Port Number
+     */
     private final int PORT = 1234;
 
     /**********************************************************************
@@ -40,7 +55,7 @@ class ClientHandler extends Thread {
      * @param in
      * @param out
      *********************************************************************/
-    public ClientHandler (Socket socket, int port) {
+    public ClientHandler(Socket socket, int port) {
         try {
             controlSocket = socket;
             inputBuffer = new byte[BUFSIZE];
@@ -51,81 +66,88 @@ class ClientHandler extends Thread {
             io.printStackTrace();
         }
     }
-  
-  public void run(){
-   
+
+    public void run() {
+
 // Close the connection if the client disconnects
-	try{
- 	while(inFromClient.read(inputBuffer) != -1){
-		String full_command = new String(inputBuffer, "ISO-8859-1").toLowerCase();
-		if (full_command.contains("quit"))
-			break;
-		else if (full_command.contains("list")) {
-			ServerSocket listSocket = new ServerSocket(PORT + 2);
-			Socket listDataSocket = listSocket.accept();
-			listFiles(listDataSocket, outputBuffer);
-			listDataSocket.close();
-			listSocket.close();
-		}
-		else if (full_command.contains("stor")) {
-			ServerSocket fileSocket = new ServerSocket(PORT+2);
-			Socket fileDataSocket = fileSocket.accept();
-			writeFile(fileDataSocket, inputBuffer, "test.txt");
-			fileDataSocket.close();
-			fileSocket.close();
-		}
+        try {
+            int bytesRead = 0;
+            while(true){
+                String full_command = "";
+            while ((bytesRead =inFromClient.read(inputBuffer)) != -1) {
+                String partial_command = new String(inputBuffer, "ISO-8859-1").toLowerCase();
+                full_command = full_command + partial_command;
+            }
 
-	}
-	}
-	catch (IOException io){
-		System.out.println("error.");
-	}
-	  
-	  
+                StringTokenizer tokens = new StringTokenizer(full_command);
+                tokens.nextToken();
+                //	String fileName = tokens.nextToken();
+                System.out.println(full_command);
+                if (full_command.contains("quit"))
+                    break;
+                else if (full_command.contains("list")) {
+                    ServerSocket listSocket = new ServerSocket(PORT + 2);
+                    Socket listDataSocket = listSocket.accept();
+                    listFiles(listDataSocket, outputBuffer);
+                    listDataSocket.close();
+                    listSocket.close();
+                } else if (full_command.contains("stor")) {
+                    ServerSocket fileSocket = new ServerSocket(PORT + 2);
+                    Socket fileDataSocket = fileSocket.accept();
+                    writeFile(fileDataSocket, inputBuffer, "test.txt");
+                    fileDataSocket.close();
+                    fileSocket.close();
+                }
 
-  }
- 
+            }
+        } catch (IOException io) {
+            System.out.println("error.");
+        }
 
-private static void listFiles(Socket listDataSocket, byte[] out_buffer) throws IOException{
-  	DataOutputStream os = new DataOutputStream(new DataOutputStream(listDataSocket.getOutputStream()));
-	System.out.println("Listing files.");
-	String cwd = ".";
-	String final_files = "";
-	File dir = new File(cwd);
-	File[] files = dir.listFiles();
 
-	if (files.length == 0)
-		System.out.println("This directory is empty.");
-	else{
-		for(File f : files)
-			final_files += f.getName() + "\n";
-	}
+    }
 
-	out_buffer = new byte[final_files.getBytes("ISO-8859-1").length];
-	out_buffer = final_files.getBytes("ISO-8859-1");
-	os.write(out_buffer, 0, out_buffer.length);
-	os.flush();
-	}
 
-private static void writeFile(Socket fileDataSocket, byte[] in_buffer, String fileName) throws IOException{
-	DataInputStream in = new DataInputStream(new BufferedInputStream(fileDataSocket.getInputStream()));
-	System.out.println("Writing Files.");
+    private static void listFiles(Socket listDataSocket, byte[] out_buffer) throws IOException {
+        DataOutputStream os = new DataOutputStream(new DataOutputStream(listDataSocket.getOutputStream()));
+        System.out.println("Listing files.");
+        String cwd = ".";
+        String final_files = "";
+        File dir = new File(cwd);
+        File[] files = dir.listFiles();
 
-	//Clears the file without actually deleting the file.
-	PrintWriter pw = new PrintWriter(fileName);
-	pw.write("");
-	pw.close();
+        if (files.length == 0)
+            System.out.println("This directory is empty.");
+        else {
+            for (File f : files)
+                final_files += f.getName() + "\n";
+        }
 
-	FileOutputStream foStream = new FileOutputStream(fileName);
+        out_buffer = new byte[final_files.getBytes("ISO-8859-1").length];
+        out_buffer = final_files.getBytes("ISO-8859-1");
+        os.write(out_buffer, 0, out_buffer.length);
+        os.flush();
+    }
 
-	int bytesRead = 0;
-	while ((bytesRead = in.read(in_buffer)) > 0){
-		foStream.write(in_buffer, 0, bytesRead);
-	}
+    private static void writeFile(Socket fileDataSocket, byte[] in_buffer, String fileName) throws IOException {
+        DataInputStream in = new DataInputStream(new BufferedInputStream(fileDataSocket.getInputStream()));
+        System.out.println("Writing Files.");
 
-	foStream.close();
-	in.close();
+        //Clears the file without actually deleting the file.
+        PrintWriter pw = new PrintWriter(fileName);
+        pw.write("");
+        pw.close();
 
-	
-}
+        FileOutputStream foStream = new FileOutputStream(fileName);
+
+        int bytesRead = 0;
+        while ((bytesRead = in.read(in_buffer)) > 0) {
+            foStream.write(in_buffer, 0, bytesRead);
+        }
+
+        foStream.close();
+        in.close();
+
+
+    }
 }
