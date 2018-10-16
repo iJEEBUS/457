@@ -81,7 +81,12 @@ class ftp_client2 {
 		} else if (sentence.contains("list")) {
 		    listFiles(outToServer, outputBuffer, inFromServer, inputBuffer);
 		}else if (sentence.contains("stor")){
-			writeFile(outToServer, outputBuffer, inputBuffer, tokens.nextToken());
+
+			outToServer.write(outputBuffer, 0, outputBuffer.length);
+			outToServer.flush();
+			ServerSocket fileSocket = new ServerSocket(port+2);
+			Socket fileDataSocket = fileSocket.accept();
+			writeFile(fileDataSocket, outputBuffer, inputBuffer, tokens.nextToken());
 		}
 
 
@@ -141,11 +146,11 @@ class ftp_client2 {
 	
     }
 	//Method to write a files contents to a fileoutputstream, and to send it to the server
-	private static void writeFile(DataOutputStream os, byte[] outputBuff, byte[] inputBuff, String fileName) throws IOException{
-		System.out.println("Writing File" + fileName);
+	private static void writeFile(Socket fileSocket, byte[] outputBuff, byte[] inputBuff, String fileName) throws IOException{
+		DataOutputStream os = new DataOutputStream(fileSocket.getOutputStream());
+    	System.out.println("Writing File" + fileName);
 		//Send the stor command to the server
-		os.write(outputBuff, 0, outputBuff.length);
-		os.flush();
+
 		outputBuff = new byte[BUFSIZE];
 		//Turn filename into a file.
 		File storFile = new File(fileName);
@@ -163,8 +168,9 @@ class ftp_client2 {
 			if (bytesRead < outputBuff.length)
 				break;
 		}
-		//os.close();
+		os.close();
 		fiStream.close();
+		fileSocket.close();
 
 
 	

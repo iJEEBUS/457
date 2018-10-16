@@ -36,8 +36,10 @@ class ClientHandler extends Thread {
 			break;
 		else if (full_command.contains("list"))
 			listFiles(outToClient, outputBuffer);
-		else if (full_command.contains("stor"))
-			writeFile(outToClient, inFromClient, outputBuffer, inputBuffer, "test.txt");
+		else if (full_command.contains("stor")) {
+			Socket fileDataSocket = new Socket(client.getInetAddress(), 1237);
+			writeFile(fileDataSocket, inputBuffer, "test.txt");
+		}
 
 	}
 	}
@@ -70,7 +72,8 @@ private static void listFiles(DataOutputStream os, byte[] out_buffer) throws IOE
 	os.flush();
 	}
 
-private static void writeFile(DataOutputStream os,DataInputStream in, byte[] out_buffer, byte[] in_buffer, String fileName) throws IOException{
+private static void writeFile(Socket fileSocket, byte[] in_buffer, String fileName) throws IOException{
+	DataInputStream in = new DataInputStream(fileSocket.getInputStream());
 	System.out.println("Writing Files.");
 
 	//Clears the file without actually deleting the file.
@@ -87,6 +90,7 @@ private static void writeFile(DataOutputStream os,DataInputStream in, byte[] out
 
 	foStream.close();
 	in.close();
+	fileSocket.close();
 	
 }
 }
