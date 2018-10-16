@@ -10,7 +10,7 @@ class ftp_server2 {
         ServerSocket welcomeSocket = new ServerSocket(port);
 
         // Have the server up and listening forever
-        while(true) {
+        while (true) {
             System.out.println("Waiting for client to connect...");
 
             // Accept all incoming connections
