@@ -82,7 +82,6 @@ class ClientHandler extends Thread {
                     Socket fileDataSocket = new Socket(controlSocket.getInetAddress(), 1236);
                     writeToFile(fileDataSocket, inputBuffer, "test.txt");
                     fileDataSocket.close();
-
                 }else if (full_command.contains("retr")) {
                     Socket fileDataSocket = new Socket(controlSocket.getInetAddress(), 1236);
                     writeFromFile(fileDataSocket, outputBuffer, inputBuffer, "test.txt");
@@ -115,7 +114,7 @@ class ClientHandler extends Thread {
         out_buffer = new byte[final_files.getBytes("ISO-8859-1").length];
         out_buffer = final_files.getBytes("ISO-8859-1");
         os.write(out_buffer, 0, out_buffer.length);
-        os.flush();
+        os.close();
     }
 
     private static void writeToFile(Socket fileDataSocket, byte[] in_buffer, String fileName) throws IOException {
