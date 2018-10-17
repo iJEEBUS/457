@@ -37,7 +37,7 @@ class ftp_client2 {
                 // serverIP = tokens.nextToken();
                 // int port = Integer.parseInt(tokens.nextToken());
 
-                String serverIP = "35.39.165.74";
+                String serverIP = "127.0.0.1";
                 int port = 1234;
                 System.out.println("Connecting to " + serverIP + " on port " + port);
 
@@ -79,27 +79,35 @@ class ftp_client2 {
                         System.out.println("Thank you for visiting.\nThis connection is now closed.");
                         connectionOpen = false;
                     } else if (sentence.contains("list")) {
+                        //send "list" command to server
                         outToServer.write(outputBuffer, 0, outputBuffer.length);
                         outToServer.flush();
-
+                        //Create socket for sending data
                         ServerSocket listSocket = new ServerSocket(1234 + 2);
                         Socket listDataSocket = listSocket.accept();
-                        //Socket listDataSocket = new Socket(serverIP, 1236);
                         listFiles(listDataSocket, outputBuffer, inputBuffer);
                         listDataSocket.close();
                         listSocket.close();
                     } else if (sentence.contains("stor")) {
+                        //send "stor" command to server
                         outToServer.write(outputBuffer, 0, outputBuffer.length);
                         outToServer.flush();
-                        Socket fileDataSocket = new Socket(serverIP, 1236);
+                        //Create socket for sending data
+                        ServerSocket fileSocket = new ServerSocket(1234 + 2);
+                        Socket fileDataSocket = fileSocket.accept();
                         writeFromFile(fileDataSocket, outputBuffer, inputBuffer, tokens.nextToken());
                         fileDataSocket.close();
+                        fileSocket.close();
                     } else if (sentence.contains("retr")) {
+                        //send "retr" command to server
                         outToServer.write(outputBuffer, 0, outputBuffer.length);
                         outToServer.flush();
-                        Socket fileDataSocket = new Socket(serverIP, 1236);
+                        ServerSocket fileSocket = new ServerSocket(1234 + 2);
+                        Socket fileDataSocket = fileSocket.accept();
+                        //Create socket for sending data
                         writeToFile(fileDataSocket, inputBuffer, "testretr.txt");
                         fileDataSocket.close();
+                        fileSocket.close();
                     }
 
 
