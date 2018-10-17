@@ -1,7 +1,6 @@
 import java.io.*;
 import java.net.*;
 import java.lang.*;
-
 /**********************************************************************
  * The client part of this program. This will allow the user to
  * interact with the server via request they input using the
@@ -20,7 +19,7 @@ class ftp_client2 {
     private static int BUFSIZE = 32;
 
     public static void main(String[] argv) throws Exception {
-        String sentence;
+        String request;
         String[] splitInput;
         boolean connectionOpen = true;
 
@@ -38,19 +37,20 @@ class ftp_client2 {
 
             // Receive user input and breakdown into components
             BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-            sentence = inFromUser.readLine();
-            splitInput = sentence.split(" ");
+            request = inFromUser.readLine();
+            splitInput = request.split(" ");
 
             // Create connection to the specified server IP and port number
-             if(splitInput.length == 3 & splitInput[0].equalsIgnoreCase("connect")) {
+            // Only execute if all needed info is given (IP and port number)
+            if (splitInput.length == 3 & splitInput[0].equalsIgnoreCase("connect")) {
 
                 // Extract server IP and port number
-                 String serverIP = splitInput[1];
-                 int port = Integer.parseInt(splitInput[2]);
+                String serverIP = splitInput[1];
+                int port = Integer.parseInt(splitInput[2]);
 
                 System.out.println("Connecting to " + serverIP + " on port " + port);
 
-                // Create the socket and keep the connection alive
+                // Create control socket - keep the connection alive
                 Socket controlSocket = new Socket(serverIP, port);
                 controlSocket.setKeepAlive(true);
                 connectionOpen = true;
@@ -58,8 +58,8 @@ class ftp_client2 {
                 // While this connection exists, run this code
                 while (connectionOpen) {
                     System.out.print("Command: ");
-                    sentence = inFromUser.readLine();
-                    String[] splitCommand = sentence.split(" ");
+                    request = inFromUser.readLine();
+                    String[] splitCommand = request.split(" ");
                     String command = splitCommand[0];
                     String file;
 
@@ -72,7 +72,7 @@ class ftp_client2 {
                     DataInputStream inFromServer = new DataInputStream(new BufferedInputStream(controlSocket.getInputStream()));
 
                     // Read the users request (as bytes) into the output buffer
-                    outputBuffer = sentence.getBytes("ISO-8859-1");
+                    outputBuffer = request.getBytes("ISO-8859-1");
 
                     // Handles user input
                     if (command.equalsIgnoreCase("quit")) {
@@ -101,7 +101,7 @@ class ftp_client2 {
                         Socket listDataSocket = listSocket.accept();
 
                         // Send data
-                        listFiles(listDataSocket, outputBuffer, inputBuffer);
+                        listFiles(listDataSocket, inputBuffer);
 
                         // Close data socket
                         listDataSocket.close();
@@ -121,7 +121,7 @@ class ftp_client2 {
                         Socket fileDataSocket = fileSocket.accept();
 
                         // Send data
-                        writeFromFile(fileDataSocket, outputBuffer, inputBuffer, file);
+                        writeFromFile(fileDataSocket, outputBuffer, file);
 
                         // Close data socket
                         fileDataSocket.close();
@@ -148,65 +148,66 @@ class ftp_client2 {
                         fileSocket.close();
                     }
                 }
-
             }
         }
     }
 
 
-    /*
-    * This sends the list command to the server in order to list all of the files
-    * that are in the current directory of the server. 
-    *
-    * @param out
-    * @param outputBuff
-    * @param in
-    * @param inputBuff
-    * @throws IOException 
-    */
+    /**********************************************************************
+     * Sends the list command to the server in order to list all of the
+     * files that are in the current directory of the server.
+     *
+     * @param listDataSocket - socket used to transmit data between
+     *                         client and server
+     * @param inputBuff - the buffer for incoming data
+     * @throws IOException
+     *********************************************************************/
     private static void listFiles(Socket listDataSocket,
-                                  byte[] outputBuff,
                                   byte[] inputBuff) throws IOException {
-        // Temporary buffers
-        byte[] tempOutputBuffer = outputBuff;
-        byte[] tempInputBuffer = inputBuff;
-        DataInputStream in = new DataInputStream(new BufferedInputStream(listDataSocket.getInputStream()));
 
+        // Create input stream for data
+        DataInputStream in = new DataInputStream(
+                                new BufferedInputStream(
+                                        listDataSocket.getInputStream()));
 
-        // Read the response from the server
-        // This prints the list of the files in the current directory of the server
+        // Read all data into buffer, print when complete, clear buffer
         int bytesRead = 0;
-        // While there is data to read
         while ((bytesRead = in.read(inputBuff)) != -1) {
 
-
-            // Create and print data to screen
             String response = new String(inputBuff, "ISO-8859-1");
             System.out.print(response);
-
-            // Clear the buffer
             inputBuff = new byte[BUFSIZE];
 
-            // Break the loop if the number of bytesRead is
-            // less than what the buffer supports. This means
-            // the message has reached the end of its transmission.
-            //if (bytesRead < BUFSIZE) {
-            //    break;
-            //}
+            // Break loop when there are less # of bytes
+            // being read in than possible (this means
+            // the end of the message has been reached)
             if (bytesRead < inputBuff.length)
                 break;
         }
-
     }
 
-    //Method to write a files contents to a fileoutputstream, and to send it to the server
-    private static void writeFromFile(Socket fileDataSocket, byte[] outputBuff, byte[] inputBuff, String fileName) throws IOException {
+
+    /**********************************************************************
+     * Writes the contents of a specified file from the users current
+     * working directory to the current directory of the server.
+     *
+     * @param fileDataSocket - socket to transmit data between client
+     *                         and server
+     * @param outputBuff - buffer for outgoing data
+     * @param fileName - the file to copy over
+     * @throws IOException
+     *********************************************************************/
+    private static void writeFromFile(Socket fileDataSocket,
+                                      byte[] outputBuff,
+                                      String fileName) throws IOException {
+
+        // Output stream to write to the server
         DataOutputStream os = new DataOutputStream(fileDataSocket.getOutputStream());
 
-        //Send the stor command to the server
+        // Buffer for outgoing data
+        byte[] outputBuffer = new byte[BUFSIZE];
 
-        outputBuff = new byte[BUFSIZE];
-        //Turn filename into a file.
+        // Create a file from given filename
         File storFile = new File(fileName);
         if (!storFile.exists()){
             System.out.println("Could not find file");
@@ -215,47 +216,61 @@ class ftp_client2 {
         }
 
         System.out.println("Uploading file: " + fileName);
-        //Create new dataInputStream with target provided from client in fileName
+
+        // Used to write out file data
         FileInputStream fiStream = new FileInputStream(fileName);
 
+
+        // Read the file data (as bytes) into the output buffer,
+        // send the data to the server, clear output buffer
         int bytesRead = 0;
-        //Read bytes from the file into the output buff
-        while ((bytesRead = fiStream.read(outputBuff)) != -1) {
-            //Write to the outstream from the output buff
-            //
-            os.write(outputBuff, 0, bytesRead);
+        while ((bytesRead = fiStream.read(outputBuffer)) != -1) {
+            os.write(outputBuffer, 0, bytesRead);
             os.flush();
-            outputBuff = new byte[BUFSIZE];
-            if (bytesRead < outputBuff.length)
+            outputBuffer = new byte[BUFSIZE];
+            if (bytesRead < outputBuffer.length)
                 break;
         }
         os.close();
         fiStream.close();
-
-
     }
 
-    private static void writeToFile(Socket fileDataSocket, byte[] in_buffer, String fileName) throws IOException {
-        DataInputStream in = new DataInputStream(new BufferedInputStream(fileDataSocket.getInputStream()));
+
+    /**********************************************************************
+     * Writes the contents of a specified file from the current directory
+     * of the server to the users current working directory.
+     *
+     * @param fileDataSocket
+     * @param in_buffer
+     * @param fileName
+     * @throws IOException
+     *********************************************************************/
+    private static void writeToFile(Socket fileDataSocket,
+                                    byte[] in_buffer,
+                                    String fileName) throws IOException {
+
+        // Input stream
+        DataInputStream in = new DataInputStream(
+                                new BufferedInputStream(
+                                        fileDataSocket.getInputStream()));
+
         System.out.println("Downloading file: " + fileName);
 
-        //Clears the file without actually deleting the file.
+        // Clear file without actually deleting file
         PrintWriter pw = new PrintWriter(fileName);
         pw.write("");
         pw.close();
 
-
+        // Used to write file data
         FileOutputStream foStream = new FileOutputStream(fileName);
 
+        // Write the data to a local file
         int bytesRead = 0;
-        while ((bytesRead = in.read(in_buffer)) > 0) {
+        while ((bytesRead = in.read(in_buffer)) > 0)
             foStream.write(in_buffer, 0, bytesRead);
-        }
 
+        // Close streams
         foStream.close();
         in.close();
-
     }
-
-
 }
