@@ -16,7 +16,7 @@ import java.lang.*;
  *********************************************************************/
 class ftp_client2 {
 
-    private static int BUFSIZE = 32;
+    private static int BUFSIZE = 1024;
 
     public static void main(String[] argv) throws Exception {
         String request;
@@ -72,7 +72,7 @@ class ftp_client2 {
                     DataInputStream inFromServer = new DataInputStream(new BufferedInputStream(controlSocket.getInputStream()));
 
                     // Read the users request (as bytes) into the output buffer
-                    outputBuffer = request.getBytes("ISO-8859-1");
+                    outputBuffer = request.getBytes("UTF-16");
 
                     // Handles user input
                     if (command.equalsIgnoreCase("quit")) {
@@ -174,7 +174,7 @@ class ftp_client2 {
         int bytesRead = 0;
         while ((bytesRead = in.read(inputBuff)) != -1) {
 
-            String response = new String(inputBuff, "ISO-8859-1");
+            String response = new String(inputBuff, "UTF-16");
             System.out.print(response);
             inputBuff = new byte[BUFSIZE];
 

@@ -25,7 +25,7 @@ class ClientHandler extends Thread {
     private byte[] outputBuffer;
 
     /** Buffer size */
-    private static int BUFSIZE = 32;
+    private static int BUFSIZE = 1024;
 
     /**********************************************************************
      * Constructor for the client handler class.
@@ -69,7 +69,7 @@ class ClientHandler extends Thread {
         // Close the connection if the client disconnects
         try {
             while (inFromClient.read(inputBuffer) != -1) {
-                String full_command = new String(inputBuffer, "ISO-8859-1").toLowerCase();
+                String full_command = new String(inputBuffer, "UTF-16");
                 // Breakdown full command into components
                 String[] splitCommand = full_command.split(" ");
                 String command = splitCommand[0];
@@ -81,7 +81,7 @@ class ClientHandler extends Thread {
                     inFromClient.close();
                     outToClient.close();
 
-                } else if (full_command.contains("list")) {
+                } else if (full_command.toLowerCase().contains("list")) {
 
                     // Create data socket
                     Socket listDataSocket = new Socket(controlSocket.getInetAddress(), 1236);
@@ -92,7 +92,7 @@ class ClientHandler extends Thread {
                     // Close socket connection
                     listDataSocket.close();
 
-                } else if (full_command.contains("stor") & splitCommand.length > 1) {
+                } else if (full_command.toLowerCase().contains("stor") & splitCommand.length > 1) {
 
                     // Create data socket
                     Socket fileDataSocket = new Socket(controlSocket.getInetAddress(), 1236);
@@ -103,7 +103,7 @@ class ClientHandler extends Thread {
                     // Close socket connection
                     fileDataSocket.close();
 
-                } else if (full_command.contains("retr") & splitCommand.length > 1) {
+                } else if (full_command.toLowerCase().contains("retr") & splitCommand.length > 1) {
 
                     // Create data socket
                     Socket fileDataSocket = new Socket(controlSocket.getInetAddress(), 1236);
@@ -113,7 +113,13 @@ class ClientHandler extends Thread {
                     // Close socket connection
                     fileDataSocket.close();
                 }
+
+                // Clear the buffers
+                inputBuffer = new byte[BUFSIZE];
+                outputBuffer = new byte[BUFSIZE];
             }
+
+
         } catch (IOException io) {
             System.out.println(io.getLocalizedMessage());
         }
@@ -153,8 +159,8 @@ class ClientHandler extends Thread {
         }
 
         // Write the files out to the client
-        outputBuffer = new byte[final_files.getBytes("ISO-8859-1").length];
-        outputBuffer = final_files.getBytes("ISO-8859-1");
+        outputBuffer = new byte[final_files.getBytes("UTF-16").length];
+        outputBuffer = final_files.getBytes("UTF-16");
         os.write(outputBuffer, 0, outputBuffer.length);
         os.close();
     }
