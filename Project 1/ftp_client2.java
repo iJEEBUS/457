@@ -189,7 +189,6 @@ class ftp_client2 {
         }
         os.close();
         fiStream.close();
-        fileDataSocket.close();
 
 
     }
@@ -203,6 +202,7 @@ class ftp_client2 {
         pw.write("");
         pw.close();
 
+
         FileOutputStream foStream = new FileOutputStream(fileName);
 
         int bytesRead = 0;
@@ -212,8 +212,6 @@ class ftp_client2 {
 
         foStream.close();
         in.close();
-
-
 
     }
 

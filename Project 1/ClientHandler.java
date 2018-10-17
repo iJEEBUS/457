@@ -75,7 +75,6 @@ class ClientHandler extends Thread {
                 if (full_command.contains("quit"))
                     break;
                 else if (full_command.contains("list")) {
-
                     Socket listDataSocket = new Socket(controlSocket.getInetAddress(), 1236);
                     listFiles(listDataSocket, outputBuffer);
                     listDataSocket.close();
@@ -88,9 +87,7 @@ class ClientHandler extends Thread {
                     Socket fileDataSocket = new Socket(controlSocket.getInetAddress(), 1236);
                     writeFromFile(fileDataSocket, outputBuffer, inputBuffer, "test.txt");
                     fileDataSocket.close();
-
                 }
-
             }
         } catch (IOException io) {
             System.out.println("error.");
@@ -144,12 +141,15 @@ class ClientHandler extends Thread {
     }
     private static void writeFromFile(Socket fileDataSocket, byte[] outputBuff, byte[] inputBuff, String fileName) throws IOException {
         DataOutputStream os = new DataOutputStream(fileDataSocket.getOutputStream());
-        System.out.println("Writing File" + fileName);
-        //Send the stor command to the server
+
 
         outputBuff = new byte[BUFSIZE];
         //Turn filename into a file.
+
         File storFile = new File(fileName);
+
+
+        System.out.println("Writing File" + fileName);
         //Create new dataInputStream with target provided from client in fileName
         FileInputStream fiStream = new FileInputStream(fileName);
 
