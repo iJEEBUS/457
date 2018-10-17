@@ -146,6 +146,11 @@ class ClientHandler extends Thread {
         //Turn filename into a file.
 
         File storFile = new File(fileName);
+        if (!storFile.exists()){
+            System.out.println("Could not find file");
+            os.close();
+            return;
+        }
 
 
         System.out.println("Writing File" + fileName);

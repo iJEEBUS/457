@@ -167,12 +167,19 @@ class ftp_client2 {
     //Method to write a files contents to a fileoutputstream, and to send it to the server
     private static void writeFromFile(Socket fileDataSocket, byte[] outputBuff, byte[] inputBuff, String fileName) throws IOException {
         DataOutputStream os = new DataOutputStream(fileDataSocket.getOutputStream());
-        System.out.println("Writing File" + fileName);
+
         //Send the stor command to the server
 
         outputBuff = new byte[BUFSIZE];
         //Turn filename into a file.
         File storFile = new File(fileName);
+        if (!storFile.exists()){
+            System.out.println("Could not find file");
+            os.close();
+            return;
+        }
+
+        System.out.println("Writing File" + fileName);
         //Create new dataInputStream with target provided from client in fileName
         FileInputStream fiStream = new FileInputStream(fileName);
 
@@ -195,7 +202,7 @@ class ftp_client2 {
 
     private static void writeToFile(Socket fileDataSocket, byte[] in_buffer, String fileName) throws IOException {
         DataInputStream in = new DataInputStream(new BufferedInputStream(fileDataSocket.getInputStream()));
-        System.out.println("Writing Files.");
+        System.out.println("Retrieving Files.");
 
         //Clears the file without actually deleting the file.
         PrintWriter pw = new PrintWriter(fileName);
