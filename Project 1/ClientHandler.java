@@ -75,19 +75,20 @@ class ClientHandler extends Thread {
                 if (full_command.contains("quit"))
                     break;
                 else if (full_command.contains("list")) {
-                    ServerSocket listSocket = new ServerSocket(PORT + 2);
-                    Socket listDataSocket = listSocket.accept();
+        //            ServerSocket listSocket = new ServerSocket(1234 + 2);
+             //       Socket listDataSocket = listSocket.accept();
+                    Socket listDataSocket = new Socket(controlSocket.getInetAddress(), 1236);
                     listFiles(listDataSocket, outputBuffer);
                     listDataSocket.close();
-                    listSocket.close();
+            //        listSocket.close();
                 } else if (full_command.contains("stor")) {
-                    ServerSocket fileSocket = new ServerSocket(PORT + 2);
+                    ServerSocket fileSocket = new ServerSocket(1234 + 2);
                     Socket fileDataSocket = fileSocket.accept();
                     writeToFile(fileDataSocket, inputBuffer, "test.txt");
                     fileDataSocket.close();
                     fileSocket.close();
                 }else if (full_command.contains("retr")) {
-                    ServerSocket fileSocket = new ServerSocket(PORT + 2);
+                    ServerSocket fileSocket = new ServerSocket(1234 + 2);
                     Socket fileDataSocket = fileSocket.accept();
                     writeFromFile(fileDataSocket, outputBuffer, inputBuffer, "test.txt");
                     fileDataSocket.close();

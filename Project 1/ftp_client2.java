@@ -37,7 +37,7 @@ class ftp_client2 {
                 // serverIP = tokens.nextToken();
                 // int port = Integer.parseInt(tokens.nextToken());
 
-                String serverIP = "127.0.0.1";
+                String serverIP = "35.39.165.74";
                 int port = 1234;
                 System.out.println("Connecting to " + serverIP + " on port " + port);
 
@@ -81,19 +81,25 @@ class ftp_client2 {
                     } else if (sentence.contains("list")) {
                         outToServer.write(outputBuffer, 0, outputBuffer.length);
                         outToServer.flush();
-                        Socket listDataSocket = new Socket(serverIP, 1236);
+
+                        ServerSocket listSocket = new ServerSocket(1234 + 2);
+                        Socket listDataSocket = listSocket.accept();
+                        //Socket listDataSocket = new Socket(serverIP, 1236);
                         listFiles(listDataSocket, outputBuffer, inputBuffer);
                         listDataSocket.close();
+                        listSocket.close();
                     } else if (sentence.contains("stor")) {
                         outToServer.write(outputBuffer, 0, outputBuffer.length);
                         outToServer.flush();
                         Socket fileDataSocket = new Socket(serverIP, 1236);
                         writeFromFile(fileDataSocket, outputBuffer, inputBuffer, tokens.nextToken());
+                        fileDataSocket.close();
                     } else if (sentence.contains("retr")) {
                         outToServer.write(outputBuffer, 0, outputBuffer.length);
                         outToServer.flush();
                         Socket fileDataSocket = new Socket(serverIP, 1236);
                         writeToFile(fileDataSocket, inputBuffer, "testretr.txt");
+                        fileDataSocket.close();
                     }
 
 
@@ -198,7 +204,7 @@ class ftp_client2 {
 
         foStream.close();
         in.close();
-        fileDataSocket.close();
+
 
 
     }
