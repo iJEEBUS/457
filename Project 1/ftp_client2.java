@@ -51,8 +51,9 @@ class ftp_client2 {
                     System.out.print("Command: ");
                     BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
                     sentence = inFromUser.readLine();
-                    StringTokenizer tokens = new StringTokenizer(sentence);
-                    tokens.nextToken();
+                    String[] splitCommand = sentence.split(" ");
+                    String command = splitCommand[0];
+                    String file;
 
 
                     // Create the buffer spaces
@@ -88,24 +89,27 @@ class ftp_client2 {
                         listFiles(listDataSocket, outputBuffer, inputBuffer);
                         listDataSocket.close();
                         listSocket.close();
-                    } else if (sentence.contains("stor")) {
+                    } else if (sentence.contains("stor") & splitCommand.length > 1) {
+                        file = splitCommand[1];
+
                         //send "stor" command to server
                         outToServer.write(outputBuffer, 0, outputBuffer.length);
                         outToServer.flush();
                         //Create socket for sending data
                         ServerSocket fileSocket = new ServerSocket(1234 + 2);
                         Socket fileDataSocket = fileSocket.accept();
-                        writeFromFile(fileDataSocket, outputBuffer, inputBuffer, tokens.nextToken());
+                        writeFromFile(fileDataSocket, outputBuffer, inputBuffer, file);
                         fileDataSocket.close();
                         fileSocket.close();
-                    } else if (sentence.contains("retr")) {
+                    } else if (sentence.contains("retr") & splitCommand.length > 1) {
+                        file = splitCommand[1];
                         //send "retr" command to server
                         outToServer.write(outputBuffer, 0, outputBuffer.length);
                         outToServer.flush();
                         ServerSocket fileSocket = new ServerSocket(1234 + 2);
                         Socket fileDataSocket = fileSocket.accept();
                         //Create socket for sending data
-                        writeToFile(fileDataSocket, inputBuffer, "testretr.txt");
+                        writeToFile(fileDataSocket, inputBuffer, file);
                         fileDataSocket.close();
                         fileSocket.close();
                     }
@@ -179,7 +183,7 @@ class ftp_client2 {
             return;
         }
 
-        System.out.println("Writing File" + fileName);
+        System.out.println("Uploading file: " + fileName);
         //Create new dataInputStream with target provided from client in fileName
         FileInputStream fiStream = new FileInputStream(fileName);
 
@@ -202,7 +206,7 @@ class ftp_client2 {
 
     private static void writeToFile(Socket fileDataSocket, byte[] in_buffer, String fileName) throws IOException {
         DataInputStream in = new DataInputStream(new BufferedInputStream(fileDataSocket.getInputStream()));
-        System.out.println("Retrieving Files.");
+        System.out.println("Downloading file: " + fileName);
 
         //Clears the file without actually deleting the file.
         PrintWriter pw = new PrintWriter(fileName);

@@ -68,28 +68,38 @@ class ClientHandler extends Thread {
 
     public void run() {
 
-// Close the connection if the client disconnects
+        // Close the connection if the client disconnects
         try {
             while (inFromClient.read(inputBuffer) != -1) {
                 String full_command = new String(inputBuffer, "ISO-8859-1").toLowerCase();
-                if (full_command.contains("quit"))
-                    break;
-                else if (full_command.contains("list")) {
+                // Breakdown full command into components
+                String[] splitCommand = full_command.split(" ");
+                String command = splitCommand[0];
+                String fname;
+
+                if (full_command.contains("quit")){
+                    this.controlSocket.close();
+                    inFromClient.close();
+                    outToClient.close();
+
+                } else if (full_command.contains("list")) {
                     Socket listDataSocket = new Socket(controlSocket.getInetAddress(), 1236);
                     listFiles(listDataSocket, outputBuffer);
                     listDataSocket.close();
-                } else if (full_command.contains("stor")) {
+
+                } else if (full_command.contains("stor") & splitCommand.length > 1) {
                     Socket fileDataSocket = new Socket(controlSocket.getInetAddress(), 1236);
                     writeToFile(fileDataSocket, inputBuffer, "test.txt");
                     fileDataSocket.close();
-                }else if (full_command.contains("retr")) {
+
+                } else if (full_command.contains("retr") & splitCommand.length > 1) {
                     Socket fileDataSocket = new Socket(controlSocket.getInetAddress(), 1236);
                     writeFromFile(fileDataSocket, outputBuffer, inputBuffer, "test.txt");
                     fileDataSocket.close();
                 }
             }
         } catch (IOException io) {
-            System.out.println("error.");
+            System.out.println(io.getLocalizedMessage());
         }
 
 
@@ -119,7 +129,7 @@ class ClientHandler extends Thread {
 
     private static void writeToFile(Socket fileDataSocket, byte[] in_buffer, String fileName) throws IOException {
         DataInputStream in = new DataInputStream(new BufferedInputStream(fileDataSocket.getInputStream()));
-        System.out.println("Writing Files.");
+        System.out.println("Downloading file from " + fileDataSocket.getInetAddress() + ": " + fileName);
 
         //Clears the file without actually deleting the file.
         PrintWriter pw = new PrintWriter(fileName);
@@ -153,7 +163,7 @@ class ClientHandler extends Thread {
         }
 
 
-        System.out.println("Writing File" + fileName);
+        System.out.println("Uploading file from " + fileDataSocket.getInetAddress() + ": " + fileName);
         //Create new dataInputStream with target provided from client in fileName
         FileInputStream fiStream = new FileInputStream(fileName);
 
