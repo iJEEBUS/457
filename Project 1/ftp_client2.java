@@ -83,6 +83,7 @@ class ftp_client2 {
                         outToServer.flush();
                         Socket listDataSocket = new Socket(serverIP, 1236);
                         listFiles(listDataSocket, outputBuffer, inputBuffer);
+                        listDataSocket.close();
                     } else if (sentence.contains("stor")) {
                         outToServer.write(outputBuffer, 0, outputBuffer.length);
                         outToServer.flush();
