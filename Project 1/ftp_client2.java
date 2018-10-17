@@ -61,7 +61,7 @@ class ftp_client2 {
                     request = inFromUser.readLine();
                     String[] splitCommand = request.split(" ");
                     String command = splitCommand[0];
-                    String file;
+		    String file; 
 
                     // Create the buffer spaces
                     byte[] inputBuffer = new byte[BUFSIZE];
@@ -93,7 +93,7 @@ class ftp_client2 {
                     } else if (command.equalsIgnoreCase("list")) {
 
                         // Send request to the server
-                        outToServer.write(outputBuffer, 0, outputBuffer.length);
+                        outToServer.writeBytes(request + "\n");
                         outToServer.flush();
 
                         // Create socket for sending data
@@ -113,7 +113,7 @@ class ftp_client2 {
                         file = splitCommand[1];
 
                         // send request to server
-                        outToServer.write(outputBuffer, 0, outputBuffer.length);
+                        outToServer.writeBytes(request + "\n");
                         outToServer.flush();
 
                         // Create socket for sending data
@@ -133,7 +133,7 @@ class ftp_client2 {
                         file = splitCommand[1];
 
                         // Send request to server
-                        outToServer.write(outputBuffer, 0, outputBuffer.length);
+                        outToServer.writeBytes(request + "\n");
                         outToServer.flush();
 
                         // Create socket for sending data

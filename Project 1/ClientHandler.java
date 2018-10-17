@@ -68,8 +68,8 @@ class ClientHandler extends Thread {
 
         // Close the connection if the client disconnects
         try {
-            while (inFromClient.read(inputBuffer) != -1) {
-                String full_command = new String(inputBuffer, "UTF-16");
+            while(true){
+                String full_command = inFromClient.readLine();
                 // Breakdown full command into components
                 String[] splitCommand = full_command.split(" ");
                 String command = splitCommand[0];
