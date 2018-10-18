@@ -67,8 +67,8 @@ class ClientHandler extends Thread {
     public void run() {
 
         // Close the connection if the client disconnects
-        try {
-            while(true){
+        while(true){
+            try {
                 String full_command = inFromClient.readLine();
                 // Breakdown full command into components
                 String[] splitCommand = full_command.split(" ");
@@ -117,14 +117,10 @@ class ClientHandler extends Thread {
                 // Clear the buffers
                 inputBuffer = new byte[BUFSIZE];
                 outputBuffer = new byte[BUFSIZE];
+            }catch (IOException io) {
+                System.out.println();
             }
-
-
-        } catch (IOException io) {
-            System.out.println(io.getLocalizedMessage());
         }
-
-
     }
 
 
@@ -147,8 +143,6 @@ class ClientHandler extends Thread {
         DataOutputStream os = new DataOutputStream(
                                 new DataOutputStream(
                                         listDataSocket.getOutputStream()));
-
-        System.out.println("Listing files.");
 
         // Print the files unless the directory is empty
         if (files.length == 0)
@@ -183,7 +177,7 @@ class ClientHandler extends Thread {
                                 new BufferedInputStream(
                                         fileDataSocket.getInputStream()));
 
-        System.out.println("Downloading file from " + fileDataSocket.getInetAddress() + ": " + fileName);
+        System.out.println("Downloading  " + fileName + " from " + fileDataSocket.getInetAddress());
 
         //Clears the file without actually deleting the file.
         PrintWriter pw = new PrintWriter(fileName);
@@ -232,7 +226,7 @@ class ClientHandler extends Thread {
             return;
         }
 
-        System.out.println("Uploading file from " + fileDataSocket.getInetAddress() + ": " + fileName);
+        System.out.println("Uploading " + fileName + " to host " + fileDataSocket.getInetAddress());
 
         // Used to write out file data
         FileInputStream fiStream = new FileInputStream(fileName);

@@ -25,129 +25,136 @@ class ftp_client2 {
 
         for (;;) {
 
-            // Greeting message
-            System.out.print("\n" +
-                    "\n* Command List *\n" +
-                    "\n     connect [address] [port #] - connect to a server at the specified host and port number" +
-                    "\n     list - lists the files in the servers current directory" +
-                    "\n     stor [filename] - upload a file from your current directory to the server" +
-                    "\n     retr [filename] - download a file from the server to your current directory" +
-                    "\n     quit - close connection with the server" +
-                    "\n\nCommand: ");
 
-            // Receive user input and breakdown into components
-            BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-            request = inFromUser.readLine();
-            splitInput = request.split(" ");
+                // Greeting message
+                System.out.print("\n" +
+                        "\n* Command List *\n" +
+                        "\n     connect [address] [port #] - connect to a server at the specified host and port number" +
+                        "\n     list - lists the files in the servers current directory" +
+                        "\n     stor [filename] - upload a file from your current directory to the server" +
+                        "\n     retr [filename] - download a file from the server to your current directory" +
+                        "\n     quit - close connection with the server" +
+                        "\n\nCommand: ");
 
-            // Create connection to the specified server IP and port number
-            // Only execute if all needed info is given (IP and port number)
-            if (splitInput.length == 3 & splitInput[0].equalsIgnoreCase("connect")) {
+                // Receive user input and breakdown into components
+                BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+                request = inFromUser.readLine();
+                splitInput = request.split(" ");
 
-                // Extract server IP and port number
-                String serverIP = splitInput[1];
-                int port = Integer.parseInt(splitInput[2]);
+                // Create connection to the specified server IP and port number
+                // Only execute if all needed info is given (IP and port number)
+                if (splitInput.length == 3 & splitInput[0].equalsIgnoreCase("connect")) {
 
-                System.out.println("Connecting to " + serverIP + " on port " + port);
+                    // Extract server IP and port number
+                    String serverIP = splitInput[1];
+                    int port = Integer.parseInt(splitInput[2]);
 
-                // Create control socket - keep the connection alive
-                Socket controlSocket = new Socket(serverIP, port);
-                controlSocket.setKeepAlive(true);
-                connectionOpen = true;
+                    System.out.println("Connecting to " + serverIP + " on port " + port);
 
-                // While this connection exists, run this code
-                while (connectionOpen) {
-                    System.out.print("Command: ");
-                    request = inFromUser.readLine();
-                    String[] splitCommand = request.split(" ");
-                    String command = splitCommand[0];
-		    String file; 
+                    // Create control socket - keep the connection alive
+                    Socket controlSocket = new Socket(serverIP, port);
+                    controlSocket.setKeepAlive(true);
+                    connectionOpen = true;
 
-                    // Create the buffer spaces
-                    byte[] inputBuffer = new byte[BUFSIZE];
-                    byte[] outputBuffer = new byte[BUFSIZE];
+                    // While this connection exists, run this code
+                    while (connectionOpen) {
 
-                    // Open the data connection to the server
-                    DataOutputStream outToServer = new DataOutputStream(controlSocket.getOutputStream());
-                    DataInputStream inFromServer = new DataInputStream(new BufferedInputStream(controlSocket.getInputStream()));
+                        try {
+                            System.out.print("Command: ");
+                            request = inFromUser.readLine();
+                        String[] splitCommand = request.split(" ");
+                        String command = splitCommand[0];
+                        String file;
 
-                    // Read the users request (as bytes) into the output buffer
-                    outputBuffer = request.getBytes("UTF-16");
+                        // Create the buffer spaces
+                        byte[] inputBuffer = new byte[BUFSIZE];
+                        byte[] outputBuffer = new byte[BUFSIZE];
 
-                    // Handles user input
-                    if (command.equalsIgnoreCase("quit")) {
+                        // Open the data connection to the server
+                        DataOutputStream outToServer = new DataOutputStream(controlSocket.getOutputStream());
+                        DataInputStream inFromServer = new DataInputStream(new BufferedInputStream(controlSocket.getInputStream()));
 
-                        // Send the quit request to the server
-                        outToServer.write(outputBuffer, 0, outputBuffer.length);
-                        outToServer.flush();
+                        // Read the users request (as bytes) into the output buffer
+                        outputBuffer = request.getBytes("UTF-16");
 
-                        // Close data connections
-                        outToServer.close();
-                        inFromServer.close();
+                        // Handles user input
+                        if (command.equalsIgnoreCase("quit")) {
 
-                        // Set connection status
-                        connectionOpen = false;
+                            // Send the quit request to the server
+                            outToServer.write(outputBuffer, 0, outputBuffer.length);
+                            outToServer.flush();
 
-                        System.out.println("Thank you for visiting.\nThis connection is now closed.");
+                            // Close data connections
+                            outToServer.close();
+                            inFromServer.close();
 
-                    } else if (command.equalsIgnoreCase("list")) {
+                            // Set connection status
+                            connectionOpen = false;
 
-                        // Send request to the server
-                        outToServer.writeBytes(request + "\n");
-                        outToServer.flush();
+                            System.out.println("Thank you for visiting.\nThis connection is now closed.");
 
-                        // Create socket for sending data
-                        ServerSocket listSocket = new ServerSocket(1234 + 2);
-                        Socket listDataSocket = listSocket.accept();
+                        } else if (command.equalsIgnoreCase("list")) {
 
-                        // Send data
-                        listFiles(listDataSocket, inputBuffer);
+                            // Send request to the server
+                            outToServer.writeBytes(request + "\n");
+                            outToServer.flush();
 
-                        // Close data socket
-                        listDataSocket.close();
-                        listSocket.close();
+                            // Create socket for sending data
+                            ServerSocket listSocket = new ServerSocket(1234 + 2);
+                            Socket listDataSocket = listSocket.accept();
 
-                    } else if (command.equalsIgnoreCase("stor") & splitCommand.length > 1) {
+                            // Send data
+                            listFiles(listDataSocket, inputBuffer);
 
-                        // Assign filename value
-                        file = splitCommand[1];
+                            // Close data socket
+                            listDataSocket.close();
+                            listSocket.close();
 
-                        // send request to server
-                        outToServer.writeBytes(request + "\n");
-                        outToServer.flush();
+                        } else if (command.equalsIgnoreCase("stor") & splitCommand.length > 1) {
 
-                        // Create socket for sending data
-                        ServerSocket fileSocket = new ServerSocket(1234 + 2);
-                        Socket fileDataSocket = fileSocket.accept();
+                            // Assign filename value
+                            file = splitCommand[1];
 
-                        // Send data
-                        writeFromFile(fileDataSocket, outputBuffer, file);
+                            // send request to server
+                            outToServer.writeBytes(request + "\n");
+                            outToServer.flush();
 
-                        // Close data socket
-                        fileDataSocket.close();
-                        fileSocket.close();
+                            // Create socket for sending data
+                            ServerSocket fileSocket = new ServerSocket(1234 + 2);
+                            Socket fileDataSocket = fileSocket.accept();
 
-                    } else if (command.equalsIgnoreCase("retr") & splitCommand.length > 1) {
+                            // Send data
+                            writeFromFile(fileDataSocket, outputBuffer, file);
 
-                        // Assign filename value
-                        file = splitCommand[1];
+                            // Close data socket
+                            fileDataSocket.close();
+                            fileSocket.close();
 
-                        // Send request to server
-                        outToServer.writeBytes(request + "\n");
-                        outToServer.flush();
+                        } else if (command.equalsIgnoreCase("retr") & splitCommand.length > 1) {
 
-                        // Create socket for sending data
-                        ServerSocket fileSocket = new ServerSocket(1234 + 2);
-                        Socket fileDataSocket = fileSocket.accept();
+                            // Assign filename value
+                            file = splitCommand[1];
 
-                        // Send data
-                        writeToFile(fileDataSocket, inputBuffer, file);
+                            // Send request to server
+                            outToServer.writeBytes(request + "\n");
+                            outToServer.flush();
 
-                        // Close data socket
-                        fileDataSocket.close();
-                        fileSocket.close();
-                    }
+                            // Create socket for sending data
+                            ServerSocket fileSocket = new ServerSocket(1234 + 2);
+                            Socket fileDataSocket = fileSocket.accept();
+
+                            // Send data
+                            writeToFile(fileDataSocket, inputBuffer, file);
+
+                            // Close data socket
+                            fileDataSocket.close();
+                            fileSocket.close();
+                        }
+                    } catch (Exception e) {
+                            System.out.println(e.getLocalizedMessage());
+                        }
                 }
+
             }
         }
     }
