@@ -2,8 +2,19 @@ from ftplib import FTP
 import os
 
 class Client(object):
+	'''Client Thread
+	
+	This class instantiated when a new Thread is spawned on the server
+	
+	Variables:
+		ftp {FTP} -- FTP connection with the server
+		__CONNECTION_ALIVE {Boolean} -- tracks the connection between client and server
+	'''
 
+	# FTP instance
 	ftp = None
+
+	# Connection status for infinite loop
 	__CONNECTION_ALIVE = None
 
 	def __init__(self):
@@ -34,7 +45,6 @@ class Client(object):
 
 	def uploadFile(self, file):
 		'''Store a file on the server. 
-
 		
 		This will be used to implement the PUSH command that you would use with Git.
 		
@@ -77,47 +87,3 @@ class Client(object):
 
 			elif command == "quit":
 				self.__CONNECTION_ALIVE = False
-
-
-
-# Create a client instance
-c = Client()
-
-c.main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	# def connectToServer(self):
-	# 	try:
-	# 		# Connect to the local host
-	# 		self.ftp.connect('localhost', 1515)
-	# 		self.ftp.login()
-	# 		self.ftp.cwd('/Desktop/')
-	# 		self.__CONNECTION_ALIVE = True
-	# 	except:
-	# 		print("Could not connect to server.\n Re-attempting connection in 3 seconds.")
-	# 		time.sleep(3)
-
-	# self.ftp.connect('localhost', 1515)
-	# self.ftp.login()
-	# command = input("Command: ")
-	# if command == "list":
-	# 	self.ftp.retrlines('LIST')

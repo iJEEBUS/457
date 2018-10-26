@@ -5,6 +5,11 @@ from pyftpdlib.authorizers import DummyAuthorizer
 
 
 def main():
+	'''Execution method
+	
+	Creates a Threaded server on the localhost with on the port 1515.
+	Runs infinitely and accepts all client connections.
+	'''
 
 	# Authorize the incoming client connection requests
 	authorizer = DummyAuthorizer()
@@ -17,9 +22,5 @@ def main():
 	server = ThreadedFTPServer(('',1515), handler)
 	server.serve_forever()
 	
-	# Create and run the threaded server instance
-	# server = FTPServer(("127.0.0.1", 1515), handler)
-	# server.serve_forever()
-
 if __name__ == "__main__":
 	main()
