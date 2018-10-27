@@ -1,3 +1,12 @@
+'''Client
+
+Clients are created to establish a connection with the server.
+Once the connection is established, you may use the BabyGit 
+version control system.
+
+@author Ron Rounsifer, Bryce Hutton
+@version 10.27.2018 (10.26.2018)
+'''
 from ftplib import FTP
 import os
 

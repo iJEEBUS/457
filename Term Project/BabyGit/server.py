@@ -1,3 +1,11 @@
+'''Server
+
+The server class will host all of the files that a user wishes to 
+manage with the BabyGit version control software.
+
+@author Ron Rounsifer, Bryce Hutton
+@version 10.27.2018 (10.26.2018)
+'''
 import os
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import ThreadedFTPServer
