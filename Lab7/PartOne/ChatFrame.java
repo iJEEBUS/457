@@ -1,4 +1,3 @@
-package Lab7.PartOne;
 import java.awt.*;
 
 public class ChatFrame extends Frame { 

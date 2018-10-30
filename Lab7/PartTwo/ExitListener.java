@@ -1,4 +1,3 @@
-package Lab7.PartTwo;
 import java.awt.event.*;
 
 public class ExitListener extends WindowAdapter {

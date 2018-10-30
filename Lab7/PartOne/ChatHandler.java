@@ -1,4 +1,3 @@
-package Lab7.PartOne;
 import java.net.*;
 import java.io.*; 
 import java.util.*;
@@ -27,7 +26,7 @@ public class ChatHandler extends Thread {
          // Broadcast the client input to the chat
          while (true) {
              String message = in.readUTF();
-             broadcast(message);
+             broadcast(name +": "+message);
          } 
 
       } catch (IOException ex) { 

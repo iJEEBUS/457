@@ -1,5 +1,3 @@
-package Lab7.PartTwo;
-
 import java.net.*;
 import java.io.*;
 

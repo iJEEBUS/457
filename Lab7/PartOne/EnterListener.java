@@ -1,4 +1,3 @@
-package Lab7.PartOne;
 import java.awt.event.*;
 
 public class EnterListener extends KeyAdapter {
