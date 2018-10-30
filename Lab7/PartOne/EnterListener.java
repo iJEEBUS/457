@@ -13,6 +13,8 @@ public class EnterListener extends KeyAdapter {
 
    public void keyPressed(KeyEvent e) {
       if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+          if (gui.input.getText().equals("quit"))
+              client.disconnect();
           client.sendTextToChat(gui.input.getText());
           gui.input.setText("");
       }

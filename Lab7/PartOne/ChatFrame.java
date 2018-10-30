@@ -14,7 +14,7 @@ public class ChatFrame extends Frame {
       setLayout (new BorderLayout ()); 
       add ("Center", output = new TextArea ()); 
       output.setEditable (false); 
-      add ("South", input = new TextField ()); 
+      add ("South", input = new TextField ());
     
       pack (); 
       show (); 
