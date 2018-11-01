@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="056c5d52-7487-4960-848f-20b7383f6982" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartOne/ChatClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartOne/ChatClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartOne/ChatClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartOne/ChatClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartOne/ChatFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartOne/ChatFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartOne/ChatFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartOne/ChatFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartOne/ChatHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartOne/ChatHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartOne/ChatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartOne/ChatHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartOne/ChatServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartOne/ChatServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartOne/ChatServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartOne/ChatServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartOne/EnterListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartOne/EnterListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartOne/EnterListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartOne/EnterListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartOne/ExitListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartOne/ExitListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartOne/ExitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartOne/ExitListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartTwo/ChatClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartTwo/ChatClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartTwo/ChatClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartTwo/ChatFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartTwo/ChatFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartTwo/ChatFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartTwo/EnterListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartTwo/EnterListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartTwo/EnterListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartTwo/ExitListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab7/PartTwo/ExitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lab7/PartTwo/ExitListener.java" afterDir="false" />
-    </list>
+    <list default="true" id="056c5d52-7487-4960-848f-20b7383f6982" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +12,7 @@
     <session id="-1149095476">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
@@ -164,7 +142,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540903955955" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540904018368" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="project.structure.last.edited" value="Project" />
@@ -318,16 +296,15 @@
       <workItem from="1538153648659" duration="439000" />
       <workItem from="1538230927808" duration="2690000" />
       <workItem from="1540855218057" duration="4808000" />
-      <workItem from="1540903603817" duration="353000" />
+      <workItem from="1540903603817" duration="951000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33875000" />
+    <option name="totallyTimeSpent" value="34473000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="695" y="436" width="1068" height="1006" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25148514" />
       <window_info id="Structure" order="1" weight="0.25" />
