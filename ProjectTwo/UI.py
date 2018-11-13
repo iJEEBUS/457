@@ -12,22 +12,28 @@ by the central server.
 class UI(object):
 
     peer = Peer()
+    connection_speed = None
 
     """ Constructor for the UI """
     def __init__(self):
         self.create()
 
-    def connect(self):
+    def connectToServer(self):
         '''Executes on button
 
 		This method will extract the user inputs from the form and
 		connect the user to the remote routing server.
 		'''
+        # Server information
         server_hostname = self.hostname_entry.get()
         port = self.port_entry.get()
+
+        # User information
         user = self.username_entry.get()
         local_hostname = self.hostname_entry.get()
-        self.peer.connectToCentralServer(server_hostname, port)
+
+        # Connect to server
+        self.peer.connectToCentralServer(server_hostname, port, local_hostname, self.connection_speed)
         
 
     def setSpeed(self, selection):
@@ -36,7 +42,7 @@ class UI(object):
 		Arguments:
 			selection
 		'''
-        speed = selection
+        self.connection_speed = selection
 
     def search(self):
         '''Query the server for a keyword
@@ -74,22 +80,27 @@ class UI(object):
         Label (window, text="Speed:", bg="white", fg="black").grid(row=2, column=4, sticky=W)
 
         # Button
-        Button(window, text="Connect", width=15, command=self.connect).grid(row=1, column=5, sticky=E)
+        Button(window, text="Connect", width=15, command=self.connectToServer).grid(row=1, column=5, sticky=E)
 
         # Text Inputs
-        self.port_entry = Entry(window, width=7, bg="white")
-        self.port_entry.grid(row=1, column=3, sticky=W)
-        self.username_entry = Entry(window, width=20, bg="white")
-        self.username_entry.grid(row=2, column=1, sticky=W)
         self.hostname_entry = Entry(window, width=20, bg="white")
         self.hostname_entry.grid(row=1, column=1, sticky=W)
+        
+        self.port_entry = Entry(window, width=7, bg="white")
+        self.port_entry.grid(row=1, column=3, sticky=W)
+        
+        self.username_entry = Entry(window, width=20, bg="white")
+        self.username_entry.grid(row=2, column=1, sticky=W)
+        
+        self.local_hostname_entry = Entry(window, width=20, bg="white")
+        self.local_hostname_entry.grid(row=2, column=3, sticky=W)
 
 
         # Dropdown menu
         speeds = ["Ethernet", "Option 2", "Option 3"]
         default = StringVar(window)
         default.set(speeds[0])
-        self.speeds_menu = OptionMenu(window, default, *speeds, command=self.connect)
+        self.speeds_menu = OptionMenu(window, default, *speeds, command=self.setSpeed)
         self.speeds_menu.grid(row=2, column=5)
 
 

@@ -35,10 +35,7 @@ class Peer(object):
 			peer_name {[type]} -- [description]
 			port {[type]} -- [description]
 		'''
-
-
-
-	def connectToCentralServer(self, server_name, port):
+	def connectToCentralServer(self, server_name, port, local_host, speed):
 		'''Connect to server and return connection status
 		
 		Creates a connection to the central server and queries for 
@@ -61,13 +58,11 @@ class Peer(object):
 		self.ftp.cwd('.')
 		self.__CONNECTION_ALIVE = True
 
-		return self.__CONNECTION_ALIVE
 
+
+		return self.__CONNECTION_ALIVE
 
 
 
 if __name__ == "__main__":
 	p = Peer()
-
-
-
