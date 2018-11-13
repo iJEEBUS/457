@@ -30,10 +30,10 @@ class UI(object):
 
         # User information
         user = self.username_entry.get()
-        local_hostname = self.hostname_entry.get()
+        local_hostname = self.local_hostname_entry.get()
 
         # Connect to server
-        self.peer.connectToCentralServer(server_hostname, port, local_hostname, self.connection_speed)
+        self.peer.connectToCentralServer(server_hostname, port, user, local_hostname, self.connection_speed)
         
 
     def setSpeed(self, selection):

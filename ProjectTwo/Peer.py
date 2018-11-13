@@ -38,7 +38,7 @@ class Peer(object):
 		'''
 		pass
 
-	def createRegistrationXML(username, hostname, speed):
+	def createRegistrationXML(self, username, hostname, speed):
 		'''Creates Registration XML file
 		
 		Arguments:
@@ -46,17 +46,22 @@ class Peer(object):
 			hostname str -- hostname of peer
 			speed int -- connection speed of peer
 		'''
+		# Create the XML file
 		root = ET.Element("root")
 		ET.SubElement(root, "user").text = username
 		ET.SubElement(root, "host").text = hostname
-		ET.SubElement(root, "speed").text = speed
+		ET.SubElement(root, "speed").text = "Ethernet"
 		tree = ET.ElementTree(root)
+		
+		# Write XML file
 		tree.write("registration.xml")
 		
 
 	def createFileListXML():
 		pass
-	def connectToCentralServer(self, server_name, port, local_host, speed):
+
+
+	def connectToCentralServer(self, server_name, port, user, local_host, speed):
 		'''Connect to server and return connection status
 		
 		Creates a connection to the central server and queries for 
@@ -77,6 +82,14 @@ class Peer(object):
 		self.ftp.connect(string_server_name,int_port)
 		self.ftp.login()
 		self.ftp.cwd('.')
+		self.ftp.retrlines('LIST')
+
+		# Create registration XML file
+		self.createRegistrationXML(user, local_host, speed)
+		print("Registering: " + user + "...")
+		registration_file = "registration.xml"
+		self.ftp.storbinary('STOR ' + registration_file, open(registration_file, 'rb'))
+
 		self.__CONNECTION_ALIVE = True
 
 
