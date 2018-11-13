@@ -1,4 +1,5 @@
 from ftplib import FTP
+import xml.etree.cElementTree as ET
 
 class Peer(object):
     # FTP instance
@@ -35,6 +36,26 @@ class Peer(object):
 			peer_name {[type]} -- [description]
 			port {[type]} -- [description]
 		'''
+		pass
+
+	def createRegistrationXML(username, hostname, speed):
+		'''Creates Registration XML file
+		
+		Arguments:
+			username str -- username of peer
+			hostname str -- hostname of peer
+			speed int -- connection speed of peer
+		'''
+		root = ET.Element("root")
+		ET.SubElement(root, "user").text = username
+		ET.SubElement(root, "host").text = hostname
+		ET.SubElement(root, "speed").text = speed
+		tree = ET.ElementTree(root)
+		tree.write("registration.xml")
+		
+
+	def createFileListXML():
+		pass
 	def connectToCentralServer(self, server_name, port, local_host, speed):
 		'''Connect to server and return connection status
 		

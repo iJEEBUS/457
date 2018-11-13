@@ -11,6 +11,32 @@ from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import ThreadedFTPServer
 from pyftpdlib.authorizers import DummyAuthorizer
 
+class ServerHandler(FTPHandler):
+
+    def on_file_received(self, file):
+        '''Populates databases with given information
+        
+        Given the xml file passed through, this method parses the information
+         it contains and adds it to the corresponding data table in our database.
+        
+        Arguments:
+            file File -- register / file_list file uploaded to server
+        '''
+        
+        filename = os.path.basename(file.name)
+        register = "register.xml"
+        file_list = "filelist.xml"
+
+        if filename == register:
+            # Parse the xml file of the registering information
+            # Add this information to the registered_users database table
+            pass
+        elif filename == file_list:
+            # Parse the xml file of the filelist information
+            # Add this to the file_list database table
+            pass
+        pass
+        
 def main():
     '''Execution method
 
@@ -23,7 +49,7 @@ def main():
     authorizer.add_user("user", "12345", ".", perm="r")
 
     # Create and define the client handler
-    handler = FTPHandler
+    handler = ServerHandler
     handler.authorizer = authorizer
     server = ThreadedFTPServer((""'', 1515), handler)
     server.serve_forever()
