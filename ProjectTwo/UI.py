@@ -12,7 +12,7 @@ by the central server.
 class UI(object):
 
     peer = Peer()
-    connection_speed = None
+    connection_speed = "Ethernet"  # Hardcoded for now
 
     """ Constructor for the UI """
     def __init__(self):

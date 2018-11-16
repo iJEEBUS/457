@@ -47,10 +47,10 @@ class Peer(object):
 			speed int -- connection speed of peer
 		'''
 		# Create the XML file
-		root = ET.Element("root")
-		ET.SubElement(root, "user").text = username
-		ET.SubElement(root, "host").text = hostname
-		ET.SubElement(root, "speed").text = "Ethernet"
+		root = ET.Element("User", name=username, host=hostname, speed=speed)
+		# ET.SubElement(root, "user").text = username
+		# ET.SubElement(root, "host").text = hostname
+		# ET.SubElement(root, "speed").text = speed
 		tree = ET.ElementTree(root)
 		
 		# Write XML file
@@ -82,7 +82,6 @@ class Peer(object):
 		self.ftp.connect(string_server_name,int_port)
 		self.ftp.login()
 		self.ftp.cwd('.')
-		self.ftp.retrlines('LIST')
 
 		# Create registration XML file
 		self.createRegistrationXML(user, local_host, speed)
@@ -91,8 +90,6 @@ class Peer(object):
 		self.ftp.storbinary('STOR ' + registration_file, open(registration_file, 'rb'))
 
 		self.__CONNECTION_ALIVE = True
-
-
 
 		return self.__CONNECTION_ALIVE
 
