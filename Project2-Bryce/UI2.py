@@ -1,5 +1,5 @@
 from tkinter import *
-from Peer import *
+from Peer2 import *
 
 """GUI
 
@@ -13,7 +13,7 @@ by the central server.
 
 
 class UI(object):
-    peer = Peer()
+    peer = Peer2()
     connection_speed = "Ethernet"  # Hardcoded for now
 
     """ Constructor for the UI """

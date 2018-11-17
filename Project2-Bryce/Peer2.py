@@ -5,7 +5,7 @@ from pyftpdlib.servers import ThreadedFTPServer
 from pyftpdlib.authorizers import DummyAuthorizer
 
 
-class Peer(object):
+class Peer2(object):
     # FTP instance
     ftp = None
 
@@ -35,13 +35,13 @@ class Peer(object):
         # lr lets you list files and retrieve them.
         authorizer.add_anonymous(os.getcwd, 'lr')
 
-        handler = Peer
+        handler = Peer2
         handler.authorizer = authorizer
         # Server port is 1514 for testing purposes, as client port needs to
         # be different than server port if running on same machine, otherwise
         # it doesn't really matter.
 
-        server = ThreadedFTPServer(('', 1514), handler)
+        server = ThreadedFTPServer(('', 1513), handler)
         server.serve_forever()
 
     def connectToOtherPeer(self, peer_name, port):
@@ -126,5 +126,5 @@ class Peer(object):
 
 
 if __name__ == "__main__":
-    p = Peer()
+    p = Peer2()
 

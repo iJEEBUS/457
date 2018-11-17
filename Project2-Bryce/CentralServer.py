@@ -4,7 +4,7 @@ The server class will host all of the files that a user wishes to
 manage with the BabyGit version control software.
 
 @author Ron Rounsifer, Bryce Hutton
-@version 11.12.2018 (10.26.2018)
+@version 11.17.2018 (10.26.2018)
 '''
 import os
 import xml.etree.ElementTree
@@ -71,7 +71,7 @@ def main():
     # Authorize the incoming client connection requests
     authorizer = DummyAuthorizer()
     # authorizer.add_user("user", "12345", ".", perm="rw")
-    authorizer.add_anonymous('./data', perm="elradfmw")
+    authorizer.add_anonymous('./data', perm="elrafmw")
 
     # Create and define the client handler
     handler = ServerHandler
