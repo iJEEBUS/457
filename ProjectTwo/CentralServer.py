@@ -49,6 +49,8 @@ class ServerHandler(FTPHandler):
             if username not in self.registered_users.keys():
                 print ("Please register your account before sharing files!")
             else:
+                #TODO: I don't know what was supposed to go here
+                print("This should not be here.")
                 # Parse the xml file of the filelist information
                 #  Add this to the file_list database table
                 # SHOULD INCLUDE:
