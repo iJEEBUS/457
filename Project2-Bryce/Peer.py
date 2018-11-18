@@ -5,6 +5,11 @@ from pyftpdlib.servers import ThreadedFTPServer
 from pyftpdlib.authorizers import DummyAuthorizer
 
 
+#PeerHandler class is the thread that handles the p2p connection from the peer server
+class PeerHandler(FTPHandler):
+    def sendFile(self):
+        return
+
 class Peer(object):
     # FTP instance
     ftp = None
@@ -23,6 +28,8 @@ class Peer(object):
         # self.ftp.login()
         # self.ftp.cwd('.')
         self.__CONNECTION_ALIVE = False
+        self.localServer()
+
 
     def localServer(self):
         '''Local server for other peers to contact
@@ -33,16 +40,16 @@ class Peer(object):
         # Creates a threaded server similarly to the CentralServer
         authorizer = DummyAuthorizer()
         # lr lets you list files and retrieve them.
-        authorizer.add_anonymous(os.getcwd, 'lr')
+        authorizer.add_anonymous('./data', perm='lr')
 
-        handler = Peer
+        handler = PeerHandler
         handler.authorizer = authorizer
         # Server port is 1514 for testing purposes, as client port needs to
         # be different than server port if running on same machine, otherwise
         # it doesn't really matter.
 
         server = ThreadedFTPServer(('', 1514), handler)
-        server.serve_forever()
+        #server.serve_forever()
 
     def connectToOtherPeer(self, peer_name, port):
         '''Connect to and download from another peer
