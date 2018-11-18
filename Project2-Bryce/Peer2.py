@@ -3,6 +3,7 @@ import xml.etree.cElementTree as ET
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import ThreadedFTPServer
 from pyftpdlib.authorizers import DummyAuthorizer
+import threading
 
 #PeerHandler class is the thread that handles the p2p connection from the peer server
 class PeerHandler(FTPHandler):
@@ -28,7 +29,8 @@ class Peer2(object):
         # self.ftp.login()
         # self.ftp.cwd('.')
         self.__CONNECTION_ALIVE = False
-        self.localServer()
+        threading.Thread(target=self.localServer).start()
+
 
     def localServer(self):
         '''Local server for other peers to contact
