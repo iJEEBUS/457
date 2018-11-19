@@ -131,11 +131,11 @@ class UI(object):
         # Table
         # TODO make this a response table
         # Server response table to be implemented
-        Label(window, text="Table", width=20, bg="white").grid(row=6, column=0, sticky=W)
-        Label(window, text="Goes", width=20, bg="white").grid(row=7, column=0, sticky=W)
-        Label(window, text="Here", width=20, bg="white").grid(row=8, column=0, sticky=W)
-        Label(window, text="Please", width=20, bg="white").grid(row=9, column=0, sticky=W)
-        Label(window, text="Thank you", width=20, bg="white").grid(row=10, column=0, sticky=W)
+        # TODO here's listbox tutorial stuff http://effbot.org/tkinterbook/listbox.htm
+        self.searchListbox = Listbox(window, height=5)
+        self.searchListbox.grid(row=6,column=0, sticky=W)
+
+        self.searchListbox.insert(END, 'test')
 
         ## Adding a blank space between connection and search areas
         Label(window, text="Blank Space", bg="white", fg="white").grid(row=11, column=0, sticky=W)
@@ -150,11 +150,11 @@ class UI(object):
         self.command_entry.grid(row=12, column=1, sticky=W)
         # Table
         # TODO make this a response table
-        Label(window, text="Table", width=20, bg="white").grid(row=13, column=0, sticky=W)
-        Label(window, text="Goes", width=20, bg="white").grid(row=14, column=0, sticky=W)
-        Label(window, text="Here", width=20, bg="white").grid(row=15, column=0, sticky=W)
-        Label(window, text="Please", width=20, bg="white").grid(row=16, column=0, sticky=W)
-        Label(window, text="Thank you", width=20, bg="white").grid(row=17, column=0, sticky=W)
+        self.commandListbox = Listbox(window, height=5)
+        self.commandListbox.grid(row=13, column=0, sticky=W)
+
+        self.commandListbox.insert(END, 'test')
+
 
         ##### Run the window
         window.mainloop()
