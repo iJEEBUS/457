@@ -16,10 +16,19 @@ class UI(object):
     peer = Peer()
     connection_speed = "Ethernet"  # Hardcoded for now
 
+
     """ Constructor for the UI """
 
     def __init__(self):
         self.create()
+
+
+    def disconnectFromServer(self):
+        '''Executes on button
+        This method will disconnect the peer from the server.
+        '''
+        self.peer.disconnectFromCentralServer()
+        self.serverButton.configure(text="Connect", command=self.connectToServer)
 
     def connectToServer(self):
         '''Executes on button
@@ -37,6 +46,7 @@ class UI(object):
 
         # Connect to server
         self.peer.connectToCentralServer(server_hostname, port, user, local_hostname, self.connection_speed)
+        self.serverButton.configure(text="Disconnect", command=self.disconnectFromServer)
 
     def setSpeed(self, selection):
         '''Set the speed limit
@@ -83,7 +93,8 @@ class UI(object):
         Label(window, text="Speed:", bg="white", fg="black").grid(row=2, column=4, sticky=W)
 
         # Button
-        Button(window, text="Connect", width=15, command=self.connectToServer).grid(row=1, column=5, sticky=E)
+        self.serverButton = Button(window, text="Connect", width=15, command=self.connectToServer)
+        self.serverButton.grid(row=1, column=5, sticky=E)
 
         # Text Inputs
         self.hostname_entry = Entry(window, width=20, bg="white")

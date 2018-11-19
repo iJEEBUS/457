@@ -124,6 +124,12 @@ class Peer(object):
         fileDest.close()
 
 
+    def disconnectFromCentralServer(self):
+        ''' Disconnects from ftp central server
+        '''
+        self.ftp.quit()
+        print("Disconnected from server.")
+
     def connectToCentralServer(self, server_name, port, user, local_host, speed):
         '''Connect to server and return connection status
 
@@ -142,7 +148,9 @@ class Peer(object):
         int_port = int(port)
         print("Attempting connection to " + server_name + " on port " + port)
         self.ftp = FTP()
+
         self.ftp.connect(string_server_name, int_port)
+
         self.ftp.login()
         self.ftp.cwd('.')
 
@@ -151,7 +159,7 @@ class Peer(object):
         print("Registering: " + user + "...")
         registration_file = "registration.xml"
         self.ftp.storbinary('STOR ' + registration_file, open(registration_file, 'rb'))
-
+        print("Connected to " + server_name + " on port " + port)
         self.__CONNECTION_ALIVE = True
 
         return self.__CONNECTION_ALIVE
