@@ -30,7 +30,6 @@ class ServerHandler(FTPHandler):
         register = "registration.xml"
         file_list = "filelist.xml"
 
-        root = xml.etree.ElementTree.parse(filename).getroot()
 
         if filename == register:
             # Parse the xml file of the registering information

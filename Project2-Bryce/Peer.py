@@ -93,6 +93,11 @@ class Peer(object):
         # Write XML file
         tree.write("registration.xml")
 
+    # Receive file from the server in the form of an iostream.
+    def recieveServerList(self):
+
+
+
     def createFileListXML(self):
         pass
 
@@ -156,6 +161,8 @@ class Peer(object):
 
         # Create registration XML file
         self.createRegistrationXML(user, local_host, speed)
+
+
         print("Registering: " + user + "...")
         registration_file = "registration.xml"
         self.ftp.storbinary('STOR ' + registration_file, open(registration_file, 'rb'))

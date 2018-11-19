@@ -22,6 +22,13 @@ class UI(object):
     def __init__(self):
         self.create()
 
+    # Puts search results (given as searchList in the form of a list), into the box.
+    def searchResults(self, searchList):
+        self.searchListbox.delete(0, END)
+
+        for item in searchList:
+            self.searchListbox.insert(END, item)
+
 
     def disconnectFromServer(self):
         '''Executes on button
@@ -65,6 +72,8 @@ class UI(object):
 	    Returns a list of locations where the file is available for download.
 		'''
         keyword = self.keyword_entry.get()
+
+        # Put results into listbox using self.searchResults(list)
 
     def go(self):
         '''Executes users command
@@ -129,8 +138,6 @@ class UI(object):
         self.keyword_entry = Entry(window, width=20, bg="white")
         self.keyword_entry.grid(row=5, column=1, sticky=W)
         # Table
-        # TODO make this a response table
-        # Server response table to be implemented
         # TODO here's listbox tutorial stuff http://effbot.org/tkinterbook/listbox.htm
         self.searchListbox = Listbox(window, height=5)
         self.searchListbox.grid(row=6,column=0, sticky=W)
@@ -149,7 +156,6 @@ class UI(object):
         self.command_entry = Entry(window, width=20, bg="white", fg="black")
         self.command_entry.grid(row=12, column=1, sticky=W)
         # Table
-        # TODO make this a response table
         self.commandListbox = Listbox(window, height=5)
         self.commandListbox.grid(row=13, column=0, sticky=W)
 
