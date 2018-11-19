@@ -4,6 +4,7 @@ from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import ThreadedFTPServer
 from pyftpdlib.authorizers import DummyAuthorizer
 import threading
+import os
 
 
 #PeerHandler class is the thread that handles the p2p connection from the peer server
@@ -117,7 +118,8 @@ class Peer(object):
     def downloadFile(self, fileTarget):
         if self.__PCONNECTION_ALIVE == False:
             return False
-        self.peerftp.retrbinary('RETR', )
+        cwd = os.getcwd()
+        self.peerftp.retrbinary('RETR ' + fileTarget, open(os.path.join(cwd, fileTarget + ".txt"), 'wb').write)
 
 
     def connectToCentralServer(self, server_name, port, user, local_host, speed):

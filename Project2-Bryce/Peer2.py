@@ -4,6 +4,7 @@ from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import ThreadedFTPServer
 from pyftpdlib.authorizers import DummyAuthorizer
 import threading
+import os
 
 #PeerHandler class is the thread that handles the p2p connection from the peer server
 class PeerHandler(FTPHandler):
@@ -14,10 +15,11 @@ class PeerHandler(FTPHandler):
 class Peer2(object):
     # FTP instance
     ftp = None
+    peerftp = None
 
     # Connection status for infinite loop
     __CONNECTION_ALIVE = None
-
+    __PCONNECTION_ALIVE = None
     def __init__(self):
         """Constructor for each peer thread made
 
@@ -29,6 +31,8 @@ class Peer2(object):
         # self.ftp.login()
         # self.ftp.cwd('.')
         self.__CONNECTION_ALIVE = False
+        self.__PCONNECTION_ALIVE = False
+        #this line creates a thread to handle the peer-server side.
         threading.Thread(target=self.localServer).start()
 
 
@@ -61,13 +65,15 @@ class Peer2(object):
         '''
 
         print("Attempting to connect to peer" + peer_name + " at port " + str(port))
-        self.ftp = FTP()
-        self.ftp.connect(peer_name, port)
-        self.ftp.login()
+        self.peerftp = FTP()
+        self.peerftp.connect(peer_name, port)
+        self.peerftp.login()
 
-        self.__CONNECTION_ALIVE = True
+        self.__PCONNECTION_ALIVE = True
 
-        return self.__CONNECTION_ALIVE
+        return self.__PCONNECTION_ALIVE
+
+
 
     def createRegistrationXML(self, username, hostname, speed):
         '''Creates Registration XML file
@@ -90,16 +96,32 @@ class Peer2(object):
     def createFileListXML(self):
         pass
 
+    # read command takes input in from the UI and decides what function should be called from it.
     def readCommand(self, command):
         commands = command.split()
         if commands[0] == "connect":
             if len(commands) < 3:
                 self.connectToOtherPeer('', int(commands[1]))
+                return True
             elif len(commands) == 3:
                 self.connectToOtherPeer(commands[1], int(commands[2]))
+                return True
             else:
-                #TODO Change this to be within the UI
-                print("Incorrect number of arguments.")
+               return False
+        elif commands[0] == "download":
+            if len(commands) == 2:
+                self.downloadFile(commands[1])
+                return True
+            else:
+                return False
+
+    def downloadFile(self, fileTarget):
+        if self.__PCONNECTION_ALIVE == False:
+            return False
+        cwd = os.getcwd()
+        self.peerftp.retrbinary('RETR ' +  fileTarget, open(os.path.join(cwd, fileTarget + ".txt"), 'wb').write)
+
+
     def connectToCentralServer(self, server_name, port, user, local_host, speed):
         '''Connect to server and return connection status
 
@@ -131,8 +153,6 @@ class Peer2(object):
         self.__CONNECTION_ALIVE = True
 
         return self.__CONNECTION_ALIVE
-
-
 if __name__ == "__main__":
     p = Peer2()
 
