@@ -45,7 +45,7 @@ class Peer(object):
         # Creates a threaded server similarly to the CentralServer
         authorizer = DummyAuthorizer()
         # lr lets you list files and retrieve them.
-        authorizer.add_anonymous('./data', perm='lr')
+        authorizer.add_anonymous('./data', perm='elr')
 
         handler = PeerHandler
         handler.authorizer = authorizer
@@ -119,7 +119,9 @@ class Peer(object):
         if self.__PCONNECTION_ALIVE == False:
             return False
         cwd = os.getcwd()
-        self.peerftp.retrbinary('RETR ' + fileTarget, open(os.path.join(cwd, fileTarget + ".txt"), 'wb').write)
+        fileDest = open(os.path.join(cwd, fileTarget), 'wb' )
+        self.peerftp.retrbinary('RETR ' + fileTarget, fileDest.write)
+        fileDest.close()
 
 
     def connectToCentralServer(self, server_name, port, user, local_host, speed):

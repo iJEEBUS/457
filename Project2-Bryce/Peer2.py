@@ -119,7 +119,9 @@ class Peer2(object):
         if self.__PCONNECTION_ALIVE == False:
             return False
         cwd = os.getcwd()
-        self.peerftp.retrbinary('RETR ' +  fileTarget, open(os.path.join(cwd, fileTarget + ".txt"), 'wb').write)
+        fileDest = open(os.path.join(cwd, fileTarget), 'wb' )
+        self.peerftp.retrbinary('RETR ' + fileTarget, fileDest.write)
+        fileDest.close()
 
 
     def connectToCentralServer(self, server_name, port, user, local_host, speed):
