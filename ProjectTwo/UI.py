@@ -16,10 +16,18 @@ class UI(object):
     peer = Peer()
     connection_speed = "Ethernet"  # Hardcoded for now
 
-
-    """ Constructor for the UI """
-
     def __init__(self):
+        """ Constructor for the UI """
+        self.serverButton = None
+        self.hostname_entry = None
+        self.port_entry = None
+        self.username_entry = None
+        self.local_hostname_entry = None
+        self.speeds_menu = None
+        self.keyword_entry = None
+        self.command_entry = None
+        self.searchListbox = None
+        self.commandListbox = None
         self.create()
 
     # Puts search results (given as searchList in the form of a list), into the box.
@@ -29,20 +37,20 @@ class UI(object):
         for item in searchList:
             self.searchListbox.insert(END, item)
 
-
     def disconnectFromServer(self):
-        '''Executes on button
+        """Executes on button
+
         This method will disconnect the peer from the server.
-        '''
+        """
         self.peer.disconnectFromCentralServer()
         self.serverButton.configure(text="Connect", command=self.connectToServer)
 
     def connectToServer(self):
-        '''Executes on button
+        """Executes on button
 
-		This method will extract the user inputs from the form and
-		connect the user to the remote routing server.
-		'''
+        This method will extract the user inputs from the form and
+        connect the user to the remote routing server.
+        """
         # Server information
         server_hostname = self.hostname_entry.get()
         port = self.port_entry.get()
@@ -56,21 +64,21 @@ class UI(object):
         self.serverButton.configure(text="Disconnect", command=self.disconnectFromServer)
 
     def setSpeed(self, selection):
-        '''Set the speed limit
+        """Set the speed limit
 
-		Arguments:
-			selection
-		'''
+        Arguments:
+            selection
+            """
         self.connection_speed = selection
 
     def search(self):
         '''Query the server for a keyword
 
-	    This method is called when the "Search" button is pressed.
-	    It collects the keyword inputted by the user.
-	    Searches each file description server-side for the keyword.
-	    Returns a list of locations where the file is available for download.
-		'''
+        This method is called when the "Search" button is pressed.
+        It collects the keyword inputted by the user.
+        Searches each file description server-side for the keyword.
+        Returns a list of locations where the file is available for download.
+        '''
         keyword = self.keyword_entry.get()
 
         # Put results into listbox using self.searchResults(list)
@@ -78,21 +86,21 @@ class UI(object):
     def go(self):
         '''Executes users command
 
-		Runs the command that the client sends.
-		Since retrievals will occur the command will open up data connection with the
-		client that is hosting the file before downloading said file.
-		Connection stays open until specified by the QUIT command.
-		'''
+        Runs the command that the client sends.
+        Since retrievals will occur the command will open up data connection with the
+        client that is hosting the file before downloading said file.
+        Connection stays open until specified by the QUIT command.
+        '''
         command = self.command_entry.get()
         self.peer.readCommand(command)
 
     def create(self):
-        ##### Create the main window
+        # Create the main window
         window = Tk()
         window.title("Napster Host")
         window.configure(background="white")
 
-        ##### Connection panel
+        # Connection panel
         # Labels
         Label(window, text="Connection", bg="white", fg="black").grid(row=0, column=0, sticky=W)
         Label(window, text="Server Hostname:", bg="white", fg="black").grid(row=1, column=0, sticky=W)
@@ -125,10 +133,10 @@ class UI(object):
         self.speeds_menu = OptionMenu(window, default, *speeds, command=self.setSpeed)
         self.speeds_menu.grid(row=2, column=5)
 
-        ## Adding a blank space between connection and search areas
+        # Adding a blank space between connection and search areas
         Label(window, text="Blank Space", bg="white", fg="white").grid(row=3, column=0, sticky=W)
 
-        ##### Search Panel
+        # Search Panel
         # Labels
         Label(window, text="Search", bg="white", fg="black").grid(row=4, column=0, sticky=W)
         Label(window, text="Keyword:", bg="white", fg="black").grid(row=5, column=0, sticky=W)
@@ -140,14 +148,14 @@ class UI(object):
         # Table
         # TODO here's listbox tutorial stuff http://effbot.org/tkinterbook/listbox.htm
         self.searchListbox = Listbox(window, height=5)
-        self.searchListbox.grid(row=6,column=0, sticky=W)
+        self.searchListbox.grid(row=6, column=0, columnspan=6, sticky=NSEW, padx=10, pady=10)
 
         self.searchListbox.insert(END, 'test')
 
-        ## Adding a blank space between connection and search areas
+        # Adding a blank space between connection and search areas
         Label(window, text="Blank Space", bg="white", fg="white").grid(row=11, column=0, sticky=W)
 
-        ##### FTP panel
+        # FTP panel
         # Labels
         Label(window, text="Enter Command: ", bg="white", fg="black").grid(row=12, column=0, sticky=W)
         # Button
@@ -157,12 +165,11 @@ class UI(object):
         self.command_entry.grid(row=12, column=1, sticky=W)
         # Table
         self.commandListbox = Listbox(window, height=5)
-        self.commandListbox.grid(row=13, column=0, sticky=W)
+        self.commandListbox.grid(row=13, column=0, columnspan=6, sticky=NSEW, padx=10, pady=10)
 
         self.commandListbox.insert(END, 'test')
 
-
-        ##### Run the window
+        # Run the window
         window.mainloop()
 
 

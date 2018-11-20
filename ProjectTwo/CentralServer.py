@@ -30,7 +30,6 @@ class ServerHandler(FTPHandler):
         register = "registration.xml"
         file_list = "filelist.xml"
 
-
         if filename == register:
             # Parse the xml file of the registering information
             # Add this information to the registered_users database table

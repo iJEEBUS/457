@@ -6,11 +6,14 @@ from pyftpdlib.authorizers import DummyAuthorizer
 import threading
 import os
 
-
-#PeerHandler class is the thread that handles the p2p connection from the peer server
 class PeerHandler(FTPHandler):
+    """p2p handler
+
+    Handles the p2p connection from the peer to the server
+    """
     def sendFile(self):
         return
+
 
 class Peer(object):
     # FTP instance
@@ -20,6 +23,7 @@ class Peer(object):
     # Connection status for infinite loop
     __CONNECTION_ALIVE = None
     __PCONNECTION_ALIVE = None
+
     def __init__(self):
         """Constructor for each peer thread made
 
@@ -32,9 +36,9 @@ class Peer(object):
         # self.ftp.cwd('.')
         self.__CONNECTION_ALIVE = False
         self.__PCONNECTION_ALIVE = False
-        #this line creates a thread to handle the peer-server side.
-        threading.Thread(target=self.localServer).start()
 
+        # create a thread to handle the peer-server side.
+        threading.Thread(target=self.localServer).start()
 
     def localServer(self):
         '''Local server for other peers to contact
@@ -57,12 +61,12 @@ class Peer(object):
         server.serve_forever()
 
     def connectToOtherPeer(self, peer_name, port):
-        '''Connect to and download from another peer
+        """Connect to and download from another peer
 
         Arguments:
             peer_name {[type]} -- [description]
             port {[type]} -- [description]
-        '''
+        """
 
         print("Attempting to connect to peer" + peer_name + " at port " + str(port))
         self.peerftp = FTP()
@@ -73,16 +77,14 @@ class Peer(object):
 
         return self.__PCONNECTION_ALIVE
 
-
-
     def createRegistrationXML(self, username, hostname, speed):
-        '''Creates Registration XML file
+        """Creates Registration XML file
 
         Arguments:
             username str -- username of peer
             hostname str -- hostname of peer
             speed int -- connection speed of peer
-        '''
+        """
         # Create the XML file
         root = ET.Element("User", name=username, host=hostname, speed=speed)
         # ET.SubElement(root, "user").text = username
@@ -96,7 +98,6 @@ class Peer(object):
     # Receive file from the server in the form of an iostream.
     def recieveServerList(self):
         pass
-
 
     def createFileListXML(self):
         pass
@@ -128,15 +129,16 @@ class Peer(object):
         self.peerftp.retrbinary('RETR ' + fileTarget, fileDest.write)
         fileDest.close()
 
-
     def disconnectFromCentralServer(self):
-        ''' Disconnects from ftp central server
-        '''
+        """ Disconnect server
+
+        Disconnects from ftp central server
+        """
         self.ftp.quit()
         print("Disconnected from server.")
 
     def connectToCentralServer(self, server_name, port, user, local_host, speed):
-        '''Connect to server and return connection status
+        """Connect to server and return connection status
 
         Creates a connection to the central server and queries for
         locations (host addresses) of files to download that contain
@@ -148,7 +150,7 @@ class Peer(object):
 
         Returns:
             bool -- The client-server connection status
-        '''
+        """
         string_server_name = str(server_name)
         int_port = int(port)
         print("Attempting connection to " + server_name + " on port " + port)
@@ -161,7 +163,6 @@ class Peer(object):
 
         # Create registration XML file
         self.createRegistrationXML(user, local_host, speed)
-
 
         print("Registering: " + user + "...")
         registration_file = "registration.xml"
