@@ -16,26 +16,10 @@ class UI(object):
     peer = Peer()
     connection_speed = "Ethernet"  # Hardcoded for now
 
-
     """ Constructor for the UI """
 
     def __init__(self):
         self.create()
-
-    # Puts search results (given as searchList in the form of a list), into the box.
-    def searchResults(self, searchList):
-        self.searchListbox.delete(0, END)
-
-        for item in searchList:
-            self.searchListbox.insert(END, item)
-
-
-    def disconnectFromServer(self):
-        '''Executes on button
-        This method will disconnect the peer from the server.
-        '''
-        self.peer.disconnectFromCentralServer()
-        self.serverButton.configure(text="Connect", command=self.connectToServer)
 
     def connectToServer(self):
         '''Executes on button
@@ -53,7 +37,6 @@ class UI(object):
 
         # Connect to server
         self.peer.connectToCentralServer(server_hostname, port, user, local_hostname, self.connection_speed)
-        self.serverButton.configure(text="Disconnect", command=self.disconnectFromServer)
 
     def setSpeed(self, selection):
         '''Set the speed limit
@@ -71,9 +54,7 @@ class UI(object):
 	    Searches each file description server-side for the keyword.
 	    Returns a list of locations where the file is available for download.
 		'''
-        keyword = self.keyword_entry.get()
-
-        # Put results into listbox using self.searchResults(list)
+        keyword = keyword_entry.get()
 
     def go(self):
         '''Executes users command
@@ -83,8 +64,7 @@ class UI(object):
 		client that is hosting the file before downloading said file.
 		Connection stays open until specified by the QUIT command.
 		'''
-        command = self.command_entry.get()
-        self.peer.readCommand(command)
+        command = command_entry.get()
 
     def create(self):
         ##### Create the main window
@@ -102,8 +82,7 @@ class UI(object):
         Label(window, text="Speed:", bg="white", fg="black").grid(row=2, column=4, sticky=W)
 
         # Button
-        self.serverButton = Button(window, text="Connect", width=15, command=self.connectToServer)
-        self.serverButton.grid(row=1, column=5, sticky=E)
+        Button(window, text="Connect", width=15, command=self.connectToServer).grid(row=1, column=5, sticky=E)
 
         # Text Inputs
         self.hostname_entry = Entry(window, width=20, bg="white")
@@ -138,11 +117,13 @@ class UI(object):
         self.keyword_entry = Entry(window, width=20, bg="white")
         self.keyword_entry.grid(row=5, column=1, sticky=W)
         # Table
-        # TODO here's listbox tutorial stuff http://effbot.org/tkinterbook/listbox.htm
-        self.searchListbox = Listbox(window, height=5)
-        self.searchListbox.grid(row=6,column=0, sticky=W)
-
-        self.searchListbox.insert(END, 'test')
+        # TODO make this a response table
+        # Server response table to be implemented
+        Label(window, text="Table", width=20, bg="white").grid(row=6, column=0, sticky=W)
+        Label(window, text="Goes", width=20, bg="white").grid(row=7, column=0, sticky=W)
+        Label(window, text="Here", width=20, bg="white").grid(row=8, column=0, sticky=W)
+        Label(window, text="Please", width=20, bg="white").grid(row=9, column=0, sticky=W)
+        Label(window, text="Thank you", width=20, bg="white").grid(row=10, column=0, sticky=W)
 
         ## Adding a blank space between connection and search areas
         Label(window, text="Blank Space", bg="white", fg="white").grid(row=11, column=0, sticky=W)
@@ -156,11 +137,12 @@ class UI(object):
         self.command_entry = Entry(window, width=20, bg="white", fg="black")
         self.command_entry.grid(row=12, column=1, sticky=W)
         # Table
-        self.commandListbox = Listbox(window, height=5)
-        self.commandListbox.grid(row=13, column=0, sticky=W)
-
-        self.commandListbox.insert(END, 'test')
-
+        # TODO make this a response table
+        Label(window, text="Table", width=20, bg="white").grid(row=13, column=0, sticky=W)
+        Label(window, text="Goes", width=20, bg="white").grid(row=14, column=0, sticky=W)
+        Label(window, text="Here", width=20, bg="white").grid(row=15, column=0, sticky=W)
+        Label(window, text="Please", width=20, bg="white").grid(row=16, column=0, sticky=W)
+        Label(window, text="Thank you", width=20, bg="white").grid(row=17, column=0, sticky=W)
 
         ##### Run the window
         window.mainloop()

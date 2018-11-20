@@ -1,38 +1,53 @@
 from ftplib import FTP
 import xml.etree.cElementTree as ET
+from pyftpdlib.handlers import FTPHandler
+from pyftpdlib.servers import ThreadedFTPServer
+from pyftpdlib.authorizers import DummyAuthorizer
+import threading
+import os
 
+
+#PeerHandler class is the thread that handles the p2p connection from the peer server
+class PeerHandler(FTPHandler):
+    def sendFile(self):
+        return
 
 class Peer(object):
     # FTP instance
     ftp = None
+    peerftp = None
 
     # Connection status for infinite loop
     __CONNECTION_ALIVE = None
-
+    __PCONNECTION_ALIVE = None
     def __init__(self):
         """Constructor for each peer thread made
 
-		Creates a File Transfer Protocol connection.
-		Sets connections status to True.
-		"""
+        Creates a File Transfer Protocol connection.
+        Sets connections status to True.
+        """
         # self.ftp = FTP()
         # self.ftp.connect('localhost',1515)
         # self.ftp.login()
         # self.ftp.cwd('.')
         self.__CONNECTION_ALIVE = False
+        self.__PCONNECTION_ALIVE = False
+        #this line creates a thread to handle the peer-server side.
+        threading.Thread(target=self.localServer).start()
+
 
     def localServer(self):
         '''Local server for other peers to contact
 
-		Will allow for other peers to download files from
-		this peer.
-		'''
+        Will allow for other peers to download files from
+        this peer.
+        '''
         # Creates a threaded server similarly to the CentralServer
         authorizer = DummyAuthorizer()
         # lr lets you list files and retrieve them.
-        authorizer.add_anonymous(os.getcwd, 'lr')
+        authorizer.add_anonymous('./data', perm='elr')
 
-        handler = Peer
+        handler = PeerHandler
         handler.authorizer = authorizer
         # Server port is 1514 for testing purposes, as client port needs to
         # be different than server port if running on same machine, otherwise
@@ -44,28 +59,30 @@ class Peer(object):
     def connectToOtherPeer(self, peer_name, port):
         '''Connect to and download from another peer
 
-		Arguments:
-			peer_name {[type]} -- [description]
-			port {[type]} -- [description]
-		'''
+        Arguments:
+            peer_name {[type]} -- [description]
+            port {[type]} -- [description]
+        '''
 
-        print("Attempting to connect to peer" + peer_name + " at port " + port)
-        self.ftp = FTP()
-        self.ftp.connect(peer_name, port)
-        self.ftp.login()
+        print("Attempting to connect to peer" + peer_name + " at port " + str(port))
+        self.peerftp = FTP()
+        self.peerftp.connect(peer_name, port)
+        self.peerftp.login()
 
-        self.__CONNECTION_ALIVE = True
+        self.__PCONNECTION_ALIVE = True
 
-        return self.__CONNECTION_ALIVE
+        return self.__PCONNECTION_ALIVE
+
+
 
     def createRegistrationXML(self, username, hostname, speed):
         '''Creates Registration XML file
 
-		Arguments:
-			username str -- username of peer
-			hostname str -- hostname of peer
-			speed int -- connection speed of peer
-		'''
+        Arguments:
+            username str -- username of peer
+            hostname str -- hostname of peer
+            speed int -- connection speed of peer
+        '''
         # Create the XML file
         root = ET.Element("User", name=username, host=hostname, speed=speed)
         # ET.SubElement(root, "user").text = username
@@ -76,37 +93,80 @@ class Peer(object):
         # Write XML file
         tree.write("registration.xml")
 
+    # Receive file from the server in the form of an iostream.
+    def recieveServerList(self):
+        pass
+
+
     def createFileListXML(self):
         pass
+
+    # read command takes input in from the UI and decides what function should be called from it.
+    def readCommand(self, command):
+        commands = command.split()
+        if commands[0] == "connect":
+            if len(commands) < 3:
+                self.connectToOtherPeer('', int(commands[1]))
+                return True
+            elif len(commands) == 3:
+                self.connectToOtherPeer(commands[1], int(commands[2]))
+                return True
+            else:
+               return False
+        elif commands[0] == "download":
+            if len(commands) == 2:
+                self.downloadFile(commands[1])
+                return True
+            else:
+                return False
+
+    def downloadFile(self, fileTarget):
+        if self.__PCONNECTION_ALIVE == False:
+            return False
+        cwd = os.getcwd()
+        fileDest = open(os.path.join(cwd, fileTarget), 'wb' )
+        self.peerftp.retrbinary('RETR ' + fileTarget, fileDest.write)
+        fileDest.close()
+
+
+    def disconnectFromCentralServer(self):
+        ''' Disconnects from ftp central server
+        '''
+        self.ftp.quit()
+        print("Disconnected from server.")
 
     def connectToCentralServer(self, server_name, port, user, local_host, speed):
         '''Connect to server and return connection status
 
-		Creates a connection to the central server and queries for
-		locations (host addresses) of files to download that contain
-		a keyword.
+        Creates a connection to the central server and queries for
+        locations (host addresses) of files to download that contain
+        a keyword.
 
-		Arguments:
-			server_name {str} -- The central servers host address
-			port {int} -- The central servers port to connect to
+        Arguments:
+            server_name {str} -- The central servers host address
+            port {int} -- The central servers port to connect to
 
-		Returns:
-			bool -- The client-server connection status
-		'''
+        Returns:
+            bool -- The client-server connection status
+        '''
         string_server_name = str(server_name)
         int_port = int(port)
         print("Attempting connection to " + server_name + " on port " + port)
         self.ftp = FTP()
+
         self.ftp.connect(string_server_name, int_port)
+
         self.ftp.login()
         self.ftp.cwd('.')
 
         # Create registration XML file
         self.createRegistrationXML(user, local_host, speed)
+
+
         print("Registering: " + user + "...")
         registration_file = "registration.xml"
         self.ftp.storbinary('STOR ' + registration_file, open(registration_file, 'rb'))
-
+        print("Connected to " + server_name + " on port " + port)
         self.__CONNECTION_ALIVE = True
 
         return self.__CONNECTION_ALIVE
