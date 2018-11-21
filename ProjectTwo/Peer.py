@@ -77,14 +77,14 @@ class Peer(object):
             port {[type]} -- [description]
         """
 
-        print("Attempting to connect to peer" + peer_name + " at port " + str(port))
+        #print("Attempting to connect to peer" + peer_name + " at port " + str(port))
         self.peerftp = FTP()
         self.peerftp.connect(peer_name, port)
         self.peerftp.login()
 
         self.__PCONNECTION_ALIVE = True
 
-        return self.__PCONNECTION_ALIVE
+        return "Connected to peer" + peer_name + " at port " + str(port)
 
     def createRegistrationXML(self, username, hostname, speed):
         """Creates Registration XML file
@@ -125,21 +125,23 @@ class Peer(object):
 
         if action_command == "connect":
             if len(commands) < 3:
-                self.connectToOtherPeer('', int(commands[1]))
-                return True
+                return self.connectToOtherPeer('', int(commands[1]))
+
             elif len(commands) == 3:
-                self.connectToOtherPeer(commands[1], int(commands[2]))
-                return True
+                return self.connectToOtherPeer(commands[1], int(commands[2]))
+
             else:
-               return False
+               return "Error, too many arguments"
         elif action_command in ["retr", "download"]:
             if len(commands) == 2:
-                self.downloadFile(commands[1])
-                return True
+                return self.downloadFile(commands[1])
+
             else:
-                return False
+                return "Error, command does match format: download file.*"
         elif action_command == "quit":
-            self.disconnectFromCentralServer(action_command)
+            return self.disconnectFromCentralServer(action_command)
+        else:
+            return commands[0] + " is not a valid command."
 
     def downloadFile(self, fileTarget):
         if self.__PCONNECTION_ALIVE == False:
@@ -148,6 +150,7 @@ class Peer(object):
         fileDest = open(os.path.join(cwd, fileTarget), 'wb')
         self.peerftp.retrbinary('RETR ' + fileTarget, fileDest.write)
         fileDest.close()
+        return "File \"" + fileTarget + "\" is being downloaded."
 
     def disconnectFromCentralServer(self, command, user):
         """ Disconnect server
@@ -163,8 +166,8 @@ class Peer(object):
         self.ftp.storbinary('STOR ' + quit_file, open(quit_file, 'rb'))
         os.remove("quit.xml")
         self.ftp.quit()
-        print(">> " + command)
-        print("Disconnected from server.")
+       # print(">> " + command)
+        return "Disconnected from server."
 
 
     def connectToCentralServer(self, server_name, port, user, local_host, speed):

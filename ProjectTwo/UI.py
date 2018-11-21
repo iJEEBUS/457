@@ -95,7 +95,7 @@ class UI(object):
         Connection stays open until specified by the QUIT command.
         '''
         command = self.command_entry.get()
-        self.peer.readCommand(command)
+        self.commandStatus.configure(text=self.peer.readCommand(command))
 
     def closeCompletely(self):
         # THIS WILL BE USED TO CLOSE THE THREADS ON EXIT.
@@ -120,6 +120,7 @@ class UI(object):
         Label(window, text="Username:", bg="white", fg="black").grid(row=2, column=0, sticky=W)
         Label(window, text="Hostname:", bg="white", fg="black").grid(row=2, column=2, sticky=W)
         Label(window, text="Speed:", bg="white", fg="black").grid(row=2, column=4, sticky=W)
+
 
         # Button
         self.serverButton = Button(window, text="Connect", width=15, command=self.connectToServer)
@@ -158,7 +159,6 @@ class UI(object):
         self.keyword_entry = Entry(window, width=20, bg="white")
         self.keyword_entry.grid(row=5, column=1, sticky=W)
         # Table
-        # TODO here's listbox tutorial stuff http://effbot.org/tkinterbook/listbox.htm
         self.searchListbox = Listbox(window, height=5)
         self.searchListbox.grid(row=6, column=0, columnspan=6, sticky=NSEW, padx=10, pady=10)
 
@@ -175,6 +175,9 @@ class UI(object):
         # Text inputs
         self.command_entry = Entry(window, width=20, bg="white", fg="black")
         self.command_entry.grid(row=12, column=1, sticky=W)
+        # Status text
+        self.commandStatus = Label(window, text="", bg="white", fg="black")
+        self.commandStatus.grid(row=12, column=3, sticky=W)
         # Table
         self.commandListbox = Listbox(window, height=5)
         self.commandListbox.grid(row=13, column=0, columnspan=6, sticky=NSEW, padx=10, pady=10)
