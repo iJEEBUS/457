@@ -177,7 +177,7 @@ class UI(object):
         self.command_entry.grid(row=12, column=1, sticky=W)
         # Status text
         self.commandStatus = Label(window, text="", bg="white", fg="black")
-        self.commandStatus.grid(row=12, column=3, sticky=W)
+        self.commandStatus.grid(row=12, column=3, columnspan=3, sticky=W)
         # Table
         self.commandListbox = Listbox(window, height=5)
         self.commandListbox.grid(row=13, column=0, columnspan=6, sticky=NSEW, padx=10, pady=10)
