@@ -86,7 +86,7 @@ class Peer(object):
 
         return "Connected to peer" + peer_name + " at port " + str(port)
 
-    def createRegistrationXML(self, username, hostname, speed):
+    def createRegistrationXML(self, username, hostname, port, speed):
         """Creates Registration XML file
 
         Arguments:
@@ -95,7 +95,7 @@ class Peer(object):
             speed int -- connection speed of peer
         """
         # Create the XML file
-        root = ET.Element("User", name=username, host=hostname, speed=speed)
+        root = ET.Element("User", name=username, host=hostname, port=port, speed=speed)
         tree = ET.ElementTree(root)
 
         # Write XML file
@@ -195,7 +195,7 @@ class Peer(object):
         self.ftp.cwd('.')
 
         # Create registration XML file
-        self.createRegistrationXML(user, local_host, speed)
+        self.createRegistrationXML(user, local_host, int_port, speed)
 
         print("Registering: " + user + "...")
         registration_file = "registration.xml"
