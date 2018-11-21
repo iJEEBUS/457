@@ -36,9 +36,11 @@ class Peer(object):
         # self.ftp.cwd('.')
         self.__CONNECTION_ALIVE = False
         self.__PCONNECTION_ALIVE = False
-
+        self.single_thread = None
+        self.local_hostname = "127.0.0.1"
+        self.port_number = None
         # create a thread to handle the peer-server side.
-        threading.Thread(target=self.localServer).start()
+        self.single_thread = threading.Thread(target=self.localServer).start()
 
     def localServer(self):
         '''Local server for other peers to contact
@@ -49,16 +51,23 @@ class Peer(object):
         # Creates a threaded server similarly to the CentralServer
         authorizer = DummyAuthorizer()
         # lr lets you list files and retrieve them.
-        authorizer.add_anonymous('./data', perm='elr')
-
+        authorizer.add_anonymous('./files', perm='elr')
+        print(os.getcwd())
+        os.chdir("./files")
+        print(os.getcwd())
         handler = PeerHandler
         handler.authorizer = authorizer
-        # Server port is 1514 for testing purposes, as client port needs to
-        # be different than server port if running on same machine, otherwise
-        # it doesn't really matter.
+        self.port_number = 1514
 
-        server = ThreadedFTPServer(('', 1514), handler)
-        server.serve_forever()
+        running_local_server = False
+        while not running_local_server:
+            try:
+                server = ThreadedFTPServer(('', self.port_number), handler)
+                running_local_server = True
+                server.serve_forever()
+            except OSError:
+                self.port_number += 2
+
 
     def connectToOtherPeer(self, peer_name, port):
         """Connect to and download from another peer
@@ -87,16 +96,23 @@ class Peer(object):
         """
         # Create the XML file
         root = ET.Element("User", name=username, host=hostname, speed=speed)
-        # ET.SubElement(root, "user").text = username
-        # ET.SubElement(root, "host").text = hostname
-        # ET.SubElement(root, "speed").text = speed
         tree = ET.ElementTree(root)
 
         # Write XML file
         tree.write("registration.xml")
 
+    def createQuitXML(self, username):
+
+        # Create XML file
+        root = ET.Element("Quit", name=username)
+        tree = ET.ElementTree(root)
+
+        os.chdir("../data")
+        # Write the file
+        tree.write("quit.xml")
+
     # Receive file from the server in the form of an iostream.
-    def recieveServerList(self):
+    def receiveServerList(self):
         pass
 
     def createFileListXML(self):
@@ -105,7 +121,9 @@ class Peer(object):
     # read command takes input in from the UI and decides what function should be called from it.
     def readCommand(self, command):
         commands = command.split()
-        if commands[0] == "connect":
+        action_command = commands[0].lower()
+
+        if action_command == "connect":
             if len(commands) < 3:
                 self.connectToOtherPeer('', int(commands[1]))
                 return True
@@ -114,28 +132,40 @@ class Peer(object):
                 return True
             else:
                return False
-        elif commands[0] == "download":
+        elif action_command in ["retr", "download"]:
             if len(commands) == 2:
                 self.downloadFile(commands[1])
                 return True
             else:
                 return False
+        elif action_command == "quit":
+            self.disconnectFromCentralServer(action_command)
 
     def downloadFile(self, fileTarget):
         if self.__PCONNECTION_ALIVE == False:
             return False
         cwd = os.getcwd()
-        fileDest = open(os.path.join(cwd, fileTarget), 'wb' )
+        fileDest = open(os.path.join(cwd, fileTarget), 'wb')
         self.peerftp.retrbinary('RETR ' + fileTarget, fileDest.write)
         fileDest.close()
 
-    def disconnectFromCentralServer(self):
+    def disconnectFromCentralServer(self, command, user):
         """ Disconnect server
 
-        Disconnects from ftp central server
+        Disconnects from ftp central server by sending an XML file to the server
+        to tell it which client is exiting.
+        Proceeds to close the connection after the file is sent and acknowledged by the server.
         """
+        # Create XML and send XML to server
+        self.createQuitXML(user)
+        quit_file = "quit.xml"
+
+        self.ftp.storbinary('STOR ' + quit_file, open(quit_file, 'rb'))
+        os.remove("quit.xml")
         self.ftp.quit()
+        print(">> " + command)
         print("Disconnected from server.")
+
 
     def connectToCentralServer(self, server_name, port, user, local_host, speed):
         """Connect to server and return connection status
@@ -169,6 +199,8 @@ class Peer(object):
         self.ftp.storbinary('STOR ' + registration_file, open(registration_file, 'rb'))
         print("Connected to " + server_name + " on port " + port)
         self.__CONNECTION_ALIVE = True
+
+        os.remove(registration_file)
 
         return self.__CONNECTION_ALIVE
 

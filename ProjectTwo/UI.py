@@ -28,6 +28,7 @@ class UI(object):
         self.command_entry = None
         self.searchListbox = None
         self.commandListbox = None
+        self.username = None
         self.create()
 
     # Puts search results (given as searchList in the form of a list), into the box.
@@ -42,7 +43,8 @@ class UI(object):
 
         This method will disconnect the peer from the server.
         """
-        self.peer.disconnectFromCentralServer()
+        command = "quit"
+        self.peer.disconnectFromCentralServer(command, self.username)
         self.serverButton.configure(text="Connect", command=self.connectToServer)
 
     def connectToServer(self):
@@ -57,6 +59,7 @@ class UI(object):
 
         # User information
         user = self.username_entry.get()
+        self.username = user
         local_hostname = self.local_hostname_entry.get()
 
         # Connect to server
@@ -94,11 +97,20 @@ class UI(object):
         command = self.command_entry.get()
         self.peer.readCommand(command)
 
+    def closeCompletely(self):
+        # THIS WILL BE USED TO CLOSE THE THREADS ON EXIT.
+        # When exited, the app hangs and does not respond because the thread is still running.
+        #self.peer.single_thread.
+
+        self.destroy()
+
     def create(self):
         # Create the main window
         window = Tk()
         window.title("Napster Host")
+        window.resizable(False, False)
         window.configure(background="white")
+        # window.protocol('WM_DELETE_WINDOW', self.closeCompletely)
 
         # Connection panel
         # Labels
