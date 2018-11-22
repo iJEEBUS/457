@@ -1,5 +1,8 @@
 from tkinter import *
+from tkinter import ttk
 from Peer import *
+import time
+import xml.etree.cElementTree as ET
 
 """GUI
 
@@ -30,6 +33,7 @@ class UI(object):
         self.searchListbox = None
         self.commandListbox = None
         self.username = None
+        self.tree = None
         self.create()
 
     # Puts search results (given as searchList in the form of a list), into the box.
@@ -88,11 +92,29 @@ class UI(object):
         Returns a list of locations where the file is available for download.
         '''
         keyword = self.keyword_entry.get()
+        print(os.getcwd())
 
         # Send the keyword to the server
-        self.peer.queryServer(keyword, self.username)
+        if self.peer.queryServer(keyword, self.username):
 
-        # Put results into listbox using self.searchResults(list)
+            # Wait until the server responds with matches
+            time.sleep(1)
+            root = ET.parse(os.getcwd() + '/client/matches_found.xml').getroot()
+            all_matches = list(root)
+
+            for match in all_matches:
+                speed = match.attrib['speed']
+                hostname = match.attrib['hostname']
+                port = match.attrib['port']
+                filename = match.attrib['filename']
+
+                routing_info = hostname + ':' + port
+
+                self.tree.insert('', 'end', text=speed, values=(routing_info, filename))
+
+
+
+
 
     def go(self):
         '''Executes users command
@@ -117,7 +139,7 @@ class UI(object):
                 port_number = full_command.split(' ')[2]
                 self.commandListbox.insert(END, "Connected to " + host_address + ":" + port_number)
 
-            if lowercase_command_action in ['retr','download']:
+            if lowercase_command_action in ['retr', 'download']:
                 filename = full_command.split(' ')[1]
                 self.commandListbox.insert(END, "Successfully downloaded \"" + filename + "\" ")
 
@@ -139,7 +161,7 @@ class UI(object):
     def create(self):
         # Create the main window
         window = Tk()
-        window.title("Napster Host")
+        window.title("File Sharing Peer")
         window.resizable(False, False)
         window.configure(background="white")
         # window.protocol('WM_DELETE_WINDOW', self.closeCompletely)
@@ -190,9 +212,21 @@ class UI(object):
         # Text inputs
         self.keyword_entry = Entry(window, width=20, bg="white")
         self.keyword_entry.grid(row=5, column=1, sticky=W)
+
         # Table
         self.searchListbox = Listbox(window, height=10)
-        self.searchListbox.grid(row=6, column=0, columnspan=6, sticky=NSEW, padx=10, pady=10)
+        # self.searchListbox.grid(row=6, column=0, columnspan=6, sticky=NSEW, padx=10, pady=10)
+
+        self.tree = ttk.Treeview(self.window, columns=('Speed', "Hostname"))
+        self.tree.heading("#0", text='Speed')
+        self.tree.heading('#1', text='Hostname')
+        self.tree.heading('#2', text='Filename')
+
+        self.tree.column('#0', stretch=YES)
+        self.tree.column('#1', stretch=YES)
+        self.tree.column('#2', stretch=YES)
+
+        self.tree.grid(row=6, column=0, columnspan=6, sticky=NSEW, padx=10, pady=10)
 
         # Adding a blank space between connection and search areas
         Label(window, text="Blank Space", bg="white", fg="white").grid(row=11, column=0, sticky=W)

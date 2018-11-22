@@ -11,16 +11,43 @@ class PeerHandler(FTPHandler):
 
     Handles the p2p connection from the peer to the server
     """
+    every_query_match = []
+    server_response = False
+    match_found = False
+
     def on_file_received(self, file):
 
         filename = os.path.basename(file)
-        pass
+        print(file)
+        print(os.getcwd())
+        if filename == 'matches_found.xml':
+            root = ET.parse('./client/' + filename).getroot()
+            all_matches = list(root)
+
+            for match in all_matches:
+                speed = match.attrib['speed']
+                hostname = match.attrib['hostname']
+                port = match.attrib['port']
+                filename = match.attrib['filename']
+
+                if filename != 'none':
+                    routing_info = hostname + ':' + port
+                    self.every_query_match.append([speed, routing_info, filename])
+                    self.match_found = True
+                    self.server_response = True
+                else:
+                    self.server_response = True
+                    break
 
 
 class Peer(object):
     # FTP instance
     ftp = None
     peerftp = None
+    handler = None
+
+    server_response = False
+    every_query_match = []
 
     # Connection status for infinite loop
     __CONNECTION_ALIVE = None
@@ -55,14 +82,14 @@ class Peer(object):
         # lr lets you list client and retrieve them.
         authorizer.add_anonymous('./client', perm='elrafmw')
         print(os.getcwd())
-        handler = PeerHandler
-        handler.authorizer = authorizer
+        self.handler = PeerHandler
+        self.handler.authorizer = authorizer
         self.port_number = 1514
 
         running_local_server = False
         while not running_local_server:
             try:
-                server = ThreadedFTPServer(('', self.port_number), handler)
+                server = ThreadedFTPServer(('', self.port_number), self.handler)
                 running_local_server = True
                 server.serve_forever()
             except OSError:
@@ -128,6 +155,7 @@ class Peer(object):
 
         query_file = "query.xml"
         self.ftp.storbinary('STOR ' + query_file, open(query_file, 'rb'))
+        return True
 
 
     def createQuitXML(self, username):

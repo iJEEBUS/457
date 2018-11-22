@@ -2,21 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ecd85bd-1134-4071-ad2d-3a49fab3b096" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/server/query.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/quit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/registration.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alice.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CentralServer.py" beforeDir="false" afterPath="$PROJECT_DIR$/CentralServer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Peer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Peer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI.py" beforeDir="false" afterPath="$PROJECT_DIR$/UI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/query.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/quit.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/registration.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/Lorem.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/Lorem.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/alice.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/alice.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/client/test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/matches_found.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/matches_found.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/filelist.xml" beforeDir="false" afterPath="$PROJECT_DIR$/filelist.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/query.xml" beforeDir="false" afterPath="$PROJECT_DIR$/query.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/quit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/filelist.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/filelist.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/matches_found.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/matches_found.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/query.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/query.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/quit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/quit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/registration.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/registration.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,42 +23,59 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/ProjectTwo$UI.coverage" NAME="UI Coverage Results" MODIFIED="1542861279965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ProjectTwo$CentralServer.coverage" NAME="CentralServer Coverage Results" MODIFIED="1542861471698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ProjectTwo$CentralServer.coverage" NAME="CentralServer Coverage Results" MODIFIED="1542869192260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ProjectTwo$UI.coverage" NAME="UI Coverage Results" MODIFIED="1542869472006" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DockManager">
     <window id="1">
       <content type="file-editors">
         <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file pinned="false" current-in-tab="false">
+          <leaf>
+            <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/UI.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="168">
-                    <caret line="26" column="31" lean-forward="true" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+                  <state relative-caret-position="1007">
+                    <caret line="163" column="39" selection-start-line="163" selection-start-column="39" selection-end-line="163" selection-end-column="39" />
                     <folding>
                       <element signature="e#0#21#0" expanded="true" />
+                      <element signature="e#1463#2310#0" />
+                      <element signature="e#4497#4546#0" />
                     </folding>
                   </state>
                 </provider>
               </entry>
             </file>
+            <file pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/CentralServer.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="372">
+                    <caret line="96" column="34" lean-forward="true" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/Peer.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="165">
-                    <caret line="11" column="58" lean-forward="true" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+                  <state relative-caret-position="93">
+                    <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
                     <folding>
                       <element signature="e#0#22#0" expanded="true" />
                       <element signature="e#651#1251#0" />
                       <element signature="e#2145#2618#0" />
                       <element signature="e#2698#3121#0" />
-                      <element signature="e#3174#3630#0" />
-                      <element signature="e#3684#3966#0" />
+                      <element signature="e#3679#3981#0" />
                       <element signature="e#4016#4267#0" />
                       <element signature="e#4373#4377#0" />
                       <element signature="e#4527#5259#0" />
-                      <element signature="e#5309#5619#0" />
                       <element signature="e#5678#6188#0" />
                     </folding>
                   </state>
@@ -117,69 +132,32 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="4450" />
+          <entry key="py" value="5977" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="4450" />
+          <entry key="Python" value="5977" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="9" />
-          <entry key="xml" value="17" />
+          <entry key="py" value="12" />
+          <entry key="xml" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="9" />
-          <entry key="XML" value="17" />
+          <entry key="Python" value="12" />
+          <entry key="XML" value="18" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/filelist.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="80" lean-forward="true" selection-start-column="80" selection-end-column="80" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/query.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="18" selection-start-column="18" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/matches_found.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="30" lean-forward="true" selection-start-column="30" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/registration.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="65" lean-forward="true" selection-start-column="65" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -230,9 +208,9 @@
         <option value="$PROJECT_DIR$/testdirectory1/testfile1" />
         <option value="$PROJECT_DIR$/Peer2.py" />
         <option value="$PROJECT_DIR$/filelist.xml" />
+        <option value="$PROJECT_DIR$/CentralServer.py" />
         <option value="$PROJECT_DIR$/UI.py" />
         <option value="$PROJECT_DIR$/Peer.py" />
-        <option value="$PROJECT_DIR$/CentralServer.py" />
       </list>
     </option>
   </component>
@@ -243,9 +221,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="569" />
-    <option name="width" value="1024" />
-    <option name="height" value="711" />
+    <option name="y" value="312" />
+    <option name="width" value="2048" />
+    <option name="height" value="968" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -301,7 +279,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.CentralServer">
+  <component name="RunManager" selected="Python.UI">
     <configuration name="CentralServer" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Project2-Bryce" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -375,8 +353,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.CentralServer" />
         <item itemvalue="Python.UI" />
+        <item itemvalue="Python.CentralServer" />
         <item itemvalue="Python.UI2" />
       </list>
     </recent_temporary>
@@ -395,11 +373,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="569" width="1024" height="711" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="312" width="1024" height="968" extended-state="0" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.16089614" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.21384929" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.32826087" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
@@ -407,7 +384,7 @@
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32956383" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.32934782" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.35218093" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.923516" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.33804348" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -469,20 +446,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI.py">
+    <entry file="file://$PROJECT_DIR$/CentralServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="26" column="31" lean-forward="true" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/registration.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="65" lean-forward="true" selection-start-column="65" selection-end-column="65" />
+        <state relative-caret-position="372">
+          <caret line="96" column="34" lean-forward="true" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -490,6 +457,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="80" lean-forward="true" selection-start-column="80" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/matches_found.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="38" lean-forward="true" selection-start-column="38" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -503,38 +477,43 @@
     <entry file="file://$PROJECT_DIR$/client/matches_found.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="30" lean-forward="true" selection-start-column="30" selection-end-column="30" />
+          <caret column="51" lean-forward="true" selection-start-column="51" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CentralServer.py">
+    <entry file="file://$PROJECT_DIR$/server/registration.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="807">
-          <caret line="56" column="24" lean-forward="true" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
-          <folding>
-            <element signature="e#201#210#0" expanded="true" />
-            <marker date="1542861441375" expanded="true" signature="622:1414" ph="..." />
-            <marker date="1542861441375" expanded="true" signature="1787:1818" ph="..." />
-          </folding>
+        <state>
+          <caret column="67" lean-forward="true" selection-start-column="67" selection-end-column="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Peer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="58" lean-forward="true" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+        <state relative-caret-position="93">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
             <element signature="e#651#1251#0" />
             <element signature="e#2145#2618#0" />
             <element signature="e#2698#3121#0" />
-            <element signature="e#3174#3630#0" />
-            <element signature="e#3684#3966#0" />
+            <element signature="e#3679#3981#0" />
             <element signature="e#4016#4267#0" />
             <element signature="e#4373#4377#0" />
             <element signature="e#4527#5259#0" />
-            <element signature="e#5309#5619#0" />
             <element signature="e#5678#6188#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1007">
+          <caret line="163" column="39" selection-start-line="163" selection-start-column="39" selection-end-line="163" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#1463#2310#0" />
+            <element signature="e#4497#4546#0" />
           </folding>
         </state>
       </provider>
