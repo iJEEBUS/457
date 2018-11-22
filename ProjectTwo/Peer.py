@@ -11,8 +11,10 @@ class PeerHandler(FTPHandler):
 
     Handles the p2p connection from the peer to the server
     """
-    def sendFile(self):
-        return
+    def on_file_received(self, file):
+
+        filename = os.path.basename(file)
+        pass
 
 
 class Peer(object):
@@ -45,13 +47,13 @@ class Peer(object):
     def localServer(self):
         '''Local server for other peers to contact
 
-        Will allow for other peers to download files from
+        Will allow for other peers to download client from
         this peer.
         '''
         # Creates a threaded server similarly to the CentralServer
         authorizer = DummyAuthorizer()
-        # lr lets you list files and retrieve them.
-        authorizer.add_anonymous('./files', perm='elr')
+        # lr lets you list client and retrieve them.
+        authorizer.add_anonymous('./client', perm='elrafmw')
         print(os.getcwd())
         handler = PeerHandler
         handler.authorizer = authorizer
@@ -99,15 +101,21 @@ class Peer(object):
         # Write XML file
         tree.write("registration.xml")
 
-    def createQueryXML(self, keyword, user):
+    def sendFileListToServer(self, user):
+
+        string_port_number = str(self.port_number)
 
         # Create XML file
-        root = ET.Element("Query", keyword=keyword, name=user)
+        root = ET.Element('FilesToShare')
+        alice = ET.SubElement(root, 'File', username=user, filename='alice.txt', description='alice in wonderland lewis carol rabbit girl')
         tree = ET.ElementTree(root)
 
-        os.chdir("../data")
         # Write the file
-        tree.write("quit.xml")
+        tree.write("filelist.xml")
+
+        file_list = "filelist.xml"
+        self.ftp.storbinary('STOR ' + file_list, open(file_list, 'rb'))
+
 
     def queryServer(self, keyword, user):
 
@@ -136,9 +144,6 @@ class Peer(object):
 
     # Receive file from the server in the form of an iostream.
     def receiveServerList(self):
-        pass
-
-    def createFileListXML(self):
         pass
 
     # read command takes input in from the UI and decides what function should be called from it.
@@ -191,12 +196,11 @@ class Peer(object):
         self.ftp.quit()
         return True
 
-
     def connectToCentralServer(self, server_name, port, user, local_host, speed):
         """Connect to server and return connection status
 
         Creates a connection to the central server and queries for
-        locations (host addresses) of files to download that contain
+        locations (host addresses) of client to download that contain
         a keyword.
 
         Arguments:

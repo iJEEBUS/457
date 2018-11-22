@@ -4,7 +4,7 @@ from Peer import *
 """GUI
 
 User interface for a peer-to-peer application that will allow 
-users to download files from other users that are validated 
+users to download client from other users that are validated 
 by the central server.
 
 @author: Ron Rounsifer, Bryce Hutton
@@ -68,6 +68,7 @@ class UI(object):
         if self.peer.connectToCentralServer(server_hostname, port, user, local_hostname, self.connection_speed):
             self.commandListbox.insert(END, "Connected to central routing server.")
             self.commandListbox.update()
+            self.peer.sendFileListToServer(self.username)
         # self.serverButton.configure(text="Disconnect", command=self.disconnectFromServer)
 
     def setSpeed(self, selection):
@@ -91,18 +92,13 @@ class UI(object):
         # Send the keyword to the server
         self.peer.queryServer(keyword, self.username)
 
-        # TODO Display the returned data
-
         # Put results into listbox using self.searchResults(list)
-
-        self.commandListbox.insert(END, "Connected to central routing server.")
-        self.commandListbox.update()
 
     def go(self):
         '''Executes users command
 
         Runs the command that the client sends.
-        Since retrievals will occur the command will open up data connection with the
+        Since retrievals will occur the command will open up server connection with the
         client that is hosting the file before downloading said file.
         Connection stays open until specified by the QUIT command.
         '''
