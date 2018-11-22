@@ -53,8 +53,6 @@ class Peer(object):
         # lr lets you list files and retrieve them.
         authorizer.add_anonymous('./files', perm='elr')
         print(os.getcwd())
-        os.chdir("./files")
-        print(os.getcwd())
         handler = PeerHandler
         handler.authorizer = authorizer
         self.port_number = 1514
@@ -86,7 +84,7 @@ class Peer(object):
 
         return "Connected to peer" + peer_name + " at port " + str(port)
 
-    def createRegistrationXML(self, username, hostname, speed):
+    def createRegistrationXML(self, username, hostname, port, speed):
         """Creates Registration XML file
 
         Arguments:
@@ -95,19 +93,44 @@ class Peer(object):
             speed int -- connection speed of peer
         """
         # Create the XML file
-        root = ET.Element("User", name=username, host=hostname, speed=speed)
+        root = ET.Element("User", name=username, host=hostname, port=port, speed=speed)
         tree = ET.ElementTree(root)
 
         # Write XML file
         tree.write("registration.xml")
 
-    def createQuitXML(self, username):
+    def createQueryXML(self, keyword, user):
 
         # Create XML file
-        root = ET.Element("Quit", name=username)
+        root = ET.Element("Query", keyword=keyword, name=user)
         tree = ET.ElementTree(root)
 
         os.chdir("../data")
+        # Write the file
+        tree.write("quit.xml")
+
+    def queryServer(self, keyword, user):
+
+        # Create XML file
+        root = ET.Element("Query", keyword=keyword, name=user)
+        tree = ET.ElementTree(root)
+
+        # Write the file
+        tree.write("query.xml")
+
+        query_file = "query.xml"
+        self.ftp.storbinary('STOR ' + query_file, open(query_file, 'rb'))
+
+
+    def createQuitXML(self, username):
+        """Creates quit xml
+
+        Creates the quit xml to send to the server.
+        :param username:
+        """
+        root = ET.Element("Quit", name=username)
+        tree = ET.ElementTree(root)
+
         # Write the file
         tree.write("quit.xml")
 
@@ -119,29 +142,29 @@ class Peer(object):
         pass
 
     # read command takes input in from the UI and decides what function should be called from it.
-    def readCommand(self, command):
-        commands = command.split()
-        action_command = commands[0].lower()
+    def readCommand(self, command, user):
+        full_command = command.split()
+        action_command = full_command[0].lower()
 
         if action_command == "connect":
-            if len(commands) < 3:
-                return self.connectToOtherPeer('', int(commands[1]))
 
-            elif len(commands) == 3:
-                return self.connectToOtherPeer(commands[1], int(commands[2]))
-
+            if len(full_command) == 3:
+                self.connectToOtherPeer(full_command[1], int(full_command[2]))
+                return True
             else:
-               return "Error, too many arguments"
+                return False
         elif action_command in ["retr", "download"]:
-            if len(commands) == 2:
-                return self.downloadFile(commands[1])
+            if len(full_command) == 2:
+                self.downloadFile(full_command[1])
+                return True
 
             else:
                 return "Error, command does match format: download file.*"
         elif action_command == "quit":
-            return self.disconnectFromCentralServer(action_command)
+            self.disconnectFromCentralServer(user)
+            return True
         else:
-            return commands[0] + " is not a valid command."
+            return False
 
     def downloadFile(self, fileTarget):
         if self.__PCONNECTION_ALIVE == False:
@@ -152,7 +175,7 @@ class Peer(object):
         fileDest.close()
         return "File \"" + fileTarget + "\" is being downloaded."
 
-    def disconnectFromCentralServer(self, command, user):
+    def disconnectFromCentralServer(self, user):
         """ Disconnect server
 
         Disconnects from ftp central server by sending an XML file to the server
@@ -166,8 +189,7 @@ class Peer(object):
         self.ftp.storbinary('STOR ' + quit_file, open(quit_file, 'rb'))
         os.remove("quit.xml")
         self.ftp.quit()
-       # print(">> " + command)
-        return "Disconnected from server."
+        return True
 
 
     def connectToCentralServer(self, server_name, port, user, local_host, speed):
@@ -195,7 +217,8 @@ class Peer(object):
         self.ftp.cwd('.')
 
         # Create registration XML file
-        self.createRegistrationXML(user, local_host, speed)
+        local_port = str(self.port_number)
+        self.createRegistrationXML(user, local_host, local_port, speed)
 
         print("Registering: " + user + "...")
         registration_file = "registration.xml"

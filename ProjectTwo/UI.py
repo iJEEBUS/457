@@ -18,6 +18,7 @@ class UI(object):
 
     def __init__(self):
         """ Constructor for the UI """
+        self.window = None
         self.serverButton = None
         self.hostname_entry = None
         self.port_entry = None
@@ -62,9 +63,12 @@ class UI(object):
         self.username = user
         local_hostname = self.local_hostname_entry.get()
 
+
         # Connect to server
-        self.peer.connectToCentralServer(server_hostname, port, user, local_hostname, self.connection_speed)
-        self.serverButton.configure(text="Disconnect", command=self.disconnectFromServer)
+        if self.peer.connectToCentralServer(server_hostname, port, user, local_hostname, self.connection_speed):
+            self.commandListbox.insert(END, "Connected to central routing server.")
+            self.commandListbox.update()
+        # self.serverButton.configure(text="Disconnect", command=self.disconnectFromServer)
 
     def setSpeed(self, selection):
         """Set the speed limit
@@ -84,7 +88,15 @@ class UI(object):
         '''
         keyword = self.keyword_entry.get()
 
+        # Send the keyword to the server
+        self.peer.queryServer(keyword, self.username)
+
+        # TODO Display the returned data
+
         # Put results into listbox using self.searchResults(list)
+
+        self.commandListbox.insert(END, "Connected to central routing server.")
+        self.commandListbox.update()
 
     def go(self):
         '''Executes users command
@@ -94,8 +106,32 @@ class UI(object):
         client that is hosting the file before downloading said file.
         Connection stays open until specified by the QUIT command.
         '''
-        command = self.command_entry.get()
-        self.commandStatus.configure(text=self.peer.readCommand(command))
+        full_command = self.command_entry.get()
+        lowercase_command_action = full_command.lower().split(' ')[0]
+        outputted_command = '>> ' + full_command
+
+        # Display command to GUI
+        self.commandListbox.insert(END, outputted_command)
+        self.commandListbox.update()
+
+        if self.peer.readCommand(full_command, self.username):
+
+            if lowercase_command_action == 'connect':
+                host_address = full_command.split(' ')[1]
+                port_number = full_command.split(' ')[2]
+                self.commandListbox.insert(END, "Connected to " + host_address + ":" + port_number)
+
+            if lowercase_command_action in ['retr','download']:
+                filename = full_command.split(' ')[1]
+                self.commandListbox.insert(END, "Successfully downloaded \"" + filename + "\" ")
+
+            if lowercase_command_action == 'quit':
+
+                self.commandListbox.insert(END, "Disconnected from server.")
+                self.peer.disconnectFromCentralServer(self.username)
+
+            self.commandListbox.update()
+
 
     def closeCompletely(self):
         # THIS WILL BE USED TO CLOSE THE THREADS ON EXIT.
@@ -159,10 +195,8 @@ class UI(object):
         self.keyword_entry = Entry(window, width=20, bg="white")
         self.keyword_entry.grid(row=5, column=1, sticky=W)
         # Table
-        self.searchListbox = Listbox(window, height=5)
+        self.searchListbox = Listbox(window, height=10)
         self.searchListbox.grid(row=6, column=0, columnspan=6, sticky=NSEW, padx=10, pady=10)
-
-        self.searchListbox.insert(END, 'test')
 
         # Adding a blank space between connection and search areas
         Label(window, text="Blank Space", bg="white", fg="white").grid(row=11, column=0, sticky=W)
@@ -179,10 +213,8 @@ class UI(object):
         self.commandStatus = Label(window, text="", bg="white", fg="black")
         self.commandStatus.grid(row=12, column=3, columnspan=3, sticky=W)
         # Table
-        self.commandListbox = Listbox(window, height=5)
+        self.commandListbox = Listbox(window, height=10)
         self.commandListbox.grid(row=13, column=0, columnspan=6, sticky=NSEW, padx=10, pady=10)
-
-        self.commandListbox.insert(END, 'test')
 
         # Run the window
         window.mainloop()

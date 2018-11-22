@@ -27,9 +27,14 @@ class ServerHandler(FTPHandler):
             file File -- register / file_list file uploaded to server
         """
 
+        # make sure you are in the correct directory (data)
+        if os.path.basename(os.getcwd()) != 'data':
+            os.chdir('./data')
+
         filename = os.path.basename(file)
         register = "registration.xml"
         file_list = "filelist.xml"
+        query_file = "query.xml"
         quit_file = "quit.xml"
 
         if filename == register:
@@ -47,12 +52,14 @@ class ServerHandler(FTPHandler):
             else:
                 print("This username is already registered.")
 
-            os.remove(register)
 
         elif filename == file_list:
 
             if username not in self.registered_users.keys():
                 print("Please register your account before sharing files!")
+        elif filename == query_file:
+
+            pass
 
         elif filename == quit_file:
 
@@ -62,7 +69,6 @@ class ServerHandler(FTPHandler):
             del self.registered_users[username]
 
             # Remove quit file
-            os.remove(quit_file)
             print("User " + "\"" + username + "\"" + " has left")
 
 
@@ -73,7 +79,7 @@ def main():
     Runs infinitely and accepts all client connections.
     """
 
-    print(os.getcwd())
+    # print(os.getcwd())
     # Authorize the incoming client connection requests
     authorizer = DummyAuthorizer()
     # authorizer.add_user("user", "12345", ".", perm="rw")
