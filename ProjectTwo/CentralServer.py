@@ -122,6 +122,7 @@ class ServerHandler(FTPHandler):
 
                     self.keyword_match_instances = []
                     self.keyword_match_instances.append([speed, hosting_hostname, hosting_port, filename])
+                    print(speed, hosting_hostname, hosting_port, filename)
 
             if self.keyword_match_instances:
                 self.sendMatchesToPeer(querying_user)

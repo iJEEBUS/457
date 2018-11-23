@@ -73,7 +73,6 @@ class UI(object):
             self.commandListbox.insert(END, "Connected to central routing server.")
             self.commandListbox.update()
             self.peer.sendFileListToServer(self.username)
-        # self.serverButton.configure(text="Disconnect", command=self.disconnectFromServer)
 
     def setSpeed(self, selection):
         """Set the speed limit
@@ -111,10 +110,6 @@ class UI(object):
                 routing_info = hostname + ':' + port
 
                 self.tree.insert('', 'end', text=speed, values=(routing_info, filename))
-
-
-
-
 
     def go(self):
         '''Executes users command

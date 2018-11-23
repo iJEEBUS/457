@@ -18,8 +18,8 @@ class PeerHandler(FTPHandler):
     def on_file_received(self, file):
 
         filename = os.path.basename(file)
-        print(file)
-        print(os.getcwd())
+        # print(file)
+        # print(os.getcwd())
         if filename == 'matches_found.xml':
             root = ET.parse('./client/' + filename).getroot()
             all_matches = list(root)
@@ -81,7 +81,7 @@ class Peer(object):
         authorizer = DummyAuthorizer()
         # lr lets you list client and retrieve them.
         authorizer.add_anonymous('./client', perm='elrafmw')
-        print(os.getcwd())
+        # print(os.getcwd())
         self.handler = PeerHandler
         self.handler.authorizer = authorizer
         self.port_number = 1514
@@ -134,7 +134,8 @@ class Peer(object):
 
         # Create XML file
         root = ET.Element('FilesToShare')
-        alice = ET.SubElement(root, 'File', username=user, filename='alice.txt', description='alice in wonderland lewis carol rabbit girl')
+        # alice = ET.SubElement(root, 'File', username=user, filename='alice.txt', description='alice in wonderland lewis carol rabbit girl')
+        lorem = ET.SubElement(root, 'File', username=user, filename='Lorem.txt', description='lorem ipsum best test example')
         tree = ET.ElementTree(root)
 
         # Write the file
@@ -142,7 +143,6 @@ class Peer(object):
 
         file_list = "filelist.xml"
         self.ftp.storbinary('STOR ' + file_list, open(file_list, 'rb'))
-
 
     def queryServer(self, keyword, user):
 
@@ -156,7 +156,6 @@ class Peer(object):
         query_file = "query.xml"
         self.ftp.storbinary('STOR ' + query_file, open(query_file, 'rb'))
         return True
-
 
     def createQuitXML(self, username):
         """Creates quit xml
