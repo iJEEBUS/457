@@ -21,9 +21,9 @@ class Baby(Client):
 		self.args = initArgs
 		command = args[0]
 
-		cwd = os.getcwd()
-		self.directory = cwd + "/"
-		self.head = open(self.directory + "/repo\\.babygit\\HEAD") 
+		self.cwd = os.getcwd()
+		self.directory = self.cwd + "/"
+		self.head = (self.directory + "/repo\\.babygit\\HEAD") 
 
 		parsed_lines = self.__headParse()
 		self.baby_files = parsed_lines[1]
@@ -57,32 +57,33 @@ class Baby(Client):
 
 	'''Commit changes to the file.'''
 	def commit(self):
-		print "here at least"# Initialize the repository
+		# Initialize the repository
 		#todo: Change the version.
-		version = self.last_version+1
+		version = str(self.last_version+1)
 		print(version)
 		destfile = self.directory + "repo" + "\\.babygit" + "\\vers" + str(version)
 		os.makedirs(destfile)
 		fhead = open(self.head, "a")
-		fhead.write("vers"+version)
+		fhead.write("\nvers"+ version)
+		fhead.close()
 
 		'''For each file in the directory that is listed and staged in the git file'''
-		for filename in os.listdir(cwd):
+		for filename in os.listdir(self.cwd):
 			#Todo: If statement a placeholder for checking if the file has been staged
 			print filename
 			if (filename in self.baby_files):
 			#If the file is not a directory
-				if os.path.isfile(os.path.join(directory,filename)):
+				if os.path.isfile(os.path.join(self.directory,filename)):
 					self.__compileFile(filename, destfile + "\\" +
 					 filename + '.' + version + '.bby')
 
 
 	# Function checks to see if the file is version controlled by baby
 	def __headParse(self):
-		cwd = os.getcwd()
-		directory = cwd + "/"
-		header = self.head
-		contents = header.readlines()
+		header = open(self.head)
+		temp = header.read()
+		contents = temp.split()
+		#print contents
 		#lines = contents.split()
 		listing_files = False
 		version_counting = False
@@ -96,6 +97,7 @@ class Baby(Client):
 			elif line == "ENDLIST":
 				listing_files = False
 			elif line == "LASTVER":
+				print "here at last"
 				version_counting = True
 			else:
 				if listing_files:
@@ -103,17 +105,13 @@ class Baby(Client):
 				# Gets the number of the last version created.
 				elif version_counting:
 					x = int(re.search(r'\d+', line).group())
-					print(x)
+					print("vers:" + str(x))
 					if x > last_version:
 						last_version = x
 		headargs = [current_head, listed_files, last_version]
+		header.close()
 		return headargs
 
-
-
-
-
-		return True	
 
 	# Given a file and a destination this function compiles and creates a new file
 	def __compileFile(self, filename, new_filename):
