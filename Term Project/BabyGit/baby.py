@@ -9,29 +9,63 @@ This class will handle:
 @version 10.27.2018 (10.26.2018)
 '''
 #!/usr/bin/python
-from Client import *
+from client import *
 import sys
 import os
+import gzip
 
 
 class Baby(Client):
 	def __init__(self, initArgs):
-		elf.args = initArgs
+		self.args = initArgs
 		self.command = args[0]
 		
 		
 	def parseCommand(self, command):
 		if command == "init":
+			repo_name = None
 			# Assign name to repo if passed
 			if len(args) == 2:
 				repo_name = args[1]
-			else:
-				repo_name = None
+			self.repoInit(repo_name)
+		elif command == "stage":
+			self.stage()
+		elif command == "commit":
+			self.commit()
+		elif command == "push":
+			pass
 		# Initialize the repository
-		repoInit(repo_name)
+		self.repoInit(repo_name)
 		
 
 	#### Method Definitions ####
+	def stage(self):
+		#todo
+		pass
+
+	'''Commit changes to the file.'''
+	def commit(self):
+		cwd = (os.getcwd())
+		#todo: Change the version.
+		version = "0"
+		directory = cwd + "/"
+		'''For each file in the directory that is listed and staged in the git file'''
+		for filename in os.listdir(cwd):
+			#Todo: If statement a placeholder for checking if the file has been staged
+			if 0 == 0:
+				fin = open(filename)
+				#Todo: Add identifier for the file
+				#todo: Maybe a specific identifier for each repo cloned
+				#todo: Then an identifier for each version from that repo
+				fout = gzip.open(filename + '.' + version + '.bby', 'wb')
+				fout.writelines(fin)
+				fout.close()
+				fin.close()
+
+
+
+
+
 	def repoInit(name):
 		'''Initialize a BabyGit repository
 		
@@ -80,7 +114,8 @@ class Baby(Client):
 
 		# Initialize the current directory
 		else:
-
+			#todo figure out what you want repo_name to be named
+			repo_name = "?"
 			directory_after_init = directory + "/.babygit"
 		
 			# Setup hidden babygit repo file if it does not exist
