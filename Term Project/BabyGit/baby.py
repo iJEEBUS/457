@@ -19,7 +19,7 @@ import re
 class Baby(Client):
     def __init__(self, initArgs):
         self.args = initArgs
-        command = args[0]
+        command = self.args[0]
 
         self.cwd = os.getcwd()
         self.directory = self.cwd + "/"
@@ -38,12 +38,13 @@ class Baby(Client):
         if command == "init":
             repo_name = None
             # Assign name to repo if passed
-            if len(args) == 2:
-                repo_name = args[1]
+            if len(self.args) == 2:
+                repo_name = self.args[1]
             # Initialize the repository
             self.repoInit(repo_name)
         elif command == "stage":
-            self.stage()
+            if len(self.args) == 2:
+                self.stage(self.args[1])
         elif command == "commit":
 
             self.commit()
@@ -61,7 +62,8 @@ class Baby(Client):
         fhead = open(self.head, "w")
         if (os.path.isfile(filename)):
             self.file_contents.insert(self.file_list_end_index, filename)
-            fhead.write(self.file_contents)
+            str1 = '\n'.join(self.file_contents)
+            fhead.write(str1)
         else:
             print(filename + "does not exist in this directory.")
         fhead.close()
@@ -91,7 +93,7 @@ class Baby(Client):
 
     # Function checks to see if the file is version controlled by baby
     def __headParse(self):
-        header = open(self.head)
+        header = open(self.head, 'r')
         temp = header.read()
         contents = temp.split()
         # print contents
@@ -102,7 +104,9 @@ class Baby(Client):
         current_head = 0
         listed_files = []
         # todo add functionality to find the currenthead
-        for index, line in enumerate(contents):
+        # Todo Occasionally after switching to a different command the headparse no longer goes through correctly.
+        index = 0
+        for line in contents:
             if line == "STARTLIST":
                 listing_files = True
             elif line == "ENDLIST":
@@ -119,6 +123,7 @@ class Baby(Client):
                     print("vers:" + str(x))
                     if x > last_version:
                         last_version = x
+            index += 1
         self.file_contents = contents
         self.baby_files = listed_files
         self.last_version = last_version
@@ -212,10 +217,11 @@ class Baby(Client):
 
 
 #### Script ####
-args = []
-args.append("commit")
+args1 = []
+args1.append("commit")
+#args1.append("testfile.txt")
 # args = sys.argv[1:]
-b = Baby(args)
+b = Baby(args1)
 '''
 # Initialize a BabyGit repo
 if command == "init":
