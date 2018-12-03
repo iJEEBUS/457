@@ -23,7 +23,7 @@ class Baby(Client):
 
         self.cwd = os.getcwd()
         self.directory = self.cwd + "/"
-        self.head = (self.directory + ".babygit\\HEAD")
+        self.head = (self.directory + ".babygit/HEAD")
         # file_list_index is the index of where the list of files in version control in the header ends.
         self.file_list_end_index = None
         self.file_contents = None
@@ -88,7 +88,7 @@ class Baby(Client):
             if (filename in self.baby_files):
                 # If the file is not a directory
                 if os.path.isfile(os.path.join(self.directory, filename)):
-                    self.__compileFile(filename, destfile + "\\" +
+                    self.__compileFile(filename, destfile + "/" +
                                        filename + '.' + version + '.bby')
 
     # Function checks to see if the file is version controlled by baby
@@ -162,7 +162,7 @@ class Baby(Client):
 
         cwd = (os.getcwd())
 
-        directory = cwd + "\\"
+        directory = cwd + "/"
 
         # Initialize named repo created in the current directory
         if name != None:
@@ -170,16 +170,16 @@ class Baby(Client):
             # Absolute path for repo to create
             repo_name = name
             directory = directory + repo_name
-            directory_after_init = directory + "\\.babygit"
+            directory_after_init = directory + "/.babygit"
 
             # Setup hidden babygit repo file if it does not exist
             try:
                 # Create .babygit directory
-                absolute_path = directory + "\\.babygit"
+                absolute_path = directory + "/.babygit"
                 os.makedirs(absolute_path, exist_ok=False)
 
                 # Create HEAD directory
-                absolute_path = directory + "\\HEAD"
+                absolute_path = directory + "/HEAD"
                 os.makedirs(absolute_path, exist_ok=False)
 
             except:
@@ -190,13 +190,13 @@ class Baby(Client):
         else:
             # todo figure out what you want repo_name to be named
             repo_name = "repo"
-            directory_after_init = directory + "\\.babygit"
+            directory_after_init = directory + "/.babygit"
 
             # Setup hidden babygit repo file if it does not exist
             try:
 
                 # Create .babygit directory
-                absolute_path = directory + repo_name + "\\.babygit"
+                absolute_path = directory + repo_name + "/.babygit"
                 print(absolute_path)
                 os.makedirs(absolute_path, exist_ok=False)
 
@@ -218,9 +218,9 @@ class Baby(Client):
 
 #### Script ####
 args1 = []
-args1.append("commit")
+#args1.append("commit")
 #args1.append("testfile.txt")
-# args = sys.argv[1:]
+args1 = sys.argv[1:]
 b = Baby(args1)
 '''
 # Initialize a BabyGit repo
