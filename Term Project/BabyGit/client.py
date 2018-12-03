@@ -26,14 +26,14 @@ class Client(object):
 	# Connection status for infinite loop
 	__CONNECTION_ALIVE = None
 
-	def __init__(self):
+	def __init__(self, hostadr):
 		'''Constructor for each client thread
 		
 		Creates a File Transfer Protocol connection.
 		Sets connections status to True.
 		'''
 		self.ftp = FTP()
-		self.ftp.connect('localhost',1515)
+		self.ftp.connect(hostadr,1515)
 		self.ftp.login()
 		self.ftp.cwd('.')
 		self.__CONNECTION_ALIVE = True;

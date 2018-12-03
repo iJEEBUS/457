@@ -49,6 +49,7 @@ class Baby(Client):
 
             self.commit()
         elif command == "push":
+            self.push()
             pass
         elif command == "clone":
             pass
@@ -90,6 +91,13 @@ class Baby(Client):
                 if os.path.isfile(os.path.join(self.directory, filename)):
                     self.__compileFile(filename, destfile + "/" +
                                        filename + '.' + version + '.bby')
+
+    '''Pushes the file to the remote server.'''
+    def push(self):
+        super.__init__(self.host_address)
+        for filename in os.listdir(self.cwd + ".babygit/"):
+            self.uploadFile(filename)
+
 
     # Function checks to see if the file is version controlled by baby
     def __headParse(self):
