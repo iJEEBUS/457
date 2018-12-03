@@ -20,7 +20,7 @@ class Baby(Client):
     def __init__(self, initArgs):
         self.args = initArgs
         command = self.args[0]
-
+        self.host_address = "0.0.0.0"
         self.cwd = os.getcwd()
         self.directory = self.cwd + "/"
         self.head = (self.directory + ".babygit/HEAD")
@@ -107,13 +107,15 @@ class Baby(Client):
         # Todo Occasionally after switching to a different command the headparse no longer goes through correctly.
         index = 0
         for line in contents:
-            if line == "STARTLIST":
+            if line == "-STARTLIST":
                 listing_files = True
-            elif line == "ENDLIST":
+            elif line == "-ENDLIST":
                 listing_files = False
                 self.file_list_end_index = index
-            elif line == "LASTVER":
+            elif line == "-LASTVER":
                 version_counting = True
+            elif line == "-HOSTNAME":
+                self.host_address = contents[index+1]
             else:
                 if listing_files:
                     listed_files.append(line)
@@ -128,6 +130,7 @@ class Baby(Client):
         self.baby_files = listed_files
         self.last_version = last_version
         header.close()
+        print (self.host_address)
         return
 
     # Given a file and a destination this function compiles and creates a new file
