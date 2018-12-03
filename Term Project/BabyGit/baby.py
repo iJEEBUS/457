@@ -94,8 +94,8 @@ class Baby(Client):
 
     '''Pushes the file to the remote server.'''
     def push(self):
-        super.__init__(self.host_address)
-        for filename in os.listdir(self.cwd + ".babygit/"):
+        super(Baby, self).__init__(self.host_address)
+        for filename in os.listdir(self.cwd + "/.babygit/"):
             self.uploadFile(filename)
 
 

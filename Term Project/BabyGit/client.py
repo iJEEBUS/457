@@ -33,6 +33,7 @@ class Client(object):
 		Sets connections status to True.
 		'''
 		self.ftp = FTP()
+		print("Connecting to " + hostadr)
 		self.ftp.connect(hostadr,1515)
 		self.ftp.login()
 		self.ftp.cwd('.')
@@ -61,7 +62,11 @@ class Client(object):
 			file {str} -- the file to upload (will not be needed when push command implemented)
 		'''
 		filename = file
-		self.ftp.storbinary('STOR' + filename, open(filename, 'rb'))
+		print("OVER HERE")
+		print (os.getcwd())
+		print("File is: " + file)
+		os.chdir(".babygit")
+		self.ftp.storbinary('STOR ' + filename, open(filename, 'rb'))
 		self.ftp.quit()
 
 
