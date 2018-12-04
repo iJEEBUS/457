@@ -1,7 +1,12 @@
 -LOCALHEAD
-vers6
+vers7
 -REMOTEHEAD
 vers1
+-USER
+Patrick
+Star
+-REPONAME
+babygit
 -HOSTNAME
 localhost
 -LISTEDFILES
@@ -18,3 +23,4 @@ vers3
 vers4
 vers5
 vers6
+vers7
