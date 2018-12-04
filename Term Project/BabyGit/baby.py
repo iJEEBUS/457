@@ -14,30 +14,34 @@ import sys
 import os
 import gzip
 import re
+import datetime
 
 
 class Baby(Client):
     def __init__(self, initArgs):
+        #todo: we can probably add most of these into two dictionaries.
+        #todo: dictionary header information, dict directory information.
         self.args = initArgs
         command = self.args[0]
         self.host_address = "0.0.0.0"
         self.cwd = os.getcwd()
         self.directory = self.cwd + "/"
-        self.bbygitdirectory = self.directory + ".babygit"
-        self.head = (self.directory + ".babygit/HEAD.bby")
+        self.bbydir = self.directory + ".babygit"
+        self.head = (self.directory + ".babygit/HEAD.ibby")
         self.user = "Bryce"
+        self.repoName = "babygit"
         #todo add user to parse
         # file_list_index is the index of where the list of files in version control in the header ends.
         self.file_list_end_index = None
         self.file_contents = None
         self.baby_files = None
         self.last_version = None
+        self.local_head = None
 
-        self.__headParse()
         self.parseCommand(command)
 
+    '''Parses the argument passed in with the baby command to the git function.'''
     def parseCommand(self, command):
-        print(command)
         if command == "init":
             repo_name = None
             # Assign name to repo if passed
@@ -45,12 +49,13 @@ class Baby(Client):
                 repo_name = self.args[1]
             # Initialize the repository
             self.repoInit(repo_name)
-        elif command == "stage":
+        else:
+            self.__headParse()
+        if command == "stage":
             if len(self.args) == 2:
                 self.stage(self.args[1])
         elif command == "commit":
-
-            self.commit()
+                self.commit()
         elif command == "push":
             self.push()
             pass
@@ -62,6 +67,8 @@ class Baby(Client):
             pass
 
     #### Method Definitions ####
+    '''Stage stages the file by adding it to the head. Doesn't add directories.'''
+    #todo add ability to stage directories.
     def stage(self, filename):
         fhead = open(self.head, "w")
         if (os.path.isfile(filename)):
@@ -74,30 +81,58 @@ class Baby(Client):
         pass
 
     '''Commit changes to the file.'''
-
     def commit(self):
         # Initialize the repository
         # todo: Change the version.
         version = str(self.last_version + 1)
-        print(version)
         destfile = self.directory + ".babygit" + "\\vers" + str(version)
         os.makedirs(destfile)
+
+        message = ""
+
+        #If there was no comment added to the commit.
+        if len(self.args) == 1:
+            message = input("Please enter description for commit: ")
+        elif len(self.args) == 2:
+            message = self.args[1]
+        else:
+            print("Incorrect commit comment format. Either put comment in between "
+                  "\"quotes\" or leave comment empty")
+
+        fhead = open(self.head, "w")
+        self.file_contents[1] = "vers"+version
+        self.file_contents.append("vers"+version)
+        str1 = '\n'.join(self.file_contents)
+        fhead.write(str1)
+        '''
         fhead = open(self.head, "a")
         fhead.write("\nvers" + version)
+        '''
         fhead.close()
+        comment = open(destfile + "/" ".comment.ibby", 'w')
+        comment.write("REPO:" + self.repoName+ "\n")
+        comment.write("TIME:" + str(datetime.datetime.now()) + "\n")
+        comment.write("USER:"+self.user+ "\n")
+        comment.write("VERS:"+version+ "\n")
+        comment.write("-COMMENT-"+ "\n")
+        comment.write(message+ "\n")
+        comment.write("-ENDCOMMENT-"+ "\n")
 
-        '''For each file in the directory that is listed and staged in the git file'''
+
+        '''For each file in the directory that is listed and staged in the git file, compress it'''
+        print("Committing files:")
         for filename in os.listdir(self.cwd):
-            print(filename)
             if (filename in self.baby_files):
+                print("+ " + filename)
                 # If the file is not a directory
                 if os.path.isfile(os.path.join(self.directory, filename)):
                     self.__compileFile(filename, destfile + "/" +
                                        filename + '.' + version + '.bby')
 
+
     '''Pushes the file to the remote server.'''
     def push(self):
-        os.chdir(self.bbygitdirectory)
+        os.chdir(self.bbydir)
         super(Baby, self).__init__(self.host_address, self.user)
         self.ftp.mkd(self.user + "vers" + str(self.last_version))
         self.ftp.cwd(self.user + "vers" + str(self.last_version))
@@ -119,20 +154,14 @@ class Baby(Client):
                 self.ftp.cwd("..")
                 os.chdir("..")
 
-
-
-
     # Function checks to see if the file is version controlled by baby
     def __headParse(self):
         header = open(self.head, 'r')
         temp = header.read()
         contents = temp.split()
-        # print contents
-        # lines = contents.split()
         listing_files = False
         version_counting = False
         last_version = 0
-        current_head = 0
         listed_files = []
         # todo add functionality to find the currenthead
         # Todo Occasionally after switching to a different command the headparse no longer goes through correctly.
@@ -147,13 +176,14 @@ class Baby(Client):
                 version_counting = True
             elif line == "-HOSTNAME":
                 self.host_address = contents[index+1]
+            elif line == "-LOCALHEAD":
+                self.local_head = contents[index+1]
             else:
                 if listing_files:
                     listed_files.append(line)
                 # Gets the number of the last version created.
                 elif version_counting:
                     x = int(re.search(r'\d+', line).group())
-                    print("vers:" + str(x))
                     if x > last_version:
                         last_version = x
             index += 1
@@ -161,7 +191,6 @@ class Baby(Client):
         self.baby_files = listed_files
         self.last_version = last_version
         header.close()
-        print (self.host_address)
         return
 
     # Given a file and a destination this function compiles and creates a new file
@@ -212,8 +241,8 @@ class Baby(Client):
                 absolute_path = directory + "/.babygit"
                 os.makedirs(absolute_path, exist_ok=False)
 
-                # Create HEAD.bby directory
-                absolute_path = directory + "/HEAD.bby"
+                # Create HEAD.ibby directory
+                absolute_path = directory + "/HEAD.ibby"
                 os.makedirs(absolute_path, exist_ok=False)
 
             except:
@@ -234,8 +263,8 @@ class Baby(Client):
                 print(absolute_path)
                 os.makedirs(absolute_path, exist_ok=False)
 
-                # Create HEAD.bby directory
-                absolute_path = absolute_path + "\\HEAD.bby"
+                # Create HEAD.ibby directory
+                absolute_path = absolute_path + "\\HEAD.ibby"
                 os.makedirs(absolute_path, exist_ok=True)
 
             except:
