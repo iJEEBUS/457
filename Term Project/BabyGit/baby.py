@@ -134,9 +134,12 @@ class Baby(Client):
     def push(self):
         os.chdir(self.bbydir)
         super(Baby, self).__init__(self.host_address, self.user)
-        self.ftp.mkd(self.user + "vers" + str(self.last_version))
-        self.ftp.cwd(self.user + "vers" + str(self.last_version))
-
+        try:
+            self.ftp.mkd(self.user + "vers" + str(self.last_version))
+            self.ftp.cwd(self.user + "vers" + str(self.last_version))
+        except:
+            print("This version already exists on the server.")
+            return
         self.pushLoop(self.cwd + "/.babygit/", self.cwd + "/.babygit/")
         self.ftp.quit()
 
