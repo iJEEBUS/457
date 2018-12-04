@@ -210,6 +210,7 @@ class Baby(Client):
                 self.host_address = contents[index+1]
             elif line == "-LOCALHEAD":
                 self.local_head = contents[index+1]
+		last_version = int(re.search(r'\d+', self.local_head).group())
             elif line == "-USER":
                 self.user = contents[index + 1]
             elif line == "-REPONAME":
