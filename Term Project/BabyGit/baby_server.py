@@ -21,8 +21,8 @@ def main():
 	cwd = os.getcwd()
 	# Authorize the incoming client connection requests
 	authorizer = DummyAuthorizer()
-	authorizer.add_user("user", "12345", ".", perm="elradfmw")
-	authorizer.add_anonymous(cwd + "/.babygit/testServerRepo")
+	authorizer.add_user("Bryce", "12345", cwd +"/testServerRepo", perm="elradfmw")
+	authorizer.add_anonymous(cwd + "/testServerRepo")
 
 	# Create and define the client handler
 	handler = FTPHandler

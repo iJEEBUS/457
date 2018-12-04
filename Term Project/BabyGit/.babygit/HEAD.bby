@@ -1,5 +1,7 @@
 -CURRENTHEAD
 vers1
+-MASTERHEAD
+vers1
 -HOSTNAME
 localhost
 -LISTEDFILES
@@ -11,3 +13,5 @@ testfile.txt
 -ENDLIST
 -LASTVER
 vers1
+vers2
+vers3

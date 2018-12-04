@@ -23,7 +23,10 @@ class Baby(Client):
         self.host_address = "0.0.0.0"
         self.cwd = os.getcwd()
         self.directory = self.cwd + "/"
-        self.head = (self.directory + ".babygit/HEAD")
+        self.bbygitdirectory = self.directory + ".babygit"
+        self.head = (self.directory + ".babygit/HEAD.bby")
+        self.user = "Bryce"
+        #todo add user to parse
         # file_list_index is the index of where the list of files in version control in the header ends.
         self.file_list_end_index = None
         self.file_contents = None
@@ -94,9 +97,29 @@ class Baby(Client):
 
     '''Pushes the file to the remote server.'''
     def push(self):
-        super(Baby, self).__init__(self.host_address)
-        for filename in os.listdir(self.cwd + "/.babygit/"):
-            self.uploadFile(filename)
+        os.chdir(self.bbygitdirectory)
+        super(Baby, self).__init__(self.host_address, self.user)
+        self.ftp.mkd(self.user + "vers" + str(self.last_version))
+        self.ftp.cwd(self.user + "vers" + str(self.last_version))
+
+        self.pushLoop(self.cwd + "/.babygit/", self.cwd + "/.babygit/")
+        self.ftp.quit()
+
+    '''Recursive loop that pushes files and directories within babygit.'''
+    def pushLoop(self, file, curdir):
+        for filename in os.listdir(file):
+            if os.path.isfile(os.path.join(curdir, filename)):
+                self.uploadFile(filename)
+            elif os.path.isdir(os.path.join(curdir, filename)):
+                self.ftp.mkd(filename)
+                self.ftp.cwd(filename)
+                curdir1 = curdir + "/" + filename
+                os.chdir(curdir1)
+                self.pushLoop(file + filename, curdir1)
+                self.ftp.cwd("..")
+                os.chdir("..")
+
+
 
 
     # Function checks to see if the file is version controlled by baby
@@ -189,8 +212,8 @@ class Baby(Client):
                 absolute_path = directory + "/.babygit"
                 os.makedirs(absolute_path, exist_ok=False)
 
-                # Create HEAD directory
-                absolute_path = directory + "/HEAD"
+                # Create HEAD.bby directory
+                absolute_path = directory + "/HEAD.bby"
                 os.makedirs(absolute_path, exist_ok=False)
 
             except:
@@ -211,8 +234,8 @@ class Baby(Client):
                 print(absolute_path)
                 os.makedirs(absolute_path, exist_ok=False)
 
-                # Create HEAD directory
-                absolute_path = absolute_path + "\\HEAD"
+                # Create HEAD.bby directory
+                absolute_path = absolute_path + "\\HEAD.bby"
                 os.makedirs(absolute_path, exist_ok=True)
 
             except:
