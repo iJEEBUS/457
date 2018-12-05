@@ -1,4 +1,4 @@
-'''
+"""
 This class will handle:
 	1) creation of a BabyGit repo (invoked by alias)
 	2) pushing updates to your current repo
@@ -6,8 +6,8 @@ This class will handle:
 	4) cloning a BabyGit repo from the server
 
 @author Ron Rounsifer, Bryce Hutton
-@version 10.27.2018 (10.26.2018)
-'''
+@version 12.04.2018 (10.26.2018)
+"""
 # !/usr/bin/python
 from client import *
 import sys
@@ -19,8 +19,8 @@ import datetime
 
 class Baby(Client):
     def __init__(self, initArgs):
-        #todo: we can probably add most of these into two dictionaries.
-        #todo: dictionary header information, dict directory information.
+        # todo: we can probably add most of these into two dictionaries.
+        # todo: dictionary header information, dict directory information.
         self.args = initArgs
         command = self.args[0]
         self.host_address = "0.0.0.0"
@@ -30,7 +30,7 @@ class Baby(Client):
         self.head = (self.directory + ".babygit/HEAD.ibby")
         self.user = None
         self.repo_name = "babygit"
-        #todo add user to parse
+        # todo add user to parse
         # file_list_index is the index of where the list of files in version control in the header ends.
         self.file_list_end_index = None
         self.file_contents = None
@@ -41,6 +41,7 @@ class Baby(Client):
         self.parseCommand(command)
 
     '''Parses the argument passed in with the baby command to the git function.'''
+
     def parseCommand(self, command):
         if command == "init":
             repo_name = None
@@ -49,17 +50,25 @@ class Baby(Client):
                 repo_name = self.args[1]
             # Initialize the repository
             self.repoInit(repo_name)
-        else:
-            self.__headParse()
-        if command == "stage":
+       #else:
+       #     self.__headParse()
+        elif command == "stage":
             if len(self.args) == 2:
                 self.stage(self.args[1])
         elif command == "commit":
-                self.commit()
+            self.commit()
         elif command == "push":
             self.push()
             pass
+        elif command == "pull":
+            # get the name of the repository to pull
+            remote_repo = self.args[1]
+            print(remote_repo)
+            # pull the repo
+            # self.pull(remote_repo)
+            pass
         elif command == "clone":
+            # get the name of the repository to clone
             pass
         elif command == "checkout":
             pass
@@ -70,15 +79,16 @@ class Baby(Client):
         elif command == "help":
             print("Command list:\ninit: initialize a repo.\nstage: stage a file."
                   "\ncommit: commit changes.\npush: push changes to remote. \nuser: change user")
-            #todo add the rest of the commands as we complete them.
+            # todo add the rest of the commands as we complete them.
         else:
             print("Command not recognized. Use command \"help\" for more information.")
 
     #### Method Definitions ####
     '''Stage stages the file by adding it to the head. Doesn't add directories.'''
+
     def stage(self, filename):
         fhead = open(self.head, "w")
-        #if the file isn't a directory, rewrite the head with the new file added.
+        # if the file isn't a directory, rewrite the head with the new file added.
         # todo add ability to stage directories.
         if (os.path.isfile(filename)):
             self.file_contents.insert(self.file_list_end_index, filename)
@@ -90,6 +100,7 @@ class Baby(Client):
         pass
 
     '''Changes the user in the header'''
+
     def userChange(self):
         fhead = open(self.head, "w")
         new_name = "anon"
@@ -108,6 +119,7 @@ class Baby(Client):
         print("Username changed to " + new_name)
 
     '''Commit changes to the file.'''
+
     def commit(self):
         # Initialize the repository
         # todo: Change the version, pref to hash of time & user to make unique.
@@ -128,8 +140,8 @@ class Baby(Client):
 
         # Update the last version in the head file.
         fhead = open(self.head, "w")
-        self.file_contents[1] = "vers"+version
-        self.file_contents.append("vers"+version)
+        self.file_contents[1] = "vers" + version
+        self.file_contents.append("vers" + version)
         str1 = '\n'.join(self.file_contents)
         fhead.write(str1)
         fhead.close()
@@ -138,11 +150,11 @@ class Baby(Client):
         comment = open(destfile + "/" ".comment.ibby", 'w')
         comment.write("REPO:" + self.repo_name + "\n")
         comment.write("TIME:" + str(datetime.datetime.now()) + "\n")
-        comment.write("USER:"+self.user+ "\n")
-        comment.write("VERS:"+version+ "\n")
-        comment.write("-COMMENT-"+ "\n")
-        comment.write(message+ "\n")
-        comment.write("-ENDCOMMENT-"+ "\n")
+        comment.write("USER:" + self.user + "\n")
+        comment.write("VERS:" + version + "\n")
+        comment.write("-COMMENT-" + "\n")
+        comment.write(message + "\n")
+        comment.write("-ENDCOMMENT-" + "\n")
 
         # For each file in the directory that is listed and staged in the git file, compress it
         print("Committing files:")
@@ -155,8 +167,15 @@ class Baby(Client):
                     self.__compileFile(filename, destfile + "/" +
                                        filename + '.' + version + '.bby')
 
-    '''Pushes the file to the remote server.'''
     def push(self):
+        """ Push files to remote repository.
+
+        Creates an FTP connection with the remote repository before calling the pushLoop() method
+        that recursively pushes all files in the current directory to the remote repository.
+
+        Returns:
+            None
+        """
         os.chdir(self.bby_dir)
         super(Baby, self).__init__(self.host_address, self.user)
         # Try to make a directory server-side, if it fails then no need to push.
@@ -169,14 +188,28 @@ class Baby(Client):
         self.pushLoop(self.cwd + "/.babygit/", self.cwd + "/.babygit/")
         self.ftp.quit()
 
-    '''Recursive loop that pushes files and directories within babygit.'''
     def pushLoop(self, file, curdir):
+        """ Recurse through all files in directory.
+
+        Recursively loop that pushes files and directories within babygit.
+
+        Args:
+            File: The file to start the recursive loop on
+            curdir: The users current directory
+
+        Returns:
+            None
+        """
         for file_name in os.listdir(file):
-            # If the given file is a file, upload to server
+            # If the file is of type File
+            # upload to remote repository
             if os.path.isfile(os.path.join(curdir, file_name)):
                 self.uploadFile(file_name)
-            # If the file is a directory, make a new directory server-side, switch to it client
-            # and server side,and recurse. After recurse, switch back to previous directory.'''
+            # If the file is of type Directory:
+            #   1 - Make a new directory server-side
+            #   2 - Switch client and server cwd to this directory
+            #   3 - Recurse through files in this new directory
+            #   4 - Return to previous directory after compplete recursion.
             elif os.path.isdir(os.path.join(curdir, file_name)):
                 self.ftp.mkd(file_name)
                 self.ftp.cwd(file_name)
@@ -186,8 +219,14 @@ class Baby(Client):
                 self.ftp.cwd("..")
                 os.chdir("..")
 
-    ''' Parses through the head file and grabs relevant information'''
     def __headParse(self):
+        """ Parse head file
+
+        Parses through the head file and grabs relevant information
+
+        Returns:
+            None
+        """
         header = open(self.head, 'r')
         temp = header.read()
         contents = temp.split()
@@ -207,10 +246,10 @@ class Baby(Client):
             elif line == "-LASTVER":
                 version_counting = True
             elif line == "-HOSTNAME":
-                self.host_address = contents[index+1]
+                self.host_address = contents[index + 1]
             elif line == "-LOCALHEAD":
-                self.local_head = contents[index+1]
-		last_version = int(re.search(r'\d+', self.local_head).group())
+                self.local_head = contents[index + 1]
+                last_version = int(re.search(r'\d+', self.local_head).group())
             elif line == "-USER":
                 self.user = contents[index + 1]
             elif line == "-REPONAME":
@@ -230,8 +269,18 @@ class Baby(Client):
         header.close()
         return
 
-    '''Given a file and a destination this function compiles and creates a new file'''
     def __compileFile(self, file_name, new_file_name):
+        """Compile file/create new file
+
+        Given a file and a destination this function compiles and creates a new file
+
+        Args:
+            file_name: Name of the file to compile
+            new_file_name: the destination of the file being compiled
+
+        Returns:
+            None
+        """
         fin = open(file_name, 'rb')
         # todo: add repo identifier for each repo cloned
         fout = gzip.open(new_file_name, 'wb')
@@ -240,15 +289,16 @@ class Baby(Client):
         fin.close()
 
     def repoInit(self, name):
-        '''Initialize a BabyGit repository
-		
-		[description]
-		
-		Arguments:
-			directory {[type]} -- the current working directory of the user.
-			name {str} -- the name of the repository to be made.
-						  Defaults to current directory if not passed.
-		'''
+        """Initialize a BabyGit repository
+
+        Args:
+            directory:  the current working directory of the user.
+            name:   the name of the repository to be made.
+                    Defaults to current directory if not passed.
+
+        Returns:
+            None
+        """
 
         # Now we must get the intialized repositories onto the server.
         #
@@ -263,55 +313,36 @@ class Baby(Client):
         directory = cwd + "/"
 
         # Initialize named repo created in the current directory
-        if name != None:
-
-            # Absolute path for repo to create
-            repo_name = name
-            directory = directory + repo_name
-            directory_after_init = directory + "/.babygit"
-
-            # Setup hidden babygit repo file if it does not exist
-            try:
-                # Create .babygit directory
-                absolute_path = directory + "/.babygit"
-                os.makedirs(absolute_path, exist_ok=False)
-
-                # Create HEAD.ibby directory
-                absolute_path = directory + "/HEAD.ibby"
-                os.makedirs(absolute_path, exist_ok=False)
-
-            except:
-                print("This directory is already initialized." +
-                      "\nDelete all BabyGit related files and try again.")
-
-        # Initialize the current directory
+        if name == None:
+            repo_name = 'crib'
         else:
-            # todo figure out what you want repo_name to be named
-            repo_name = "repo"
-            directory_after_init = directory + "/.babygit"
+            repo_name = name
 
-            # Setup hidden babygit repo file if it does not exist
-            try:
+        # Absolute path for repo to create
+        directory = directory + repo_name
+        directory_after_init = directory + "/.babygit"
 
-                # Create .babygit directory
-                absolute_path = directory + repo_name + "/.babygit"
-                print(absolute_path)
-                os.makedirs(absolute_path, exist_ok=False)
+        # Setup hidden babygit repo file if it does not exist
+        try:
+            # Create .babygit directory
+            absolute_path = directory + "/.babygit"
+            os.makedirs(absolute_path, exist_ok=False)
 
-                # Create HEAD.ibby directory
-                absolute_path = absolute_path + "\\HEAD.ibby"
-                os.makedirs(absolute_path, exist_ok=True)
+            # Create HEAD.ibby file 
+            head_file_path = absolute_path + "/HEAD.ibby"
+            open(head_file_path, "w+")
 
-            except:
-                print("This directory is already initialized." +
-                      "\nDelete all BabyGit related files and try again.")
+        except:
+            print("This directory is already initialized." +
+                  "\nDelete all BabyGit related files and try again.")
 
         # now that the directories have been created, we need to upload them
         # to the server
 
         # Print if success
-        success_msg = "Initialized empty BabyGit repository in " + directory_after_init + "/"
+        success_msg = f"""Initialized empty BabyGit repository in {directory_after_init}/"""
         print(success_msg)
+        return
 
 
 #### Script ####

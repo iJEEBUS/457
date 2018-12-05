@@ -1,5 +1,5 @@
 -LOCALHEAD
-vers11
+vers9
 -REMOTEHEAD
 vers1
 -USER
@@ -26,5 +26,3 @@ vers6
 vers7
 vers8
 vers9
-vers10
-vers11
