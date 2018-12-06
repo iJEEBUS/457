@@ -10,13 +10,9 @@ repo
 localhost
 -LISTEDFILES
 -STARTLIST
-testfile.txt
-baby.py
-testfileindirectory
 -ENDLIST
 -LISTEDDIRS
 -STARTDIRS
-testd
 -ENDDIRS
 -LASTVER
 vers0

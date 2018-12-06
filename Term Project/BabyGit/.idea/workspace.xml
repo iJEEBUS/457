@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4292c05-5b55-42a0-9d97-72a962f00c66" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.babygit/HEAD.ibby" afterPath="$PROJECT_DIR$/testd/testfileindirectory" />
+      <change beforePath="$PROJECT_DIR$/.babygit/HEAD.ibby" afterPath="$PROJECT_DIR$/.babygit/HEAD.ibby" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers10/.comment.ibby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers10/baby.py.10.bby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers10/baby_server.py.10.bby" afterPath="" />
@@ -25,108 +25,6 @@
       <change beforePath="$PROJECT_DIR$/.babygit/vers9/testfile.txt.9.bby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/baby.py" afterPath="$PROJECT_DIR$/baby.py" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/HEAD.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers1/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers1/baby.py.1.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers1/baby_server.py.1.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers1/client.py.1.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers2/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers2/baby.py.2.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers2/baby_server.py.2.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers2/client.py.2.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers2/testfile.txt.2.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers3/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers3/baby.py.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers3/baby_server.py.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers3/client.py.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers3/testfile.txt.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers4/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers4/baby.py.4.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers4/baby_server.py.4.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers4/client.py.4.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers4/testfile.txt.4.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers5/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers5/baby.py.5.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers5/baby_server.py.5.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers5/client.py.5.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers5/testfile.txt.5.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers6/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers6/baby.py.6.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers6/baby_server.py.6.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers6/client.py.6.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers6/testfile.txt.6.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers7/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers7/baby.py.7.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers7/baby_server.py.7.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers7/client.py.7.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers10/vers7/testfile.txt.7.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers11/HEAD.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/HEAD.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers1/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers1/baby.py.1.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers1/baby_server.py.1.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers1/client.py.1.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers1/testfile.txt.1.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers2/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers2/baby.py.2.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers2/baby_server.py.2.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers2/client.py.2.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers2/testfile.txt.2.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers3/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers3/baby.py.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers3/baby_server.py.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers3/client.py.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers3/testfile.txt.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers4/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers4/baby.py.4.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers4/baby_server.py.4.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers4/client.py.4.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers4/testfile.txt.4.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers5/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers5/baby.py.5.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers5/baby_server.py.5.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers5/client.py.5.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers5/testfile.txt.5.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers6/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers6/baby.py.6.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers6/baby_server.py.6.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers6/client.py.6.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers6/vers6/testfile.txt.6.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/HEAD.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers1/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers1/baby.py.1.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers1/baby_server.py.1.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers1/client.py.1.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers2/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers2/baby.py.2.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers2/baby_server.py.2.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers2/client.py.2.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers2/testfile.txt.2.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers3/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers3/baby.py.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers3/baby_server.py.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers3/client.py.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers3/testfile.txt.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers4/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers4/baby.py.4.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers4/baby_server.py.4.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers4/client.py.4.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers4/testfile.txt.4.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers5/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers5/baby.py.5.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers5/baby_server.py.5.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers5/client.py.5.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers5/testfile.txt.5.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers6/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers6/baby.py.6.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers6/baby_server.py.6.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers6/client.py.6.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers6/testfile.txt.6.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers7/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers7/baby.py.7.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers7/baby_server.py.7.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers7/client.py.7.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testServerRepo/Brycevers9/vers7/testfile.txt.7.bby" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -175,36 +73,16 @@
           <file leaf-file-name="baby.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/baby.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="136">
-                  <caret line="106" column="82" lean-forward="false" selection-start-line="106" selection-start-column="82" selection-end-line="106" selection-end-column="82" />
+                <state relative-caret-position="308">
+                  <caret line="118" column="73" lean-forward="false" selection-start-line="118" selection-start-column="73" selection-end-line="118" selection-end-column="73" />
                   <folding>
-                    <element signature="e#5010#5694#0" expanded="false" />
-                    <element signature="e#5726#7938#0" expanded="false" />
-                    <element signature="e#7968#8770#0" expanded="false" />
-                    <element signature="e#12395#12904#0" expanded="false" />
-                    <element signature="e#12957#13809#0" expanded="false" />
-                    <element signature="e#13849#15376#0" expanded="false" />
+                    <element signature="e#5474#6158#0" expanded="false" />
+                    <element signature="e#6190#8402#0" expanded="false" />
+                    <element signature="e#8432#9234#0" expanded="false" />
+                    <element signature="e#12859#13368#0" expanded="false" />
+                    <element signature="e#13421#14273#0" expanded="false" />
+                    <element signature="e#14313#15840#0" expanded="false" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="genericpath.py" pinned="false" current-in-tab="false">
-            <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/genericpath.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="208">
-                  <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="codecs.py" pinned="false" current-in-tab="false">
-            <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/codecs.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="157">
-                  <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -238,14 +116,15 @@
           <file leaf-file-name="baby.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/baby.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="729">
-                  <caret line="270" column="27" lean-forward="true" selection-start-line="270" selection-start-column="27" selection-end-line="270" selection-end-column="27" />
+                <state relative-caret-position="728">
+                  <caret line="287" column="34" lean-forward="false" selection-start-line="287" selection-start-column="34" selection-end-line="287" selection-end-column="34" />
                   <folding>
-                    <element signature="e#5010#5694#0" expanded="false" />
-                    <element signature="e#5726#7938#0" expanded="false" />
-                    <element signature="e#10052#12330#0" expanded="false" />
-                    <element signature="e#12395#12904#0" expanded="false" />
-                    <element signature="e#13849#15376#0" expanded="false" />
+                    <element signature="e#5474#6158#0" expanded="false" />
+                    <element signature="e#6190#8402#0" expanded="false" />
+                    <element signature="e#10516#12794#0" expanded="false" />
+                    <element signature="e#12859#13368#0" expanded="false" />
+                    <element signature="e#14313#15840#0" expanded="false" />
+                    <marker date="1544138046160" expanded="true" signature="4757:4888" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -254,8 +133,8 @@
           <file leaf-file-name="HEAD.ibby" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/.babygit/HEAD.ibby">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
-                  <caret line="17" column="10" lean-forward="false" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+                <state relative-caret-position="238">
+                  <caret line="14" column="10" lean-forward="false" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
                   <folding />
                 </state>
               </provider>
@@ -290,6 +169,8 @@
       <find>file_name</find>
       <find>filename</find>
       <find>file_contents</find>
+      <find>/</find>
+      <find>\\</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -342,11 +223,6 @@
               <item name="BabyGit" type="b2602c69:ProjectViewProjectNode" />
               <item name="BabyGit" type="462c0819:PsiDirectoryNode" />
               <item name=".babygit" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BabyGit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BabyGit" type="462c0819:PsiDirectoryNode" />
-              <item name="testd" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -534,8 +410,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/baby.py</url>
-          <line>405</line>
+          <line>415</line>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/baby.py</url>
+          <line>148</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -545,46 +426,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="21" />
+      <option name="time" value="26" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-          <folding>
-            <element signature="e#233#255#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baby_server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#202#211#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baby.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-          <folding>
-            <element signature="e#5010#5694#0" expanded="false" />
-            <element signature="e#5726#7938#0" expanded="false" />
-            <element signature="e#7968#8770#0" expanded="false" />
-            <element signature="e#12395#12904#0" expanded="false" />
-            <element signature="e#12957#13809#0" expanded="false" />
-            <element signature="e#13849#15376#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.babygit/HEAD.ibby">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -618,12 +464,12 @@
         <state relative-caret-position="1598">
           <caret line="98" column="28" lean-forward="false" selection-start-line="98" selection-start-column="28" selection-end-line="98" selection-end-column="28" />
           <folding>
-            <element signature="e#5010#5694#0" expanded="false" />
-            <element signature="e#5726#7938#0" expanded="false" />
-            <element signature="e#7968#8770#0" expanded="false" />
-            <element signature="e#12395#12904#0" expanded="false" />
-            <element signature="e#12957#13809#0" expanded="false" />
-            <element signature="e#13849#15376#0" expanded="false" />
+            <element signature="e#5474#6158#0" expanded="false" />
+            <element signature="e#6190#8402#0" expanded="false" />
+            <element signature="e#8432#9234#0" expanded="false" />
+            <element signature="e#12859#13368#0" expanded="false" />
+            <element signature="e#13421#14273#0" expanded="false" />
+            <element signature="e#14313#15840#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -729,12 +575,12 @@
         <state relative-caret-position="1581">
           <caret line="104" column="18" lean-forward="false" selection-start-line="104" selection-start-column="18" selection-end-line="104" selection-end-column="18" />
           <folding>
-            <element signature="e#5010#5694#0" expanded="false" />
-            <element signature="e#5726#7938#0" expanded="false" />
-            <element signature="e#7968#8770#0" expanded="false" />
-            <element signature="e#12395#12904#0" expanded="false" />
-            <element signature="e#12957#13809#0" expanded="false" />
-            <element signature="e#13849#15376#0" expanded="false" />
+            <element signature="e#5474#6158#0" expanded="false" />
+            <element signature="e#6190#8402#0" expanded="false" />
+            <element signature="e#8432#9234#0" expanded="false" />
+            <element signature="e#12859#13368#0" expanded="false" />
+            <element signature="e#13421#14273#0" expanded="false" />
+            <element signature="e#14313#15840#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -754,12 +600,12 @@
         <state relative-caret-position="272">
           <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
           <folding>
-            <element signature="e#5010#5694#0" expanded="false" />
-            <element signature="e#5726#7938#0" expanded="false" />
-            <element signature="e#7968#8770#0" expanded="false" />
-            <element signature="e#12395#12904#0" expanded="false" />
-            <element signature="e#12957#13809#0" expanded="false" />
-            <element signature="e#13849#15376#0" expanded="false" />
+            <element signature="e#5474#6158#0" expanded="false" />
+            <element signature="e#6190#8402#0" expanded="false" />
+            <element signature="e#8432#9234#0" expanded="false" />
+            <element signature="e#12859#13368#0" expanded="false" />
+            <element signature="e#13421#14273#0" expanded="false" />
+            <element signature="e#14313#15840#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -797,12 +643,12 @@
         <state relative-caret-position="1598">
           <caret line="98" column="28" lean-forward="false" selection-start-line="98" selection-start-column="28" selection-end-line="98" selection-end-column="28" />
           <folding>
-            <element signature="e#5010#5694#0" expanded="false" />
-            <element signature="e#5726#7938#0" expanded="false" />
-            <element signature="e#7968#8770#0" expanded="false" />
-            <element signature="e#12395#12904#0" expanded="false" />
-            <element signature="e#12957#13809#0" expanded="false" />
-            <element signature="e#13849#15376#0" expanded="false" />
+            <element signature="e#5474#6158#0" expanded="false" />
+            <element signature="e#6190#8402#0" expanded="false" />
+            <element signature="e#8432#9234#0" expanded="false" />
+            <element signature="e#12859#13368#0" expanded="false" />
+            <element signature="e#13421#14273#0" expanded="false" />
+            <element signature="e#14313#15840#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -872,14 +718,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -898,6 +736,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/genericpath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/baby_server.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -908,33 +754,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/genericpath.py">
+    <entry file="file://$PROJECT_DIR$/testd/fuck/fuckinfuck">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/_bootlocale.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="193" column="0" lean-forward="false" selection-start-line="193" selection-start-column="0" selection-end-line="193" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testd/fuck2/electricfuckaloo">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.babygit/HEAD.ibby">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="10" lean-forward="false" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+        <state relative-caret-position="238">
+          <caret line="14" column="10" lean-forward="false" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/baby.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="106" column="82" lean-forward="false" selection-start-line="106" selection-start-column="82" selection-end-line="106" selection-end-column="82" />
+        <state relative-caret-position="308">
+          <caret line="118" column="73" lean-forward="false" selection-start-line="118" selection-start-column="73" selection-end-line="118" selection-end-column="73" />
           <folding>
-            <element signature="e#5010#5694#0" expanded="false" />
-            <element signature="e#5726#7938#0" expanded="false" />
-            <element signature="e#7968#8770#0" expanded="false" />
-            <element signature="e#12395#12904#0" expanded="false" />
-            <element signature="e#12957#13809#0" expanded="false" />
-            <element signature="e#13849#15376#0" expanded="false" />
+            <element signature="e#5474#6158#0" expanded="false" />
+            <element signature="e#6190#8402#0" expanded="false" />
+            <element signature="e#8432#9234#0" expanded="false" />
+            <element signature="e#12859#13368#0" expanded="false" />
+            <element signature="e#13421#14273#0" expanded="false" />
+            <element signature="e#14313#15840#0" expanded="false" />
           </folding>
         </state>
       </provider>

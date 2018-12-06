@@ -53,44 +53,50 @@ class Baby(Client):
         Returns:
             None
         """
-        repo_name = None
-        if command == "init":
-            # Assign name to repo if passed
-            if len(self.args) == 2:
-                repo_name = self.args[1]
-            # Initialize the repository
-            self.repoInit(repo_name)
-        self.__headParse(self.repo_name)
-        if command == "stage":
-            if len(self.args) == 2:
-                self.stage(self.args[1])
-        elif command == "commit":
-            self.commit()
-        elif command == "push":
-            self.push()
-            pass
-        elif command == "pull":
-            # get the name of the repository to pull
-            remote_repo = self.args[1]
-            print(remote_repo)
-            # pull the repo
-            # self.pull(remote_repo)
-            pass
-        elif command == "clone":
-            # get the name of the repository to clone
-            pass
-        elif command == "checkout":
-            pass
-        elif command == "branch":  # Are we adding branch to our program?
-            pass
-        elif command == "user":
-            self.userChange()
-        elif command == "help":
-            print("Command list:\ninit: initialize a repo.\nstage: stage a file."
-                  "\ncommit: commit changes.\npush: push changes to remote. \nuser: change user")
-            # todo add the rest of the commands as we complete them.
-        else:
-            print("Command not recognized. Use command \"help\" for more information.")
+        try:
+            repo_name = None
+            if command == "init":
+                # Assign name to repo if passed
+                if len(self.args) == 2:
+                    repo_name = self.args[1]
+                # Initialize the repository
+                self.repoInit(repo_name)
+            self.__headParse(self.repo_name)
+            if command == "stage":
+                if len(self.args) == 2:
+                    self.stage(self.args[1])
+            elif command == "commit":
+                self.commit()
+            elif command == "push":
+                self.push()
+                pass
+            elif command == "pull":
+                # get the name of the repository to pull
+                remote_repo = self.args[1]
+                print(remote_repo)
+                # pull the repo
+                # self.pull(remote_repo)
+                pass
+            elif command == "clone":
+                # get the name of the repository to clone
+                pass
+            elif command == "checkout":
+                pass
+            elif command == "branch":  # Are we adding branch to our program?
+                pass
+            elif command == "user":
+                self.userChange()
+            elif command == "help":
+                print("Command list:\ninit: initialize a repo.\nstage: stage a file."
+                      "\ncommit: commit changes.\npush: push changes to remote. \nuser: change user")
+                # todo add the rest of the commands as we complete them.
+            else:
+                print("Command not recognized. Use command \"help\" for more information.")
+        except:
+            fhead = open(self.head, "w")
+            str1 = '\n'.join(self.file_contents)
+            fhead.write(str1)
+            fhead.close()
 
     def stage(self, filename):
         """Stages file
@@ -103,14 +109,17 @@ class Baby(Client):
         Returns:
             None
         """
+
+
         fhead = open(self.head, "w")
         # if the file isn't a directory, rewrite the head with the new file added.
         # todo make sure file isn't already staged.
+
         if (os.path.isfile(filename)):
             self.file_contents.insert(self.file_list_end_index, filename)
         elif (os.path.isdir(filename)):
             self.file_contents.insert(self.dir_list_end_index, filename)
-            self.__stageLoop(filename, self.cwd + "/" + filename)
+            self.__stageLoop(self.cwd + "/" + filename + "/", self.cwd + "/" + filename)
         else:
             print(filename + " does not exist in this directory.")
         str1 = '\n'.join(self.file_contents)
@@ -130,11 +139,12 @@ class Baby(Client):
             None
         """
         for file_name in os.listdir(file):
+            print (os.path.join(curdir,file_name))
             #If the file is a File, stage it.
             if os.path.isfile(os.path.join(curdir,file_name)):
                 self.file_contents.insert(self.file_list_end_index, file_name)
                 self.staged_files.append(file_name)
-
+                self.dir_list_end_index += 1
             #If the file is a directory, recursively stage.
             elif os.path.isdir(os.path.join(curdir,file_name)):
                 self.file_contents.insert(self.dir_list_end_index, file_name)
@@ -142,7 +152,7 @@ class Baby(Client):
                 # within one directory.
                 curdir1 = curdir + "/" + file_name
                 os.chdir(curdir1)
-                self.__stageLoop(file_name)
+                self.__stageLoop(file + file_name, curdir1)
                 os.chdir("..")
 
     def userChange(self):
