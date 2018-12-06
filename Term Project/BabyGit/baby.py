@@ -18,7 +18,7 @@ import datetime
 
 
 class Baby(Client):
-    
+
     def __init__(self, init_args):
         # todo: we can probably add most of these into two dictionaries.
         # todo: dictionary header information, dict directory information.
@@ -350,17 +350,7 @@ class Baby(Client):
         Returns:
             None
         """
-
-        # Now we must get the intialized repositories onto the server.
-        #
-        # 2 options:
-        #	1) Create files server side and pull to client
-        #		- USING THIS MODEL
-        #   2) Create files client side and send to server
-        #		- if 2+ people make the same repo it could cause problems
-
         cwd = (os.getcwd())
-
         directory = cwd + "/"
 
         # Initialize named repo created in the current directory
@@ -383,8 +373,6 @@ class Baby(Client):
             head_file_path = absolute_path + "/HEAD.ibby"
             self.createInitialHeadFile(head_file_path)
 
-            # Change header file pointer
-        # TODO make it so a template head file is placed in the head file location
         except Exception as e:
             print("This directory may already be initialized." +
                   "\nTry deleting all BabyGit related files and try again.")
