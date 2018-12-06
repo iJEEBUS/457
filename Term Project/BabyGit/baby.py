@@ -34,10 +34,12 @@ class Baby(Client):
         # todo add user to parse
         # file_list_index is the index of where the list of files in version control in the header ends.
         self.file_list_end_index = None
+        self.dir_list_end_index = None
         self.file_contents = None
-        self.baby_files = None
         self.last_version = None
         self.local_head = None
+        self.staged_files = None
+        self.staged_dirs = None
         self.parseCommand(command)
 
     def parseCommand(self, command):
@@ -51,15 +53,15 @@ class Baby(Client):
         Returns:
             None
         """
+        repo_name = None
         if command == "init":
-            repo_name = None
             # Assign name to repo if passed
             if len(self.args) == 2:
                 repo_name = self.args[1]
             # Initialize the repository
             self.repoInit(repo_name)
-            self.__headParse(repo_name)
-        elif command == "stage":
+        self.__headParse(self.repo_name)
+        if command == "stage":
             if len(self.args) == 2:
                 self.stage(self.args[1])
         elif command == "commit":
@@ -103,15 +105,45 @@ class Baby(Client):
         """
         fhead = open(self.head, "w")
         # if the file isn't a directory, rewrite the head with the new file added.
-        # todo add ability to stage directories.
+        # todo make sure file isn't already staged.
         if (os.path.isfile(filename)):
             self.file_contents.insert(self.file_list_end_index, filename)
-            str1 = '\n'.join(self.file_contents)
-            fhead.write(str1)
+        elif (os.path.isdir(filename)):
+            self.file_contents.insert(self.dir_list_end_index, filename)
+            self.__stageLoop(filename, self.cwd + "/" + filename)
         else:
             print(filename + " does not exist in this directory.")
+        str1 = '\n'.join(self.file_contents)
+        fhead.write(str1)
         fhead.close()
         pass
+
+    def __stageLoop(self, file, curdir):
+        """ Recurse through files under directory
+
+        Recursively stage those files.
+
+        Args:
+             File: The directory to start the recursive loop on.
+
+        Returns:
+            None
+        """
+        for file_name in os.listdir(file):
+            #If the file is a File, stage it.
+            if os.path.isfile(os.path.join(curdir,file_name)):
+                self.file_contents.insert(self.file_list_end_index, file_name)
+                self.staged_files.append(file_name)
+
+            #If the file is a directory, recursively stage.
+            elif os.path.isdir(os.path.join(curdir,file_name)):
+                self.file_contents.insert(self.dir_list_end_index, file_name)
+                # Need a second current directory in case there's multiple directories
+                # within one directory.
+                curdir1 = curdir + "/" + file_name
+                os.chdir(curdir1)
+                self.__stageLoop(file_name)
+                os.chdir("..")
 
     def userChange(self):
         """Change user.
@@ -186,7 +218,7 @@ class Baby(Client):
         # For each file in the directory that is listed and staged in the git file, compress it
         print("Committing files:")
         for filename in os.listdir(self.cwd):
-            if (filename in self.baby_files):
+            if (filename in self.staged_files):
                 print("+ " + filename)
                 # If the file is not a directory
                 # todo add directory commit
@@ -212,10 +244,10 @@ class Baby(Client):
         except:
             print("This version already exists on the server.")
             return
-        self.pushLoop(self.cwd + "/.babygit/", self.cwd + "/.babygit/")
+        self.__pushLoop(self.cwd + "/.babygit/", self.cwd + "/.babygit/")
         self.ftp.quit()
 
-    def pushLoop(self, file, curdir):
+    def __pushLoop(self, file, curdir):
         """ Recurse through all files in directory.
 
         Recursively loop that pushes files and directories within babygit.
@@ -242,7 +274,7 @@ class Baby(Client):
                 self.ftp.cwd(file_name)
                 curdir1 = curdir + "/" + file_name
                 os.chdir(curdir1)
-                self.pushLoop(file + file_name, curdir1)
+                self.__pushLoop(file + file_name, curdir1)
                 self.ftp.cwd("..")
                 os.chdir("..")
 
@@ -254,14 +286,16 @@ class Baby(Client):
         Returns:
             None
         """
-        self.head = self.directory + repo_name + "/.babygit/HEAD.ibby"
+        self.head = self.directory  + "/.babygit/HEAD.ibby"
         header = open(self.head, 'r')
         temp = header.read()
         contents = temp.split()
         listing_files = False
+        listing_dirs = False
         version_counting = False
         last_version = 0
         listed_files = []
+        listed_dirs = []
         # todo add functionality to find the currenthead
         # Todo Occasionally after switching to a different command the headparse no longer goes through correctly.
         index = 0
@@ -282,17 +316,29 @@ class Baby(Client):
                 self.user = contents[index + 1]
             elif line == "-REPONAME":
                 self.repo_name = contents[index + 1]
+            elif line == "-STARTDIRS":
+                listing_dirs = True
+                listing_files = False
+            elif line == "-ENDDIRS":
+                listing_files = False
+                self.dir_list_end_index = index
+
             else:
                 if listing_files:
                     listed_files.append(line)
+                elif listing_dirs:
+                    listed_dirs.append(line)
                 # Gets the number of the last version created.
                 elif version_counting:
                     x = int(re.search(r'\d+', line).group())
                     if x > last_version:
                         last_version = x
+
             index += 1
+
         self.file_contents = contents
-        self.baby_files = listed_files
+        self.staged_dirs = listed_dirs
+        self.staged_files = listed_files
         self.last_version = last_version
         header.close()
         return
@@ -334,6 +380,9 @@ class Baby(Client):
                    "-LISTEDFILES\n" + \
                    "-STARTLIST\n" + \
                    "-ENDLIST\n" + \
+                   "-LISTEDDIRS\n" + \
+                   "-STARTDIRS\n" + \
+                   "-ENDDIRS\n" + \
                    "-LASTVER\nvers0\n"
 
         with open(path, 'w+') as f:
