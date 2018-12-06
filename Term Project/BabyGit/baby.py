@@ -18,17 +18,18 @@ import datetime
 
 
 class Baby(Client):
-    def __init__(self, initArgs):
+    
+    def __init__(self, init_args):
         # todo: we can probably add most of these into two dictionaries.
         # todo: dictionary header information, dict directory information.
-        self.args = initArgs
+        self.args = init_args
         command = self.args[0]
         self.host_address = "0.0.0.0"
         self.cwd = os.getcwd()
         self.directory = self.cwd + "/"
         self.bby_dir = self.directory + ".babygit"
         self.head = (self.directory + ".babygit/HEAD.ibby")
-        self.user = None
+        self.user = "anon"
         self.repo_name = "babygit"
         # todo add user to parse
         # file_list_index is the index of where the list of files in version control in the header ends.
@@ -37,12 +38,19 @@ class Baby(Client):
         self.baby_files = None
         self.last_version = None
         self.local_head = None
-
         self.parseCommand(command)
 
-    '''Parses the argument passed in with the baby command to the git function.'''
-
     def parseCommand(self, command):
+        """Parse user arguments
+
+        Parses the argument passed in with the baby command to the git function.
+
+        Args:
+            command: the command entered by the user
+
+        Returns:
+            None
+        """
         if command == "init":
             repo_name = None
             # Assign name to repo if passed
@@ -50,8 +58,7 @@ class Baby(Client):
                 repo_name = self.args[1]
             # Initialize the repository
             self.repoInit(repo_name)
-       #else:
-       #     self.__headParse()
+            self.__headParse(repo_name)
         elif command == "stage":
             if len(self.args) == 2:
                 self.stage(self.args[1])
@@ -83,10 +90,17 @@ class Baby(Client):
         else:
             print("Command not recognized. Use command \"help\" for more information.")
 
-    #### Method Definitions ####
-    '''Stage stages the file by adding it to the head. Doesn't add directories.'''
-
     def stage(self, filename):
+        """Stages file
+
+        Stages the file by writing it to the head file.
+
+        Args:
+            filename: the file to stage
+
+        Returns:
+            None
+        """
         fhead = open(self.head, "w")
         # if the file isn't a directory, rewrite the head with the new file added.
         # todo add ability to stage directories.
@@ -95,17 +109,24 @@ class Baby(Client):
             str1 = '\n'.join(self.file_contents)
             fhead.write(str1)
         else:
-            print(filename + "does not exist in this directory.")
+            print(filename + " does not exist in this directory.")
         fhead.close()
         pass
 
-    '''Changes the user in the header'''
-
     def userChange(self):
+        """Change user.
+
+        Changes the users name in the head file.
+
+        Returns:
+            None
+        """
         fhead = open(self.head, "w")
         new_name = "anon"
         if len(self.args) == 1:
-            new_name = input("Please enter desired name.")
+            new_name = input("Username: ")
+            print(new_name)
+            print(type(new_name))
         elif len(self.args) == 2:
             new_name = self.args[1]
         else:
@@ -118,9 +139,15 @@ class Baby(Client):
         fhead.close()
         print("Username changed to " + new_name)
 
-    '''Commit changes to the file.'''
-
     def commit(self):
+        """Commit changes.
+
+        Commits the changes to the file by adding this version as the last version of the head file before running
+        through all babygit files and compressing them.
+
+        Returns:
+            None
+        """
         # Initialize the repository
         # todo: Change the version, pref to hash of time & user to make unique.
         version = str(self.last_version + 1)
@@ -219,7 +246,7 @@ class Baby(Client):
                 self.ftp.cwd("..")
                 os.chdir("..")
 
-    def __headParse(self):
+    def __headParse(self, repo_name):
         """ Parse head file
 
         Parses through the head file and grabs relevant information
@@ -227,6 +254,7 @@ class Baby(Client):
         Returns:
             None
         """
+        self.head = self.directory + repo_name + "/.babygit/HEAD.ibby"
         header = open(self.head, 'r')
         temp = header.read()
         contents = temp.split()
@@ -288,6 +316,29 @@ class Baby(Client):
         fout.close()
         fin.close()
 
+    def createInitialHeadFile(self, path):
+        """Create empty head file
+    
+        Called by the repoInit() method. Creates a blank slate head file
+        for each new BabyGit repository that is created.
+      
+        Args:
+            path: the location of the header file
+        """
+        template = "-LOCALHEAD\nvers0\n" + \
+                   "-REMOTEHEAD\nvers0\n" + \
+                   "-USER\n" + \
+                   str(self.user) + "\n" + \
+                   "-REPONAME\n" + str(self.repo_name) + \
+                   "-HOSTNAME\nlocalhost\n" + \
+                   "-LISTEDFILES\n" + \
+                   "-STARTLIST\n" + \
+                   "-ENDLIST\n" + \
+                   "-LASTVER\nvers0\n"
+
+        with open(path, 'w+') as f:
+            f.write(template)
+
     def repoInit(self, name):
         """Initialize a BabyGit repository
 
@@ -314,12 +365,12 @@ class Baby(Client):
 
         # Initialize named repo created in the current directory
         if name == None:
-            repo_name = 'crib'
+            self.repo_name = 'crib'
         else:
-            repo_name = name
+            self.repo_name = name
 
         # Absolute path for repo to create
-        directory = directory + repo_name
+        directory = directory + self.repo_name
         directory_after_init = directory + "/.babygit"
 
         # Setup hidden babygit repo file if it does not exist
@@ -328,13 +379,17 @@ class Baby(Client):
             absolute_path = directory + "/.babygit"
             os.makedirs(absolute_path, exist_ok=False)
 
-            # Create HEAD.ibby file 
+            # Create template HEAD.ibby file
             head_file_path = absolute_path + "/HEAD.ibby"
-            open(head_file_path, "w+")
+            self.createInitialHeadFile(head_file_path)
 
-        except:
-            print("This directory is already initialized." +
-                  "\nDelete all BabyGit related files and try again.")
+            # Change header file pointer
+        # TODO make it so a template head file is placed in the head file location
+        except Exception as e:
+            print("This directory may already be initialized." +
+                  "\nTry deleting all BabyGit related files and try again.")
+            print(e)
+            return
 
         # now that the directories have been created, we need to upload them
         # to the server
