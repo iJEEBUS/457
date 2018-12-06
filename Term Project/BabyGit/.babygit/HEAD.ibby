@@ -10,9 +10,12 @@ repo
 localhost
 -LISTEDFILES
 -STARTLIST
+testfileindirectory
 -ENDLIST
 -LISTEDDIRS
 -STARTDIRS
+dfa
+testd
 -ENDDIRS
 -LASTVER
 vers0

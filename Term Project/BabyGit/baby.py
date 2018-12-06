@@ -115,13 +115,13 @@ class Baby(Client):
         # if the file isn't a directory, rewrite the head with the new file added.
         # todo make sure file isn't already staged.
 
-        if (os.path.isfile(filename)):
+        if (os.path.isfile(filename)) and not filename in self.staged_files:
             self.file_contents.insert(self.file_list_end_index, filename)
-        elif (os.path.isdir(filename)):
+        elif (os.path.isdir(filename)) and not filename in self.staged_dirs :
             self.file_contents.insert(self.dir_list_end_index, filename)
             self.__stageLoop(self.cwd + "/" + filename + "/", self.cwd + "/" + filename)
         else:
-            print(filename + " does not exist in this directory.")
+            print(filename + " does not exist in this directory, or is already staged.")
         str1 = '\n'.join(self.file_contents)
         fhead.write(str1)
         fhead.close()
@@ -336,6 +336,7 @@ class Baby(Client):
             else:
                 if listing_files:
                     listed_files.append(line)
+
                 elif listing_dirs:
                     listed_dirs.append(line)
                 # Gets the number of the last version created.
