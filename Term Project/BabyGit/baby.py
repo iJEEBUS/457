@@ -99,18 +99,12 @@ class Baby(Client):
             self.push()
             pass
         elif command == "pull":
-            # get the name of the repository to pull
+            # get the user and name of the repository to pull
             remote_repo = self.args[1]
-            print(remote_repo)
+            self.user = self.args[2]
+
             # pull the repo
-            # self.pull(remote_repo)
-            pass
-        elif command == "clone":
-            # get the name of the repository to clone
-            pass
-        elif command == "checkout":
-            pass
-        elif command == "branch":  # Are we adding branch to our program?
+            self.pull(remote_repo)
             pass
         elif command == "user":
             self.head = os.getcwd() + '/.babygit/HEAD.ibby'
@@ -228,21 +222,18 @@ class Baby(Client):
                     self.__compileFile(filename, destfile + "/" +
                                        filename + '.' + version + '.bby')
 
-    def publish(self):
-        """
-
-        :return:
-        """
+    def pull(self, repo_name):
         try:
-            self.user = self.file_contents[5]
             super(Baby, self).__init__(self.host_address, self.user)
-            self.ftp.cwd(self.repo_name)
-            self.ftp.cwd(self.user)
-            os.chdir(os.getcwd() + '/.babygit/')
-            self.ftp.storbinary('STOR HEAD.ibby', open('HEAD.ibby', 'rb'))
-            self.ftp.quit()
+            self.ftp.cwd(repo_name + '/')
+            os.mkdir(repo_name + '/')
+            os.chdir(repo_name)
         except Exception as e:
             print(e)
+        self.pullLoop()
+
+
+
 
 # TODO fix this method. This only works when pushing the initial files to the server
     def push(self):
@@ -266,6 +257,27 @@ class Baby(Client):
 
         self.pushLoop(self.cwd + "/.babygit/", self.cwd + "/.babygit/")
         self.ftp.quit()
+
+    def pullLoop(self):
+        for filename in self.ftp.nlst():
+
+            directory = True
+            try:
+                self.ftp.cwd(filename)
+                os.mkdir(filename)
+                os.chdir(filename)
+                self.pullLoop()
+                self.ftp.cwd('..')
+                os.chdir('..')
+            except Exception as e:
+                directory = False
+
+            if not directory:
+                local_path = os.path.join(os.getcwd() + '/', filename)
+                f = open(local_path, 'wb')
+                self.ftp.retrbinary('RETR ' + filename, f.write)
+
+
 
     def pushLoop(self, file, curdir):
         """ Recurse through all files in directory.
