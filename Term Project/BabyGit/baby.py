@@ -31,7 +31,6 @@ class Baby(Client):
         self.head = (self.directory + ".babygit/HEAD.ibby")
         self.user = "anon"
         self.repo_name = "babygit"
-        # todo add user to parse
         # file_list_index is the index of where the list of files in version control in the header ends.
         self.file_list_end_index = None
         self.dir_list_end_index = None
@@ -77,19 +76,11 @@ class Baby(Client):
                 # pull the repo
                 # self.pull(remote_repo)
                 pass
-            elif command == "clone":
-                # get the name of the repository to clone
-                pass
-            elif command == "checkout":
-                pass
-            elif command == "branch":  # Are we adding branch to our program?
-                pass
             elif command == "user":
                 self.userChange()
             elif command == "help":
                 print("Command list:\ninit: initialize a repo.\nstage: stage a file."
                       "\ncommit: commit changes.\npush: push changes to remote. \nuser: change user")
-                # todo add the rest of the commands as we complete them.
             else:
                 print("Command not recognized. Use command \"help\" for more information.")
         except:
@@ -187,7 +178,6 @@ class Baby(Client):
             None
         """
         # Initialize the repository
-        # todo: Change the version, pref to hash of time & user to make unique.
         version = str(self.last_version + 1)
         destfile = self.directory + ".babygit" + "\\vers" + str(version)
         os.makedirs(destfile)
@@ -227,7 +217,6 @@ class Baby(Client):
             if (filename in self.staged_files) or (filename in self.staged_dirs):
                 print("+ " + filename)
                 # If the file is not a directory
-                # todo add directory commit
                 if os.path.isfile(os.path.join(self.directory, filename)):
                     self.__compileFile(filename, destfile + "/" +
                                        filename + '.' + version + '.bby')
