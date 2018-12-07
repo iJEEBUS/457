@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4292c05-5b55-42a0-9d97-72a962f00c66" name="Default Changelist" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/testd/testrepo2/testfile3" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/testd/testrepo3/testrepo4/testfile6" />
       <change beforePath="$PROJECT_DIR$/.babygit/HEAD.ibby" afterPath="$PROJECT_DIR$/.babygit/HEAD.ibby" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers10/.comment.ibby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers10/baby.py.10.bby" afterPath="" />
@@ -23,7 +25,9 @@
       <change beforePath="$PROJECT_DIR$/.babygit/vers9/baby_server.py.9.bby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers9/client.py.9.bby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers9/testfile.txt.9.bby" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/baby.py" afterPath="$PROJECT_DIR$/baby.py" />
+      <change beforePath="$PROJECT_DIR$/testd/testfileindirectory" afterPath="$PROJECT_DIR$/testd/testfile2" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -72,26 +76,13 @@
           <file leaf-file-name="baby.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/baby.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="342">
-                  <caret line="123" column="86" lean-forward="false" selection-start-line="123" selection-start-column="86" selection-end-line="123" selection-end-column="86" />
+                <state relative-caret-position="204">
+                  <caret line="259" column="25" lean-forward="false" selection-start-line="259" selection-start-column="25" selection-end-line="259" selection-end-column="25" />
                   <folding>
-                    <element signature="e#5572#6256#0" expanded="false" />
-                    <element signature="e#6288#8500#0" expanded="false" />
-                    <element signature="e#8530#9332#0" expanded="false" />
-                    <element signature="e#12958#13467#0" expanded="false" />
-                    <element signature="e#13520#14372#0" expanded="false" />
-                    <element signature="e#14412#15939#0" expanded="false" />
+                    <element signature="e#5443#6127#0" expanded="false" />
+                    <element signature="e#14796#15648#0" expanded="false" />
+                    <element signature="e#15688#17215#0" expanded="false" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="testfileindirectory" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testd/testfileindirectory">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -99,8 +90,8 @@
           <file leaf-file-name="client.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/client.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="29" column="38" lean-forward="false" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
+                <state relative-caret-position="-238">
+                  <caret line="43" column="41" lean-forward="false" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
                   <folding>
                     <element signature="e#233#255#0" expanded="true" />
                   </folding>
@@ -115,25 +106,35 @@
           <file leaf-file-name="baby.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/baby.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="728">
-                  <caret line="287" column="34" lean-forward="false" selection-start-line="287" selection-start-column="34" selection-end-line="287" selection-end-column="34" />
+                <state relative-caret-position="2325">
+                  <caret line="479" column="0" lean-forward="false" selection-start-line="479" selection-start-column="0" selection-end-line="479" selection-end-column="0" />
                   <folding>
-                    <element signature="e#5572#6256#0" expanded="false" />
-                    <element signature="e#6288#8500#0" expanded="false" />
-                    <element signature="e#10614#12893#0" expanded="false" />
-                    <element signature="e#12958#13467#0" expanded="false" />
-                    <element signature="e#14412#15939#0" expanded="false" />
-                    <marker date="1544138170018" expanded="true" signature="4855:4986" ph="..." />
+                    <element signature="e#3445#4256#0" expanded="false" />
+                    <element signature="e#5443#6127#0" expanded="false" />
+                    <element signature="e#12120#14226#0" expanded="false" />
+                    <element signature="e#14291#14743#0" expanded="false" />
+                    <element signature="e#15688#17215#0" expanded="false" />
+                    <marker date="1544140796985" expanded="true" signature="9258:9392" ph="..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="HEAD.ibby" pinned="false" current-in-tab="true">
+          <file leaf-file-name="HEAD.ibby" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/.babygit/HEAD.ibby">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
-                  <caret line="17" column="5" lean-forward="false" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+                <state relative-caret-position="272">
+                  <caret line="16" column="8" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name=".comment.ibby" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/.babygit/vers3/.comment.ibby">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -163,13 +164,13 @@
       <find>os.chdir</find>
       <find>head.bby</find>
       <find>HEAD.bby</find>
-      <find>print</find>
       <find>todo</find>
       <find>file_name</find>
       <find>filename</find>
       <find>file_contents</find>
       <find>/</find>
       <find>\\</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -184,6 +185,8 @@
         <option value="$PROJECT_DIR$/baby_server.py" />
         <option value="$PROJECT_DIR$/.babygit/HEAD.bby" />
         <option value="$PROJECT_DIR$/.babygit/vers2/.comment.ibby" />
+        <option value="$PROJECT_DIR$/testd/testfile2" />
+        <option value="$PROJECT_DIR$/testd/testrepo3/testrepo4/testfile6" />
         <option value="$PROJECT_DIR$/.babygit/HEAD.ibby" />
         <option value="$PROJECT_DIR$/baby.py" />
       </list>
@@ -222,6 +225,30 @@
               <item name="BabyGit" type="b2602c69:ProjectViewProjectNode" />
               <item name="BabyGit" type="462c0819:PsiDirectoryNode" />
               <item name=".babygit" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BabyGit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BabyGit" type="462c0819:PsiDirectoryNode" />
+              <item name=".babygit" type="462c0819:PsiDirectoryNode" />
+              <item name="vers3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BabyGit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BabyGit" type="462c0819:PsiDirectoryNode" />
+              <item name="testd" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BabyGit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BabyGit" type="462c0819:PsiDirectoryNode" />
+              <item name="testd" type="462c0819:PsiDirectoryNode" />
+              <item name="testrepo3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BabyGit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BabyGit" type="462c0819:PsiDirectoryNode" />
+              <item name="testd" type="462c0819:PsiDirectoryNode" />
+              <item name="testrepo3" type="462c0819:PsiDirectoryNode" />
+              <item name="testrepo4" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -269,7 +296,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="BabyGit" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/baby.py" />
-      <option name="PARAMETERS" value="stage testd" />
+      <option name="PARAMETERS" value="commit &quot;recursion.&quot;" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -376,12 +403,12 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3347826" sideWeight="0.49966952" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14851485" sideWeight="0.50231326" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26630434" sideWeight="0.4976867" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26630434" sideWeight="0.4976867" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.49966952" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33804348" sideWeight="0.4990086" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23369566" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3652174" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3347826" sideWeight="0.49966952" order="6" side_tool="false" content_ui="tabs" />
@@ -409,8 +436,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/baby.py</url>
-          <line>416</line>
+          <line>442</line>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/baby.py</url>
+          <line>253</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/baby.py</url>
+          <line>144</line>
+          <option name="timeStamp" value="33" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -420,62 +457,24 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="26" />
+      <option name="time" value="34" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="os.curdir" language="Python" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>os.curdir</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.babygit/HEAD.ibby">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="9" lean-forward="false" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="37" column="36" lean-forward="false" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
-          <folding>
-            <element signature="e#233#255#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baby_server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#202#211#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baby.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1598">
-          <caret line="98" column="28" lean-forward="false" selection-start-line="98" selection-start-column="28" selection-end-line="98" selection-end-column="28" />
-          <folding>
-            <element signature="e#5572#6256#0" expanded="false" />
-            <element signature="e#6288#8500#0" expanded="false" />
-            <element signature="e#8530#9332#0" expanded="false" />
-            <element signature="e#12958#13467#0" expanded="false" />
-            <element signature="e#13520#14372#0" expanded="false" />
-            <element signature="e#14412#15939#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.babygit/HEAD.ibby">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="9" lean-forward="false" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1139">
@@ -509,6 +508,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
           <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -569,12 +569,12 @@
         <state relative-caret-position="1581">
           <caret line="104" column="18" lean-forward="false" selection-start-line="104" selection-start-column="18" selection-end-line="104" selection-end-column="18" />
           <folding>
-            <element signature="e#5572#6256#0" expanded="false" />
-            <element signature="e#6288#8500#0" expanded="false" />
-            <element signature="e#8530#9332#0" expanded="false" />
-            <element signature="e#12958#13467#0" expanded="false" />
-            <element signature="e#13520#14372#0" expanded="false" />
-            <element signature="e#14412#15939#0" expanded="false" />
+            <element signature="e#3445#4256#0" expanded="false" />
+            <element signature="e#5443#6127#0" expanded="false" />
+            <element signature="e#12120#14226#0" expanded="false" />
+            <element signature="e#14291#14743#0" expanded="false" />
+            <element signature="e#15688#17215#0" expanded="false" />
+            <marker date="1544140796985" expanded="true" signature="9258:9392" ph="..." />
           </folding>
         </state>
       </provider>
@@ -594,12 +594,12 @@
         <state relative-caret-position="272">
           <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
           <folding>
-            <element signature="e#5572#6256#0" expanded="false" />
-            <element signature="e#6288#8500#0" expanded="false" />
-            <element signature="e#8530#9332#0" expanded="false" />
-            <element signature="e#12958#13467#0" expanded="false" />
-            <element signature="e#13520#14372#0" expanded="false" />
-            <element signature="e#14412#15939#0" expanded="false" />
+            <element signature="e#3445#4256#0" expanded="false" />
+            <element signature="e#5443#6127#0" expanded="false" />
+            <element signature="e#12120#14226#0" expanded="false" />
+            <element signature="e#14291#14743#0" expanded="false" />
+            <element signature="e#15688#17215#0" expanded="false" />
+            <marker date="1544140796985" expanded="true" signature="9258:9392" ph="..." />
           </folding>
         </state>
       </provider>
@@ -637,12 +637,12 @@
         <state relative-caret-position="1598">
           <caret line="98" column="28" lean-forward="false" selection-start-line="98" selection-start-column="28" selection-end-line="98" selection-end-column="28" />
           <folding>
-            <element signature="e#5572#6256#0" expanded="false" />
-            <element signature="e#6288#8500#0" expanded="false" />
-            <element signature="e#8530#9332#0" expanded="false" />
-            <element signature="e#12958#13467#0" expanded="false" />
-            <element signature="e#13520#14372#0" expanded="false" />
-            <element signature="e#14412#15939#0" expanded="false" />
+            <element signature="e#3445#4256#0" expanded="false" />
+            <element signature="e#5443#6127#0" expanded="false" />
+            <element signature="e#12120#14226#0" expanded="false" />
+            <element signature="e#14291#14743#0" expanded="false" />
+            <element signature="e#15688#17215#0" expanded="false" />
+            <marker date="1544140796985" expanded="true" signature="9258:9392" ph="..." />
           </folding>
         </state>
       </provider>
@@ -684,13 +684,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testServerRepo/Brycevers1/HEAD.bby" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/ntpath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.babygit.COMMENT.bby" />
     <entry file="file://$PROJECT_DIR$/.babygit/vers10/.BBYCOMMENT.bby" />
     <entry file="file://$PROJECT_DIR$/testServerRepo/Brycevers3/HEAD.bby" />
@@ -708,32 +701,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="29" column="38" lean-forward="false" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
-          <folding>
-            <element signature="e#233#255#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testd/testfileindirectory">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/genericpath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -780,26 +747,100 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.babygit/HEAD.ibby">
+    <entry file="file://$PROJECT_DIR$/.babygit/vers1/.comment.ibby">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="5" lean-forward="false" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testd/testrepo2/testfile3">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testd/testfile2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/ntpath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/genericpath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-238">
+          <caret line="43" column="41" lean-forward="false" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+          <folding>
+            <element signature="e#233#255#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testd/testrepo3/testfile4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testd/testrepo3/testrepo4/testfile6">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="1" lean-forward="true" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/baby.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="123" column="86" lean-forward="false" selection-start-line="123" selection-start-column="86" selection-end-line="123" selection-end-column="86" />
+        <state relative-caret-position="2325">
+          <caret line="479" column="0" lean-forward="false" selection-start-line="479" selection-start-column="0" selection-end-line="479" selection-end-column="0" />
           <folding>
-            <element signature="e#5572#6256#0" expanded="false" />
-            <element signature="e#6288#8500#0" expanded="false" />
-            <element signature="e#8530#9332#0" expanded="false" />
-            <element signature="e#12958#13467#0" expanded="false" />
-            <element signature="e#13520#14372#0" expanded="false" />
-            <element signature="e#14412#15939#0" expanded="false" />
+            <element signature="e#3445#4256#0" expanded="false" />
+            <element signature="e#5443#6127#0" expanded="false" />
+            <element signature="e#12120#14226#0" expanded="false" />
+            <element signature="e#14291#14743#0" expanded="false" />
+            <element signature="e#15688#17215#0" expanded="false" />
+            <marker date="1544140796985" expanded="true" signature="9258:9392" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.babygit/HEAD.ibby">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="8" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.babygit/vers3/.comment.ibby">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

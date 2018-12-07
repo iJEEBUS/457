@@ -110,11 +110,7 @@ class Baby(Client):
             None
         """
 
-
         fhead = open(self.head, "w")
-        # if the file isn't a directory, rewrite the head with the new file added.
-        # todo make sure file isn't already staged.
-
         if (os.path.isfile(filename)) and not filename in self.staged_files:
             self.file_contents.insert(self.file_list_end_index, filename)
         elif (os.path.isdir(filename)) and not filename in self.staged_dirs :
@@ -140,19 +136,19 @@ class Baby(Client):
         """
         for file_name in os.listdir(file):
             print (os.path.join(curdir,file_name))
-            #If the file is a File, stage it.
+            # If the file is a File, stage it.
             if os.path.isfile(os.path.join(curdir,file_name)):
                 self.file_contents.insert(self.file_list_end_index, file_name)
                 self.staged_files.append(file_name)
                 self.dir_list_end_index += 1
-            #If the file is a directory, recursively stage.
+            # If the file is a directory, recursively stage.
             elif os.path.isdir(os.path.join(curdir,file_name)):
                 self.file_contents.insert(self.dir_list_end_index, file_name)
                 # Need a second current directory in case there's multiple directories
                 # within one directory.
                 curdir1 = curdir + "/" + file_name
                 os.chdir(curdir1)
-                self.__stageLoop(file + file_name, curdir1)
+                self.__stageLoop(file + "/" + file_name, curdir1)
                 os.chdir("..")
 
     def userChange(self):
@@ -228,13 +224,47 @@ class Baby(Client):
         # For each file in the directory that is listed and staged in the git file, compress it
         print("Committing files:")
         for filename in os.listdir(self.cwd):
-            if (filename in self.staged_files):
+            if (filename in self.staged_files) or (filename in self.staged_dirs):
                 print("+ " + filename)
                 # If the file is not a directory
                 # todo add directory commit
                 if os.path.isfile(os.path.join(self.directory, filename)):
                     self.__compileFile(filename, destfile + "/" +
                                        filename + '.' + version + '.bby')
+                elif os.path.isdir(os.path.join(self.directory, filename)):
+                    os.chdir(self.directory + filename)
+                    os.mkdir(destfile + "/" + filename)
+                    destfile = destfile + "/" + filename
+                    self.__commitLoop(self.cwd + "/" + filename + "/", self.cwd + "/" + filename + "/", version, destfile)
+
+
+    def __commitLoop(self, file, curdir, version, destfile):
+        """ Recurse through files under directory
+
+                Recursively commits those files.
+
+                Args:
+                     File: The directory to start the recursive loop on.
+
+                Returns:
+                    None
+                """
+        for file_name in os.listdir(file):
+            # If the file is a File, commit it.
+            if os.path.isfile(os.path.join(curdir, file_name)):
+                self.__compileFile(file_name, destfile + "/" +
+                                   file_name + '.' + version + '.bby')
+                print("+ " + file_name)
+            # If the file is a directory, recursively commit.
+            elif os.path.isdir(os.path.join(curdir, file_name)):
+                print("++ " + file_name)
+                os.mkdir(destfile + "/" + file_name)
+                # Need a second current directory in case there's multiple directories
+                # within one directory.
+                curdir1 = curdir + "/" + file_name
+                os.chdir(curdir1)
+                self.__commitLoop(file + "/" + file_name, curdir1, version, destfile + "/" + file_name)
+                os.chdir("..")
 
     def push(self):
         """ Push files to remote repository.
@@ -284,7 +314,7 @@ class Baby(Client):
                 self.ftp.cwd(file_name)
                 curdir1 = curdir + "/" + file_name
                 os.chdir(curdir1)
-                self.__pushLoop(file + file_name, curdir1)
+                self.__pushLoop(file + "/" + file_name, curdir1)
                 self.ftp.cwd("..")
                 os.chdir("..")
 
@@ -306,8 +336,6 @@ class Baby(Client):
         last_version = 0
         listed_files = []
         listed_dirs = []
-        # todo add functionality to find the currenthead
-        # Todo Occasionally after switching to a different command the headparse no longer goes through correctly.
         index = 0
         for line in contents:
             if line == "-STARTLIST":
@@ -332,7 +360,6 @@ class Baby(Client):
             elif line == "-ENDDIRS":
                 listing_files = False
                 self.dir_list_end_index = index
-
             else:
                 if listing_files:
                     listed_files.append(line)
@@ -367,7 +394,6 @@ class Baby(Client):
             None
         """
         fin = open(file_name, 'rb')
-        # todo: add repo identifier for each repo cloned
         fout = gzip.open(new_file_name, 'wb')
         fout.writelines(fin)
         fout.close()
