@@ -19,7 +19,7 @@ def main():
 	Runs infinitely and accepts all client connections.
 	"""
 	cwd = os.getcwd()
-	directory = '/Users/jeannettehigh/.babygit'
+	directory = 'D:\\github\\457\\Term Project\\BabyGit\\testrepo'
 
 	# Make the directory if it does not exist
 	if not os.path.isdir(directory):

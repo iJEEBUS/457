@@ -2,22 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4292c05-5b55-42a0-9d97-72a962f00c66" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.babygit/HEAD.ibby" afterPath="$PROJECT_DIR$/.babygit/HEAD.ibby" />
+      <change beforePath="$PROJECT_DIR$/.babygit/HEAD.ibby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers1/.comment.ibby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers1/testd/testfile2.1.bby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers1/testd/testrepo2/testfile3.1.bby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers1/testd/testrepo3/testfile4.1.bby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers1/testd/testrepo3/testrepo4/testfile6.1.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers10/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers10/baby.py.10.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers10/baby_server.py.10.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers10/client.py.10.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers10/testfile.txt.10.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers11/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers11/baby.py.11.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers11/baby_server.py.11.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers11/client.py.11.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers11/testfile.txt.11.bby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers2/.comment.ibby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers2/testd/testfile2.2.bby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers2/testd/testrepo2/testfile3.2.bby" afterPath="" />
@@ -28,18 +18,14 @@
       <change beforePath="$PROJECT_DIR$/.babygit/vers3/testd/testrepo2/testfile3.3.bby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers3/testd/testrepo3/testfile4.3.bby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.babygit/vers3/testd/testrepo3/testrepo4/testfile6.3.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers8/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers8/baby.py.8.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers8/baby_server.py.8.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers8/client.py.8.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers8/testfile.txt.8.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers9/.comment.ibby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers9/baby.py.9.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers9/baby_server.py.9.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers9/client.py.9.bby" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.babygit/vers9/testfile.txt.9.bby" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.babygit/vers4/.comment.ibby" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.babygit/vers4/testd/testfile2.4.bby" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.babygit/vers4/testd/testrepo2/testfile3.4.bby" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.babygit/vers4/testd/testrepo3/testfile4.4.bby" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.babygit/vers4/testd/testrepo3/testrepo4/testfile6.4.bby" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/baby.py" afterPath="$PROJECT_DIR$/baby.py" />
+      <change beforePath="$PROJECT_DIR$/baby_server.py" afterPath="$PROJECT_DIR$/baby_server.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -88,18 +74,8 @@
           <file leaf-file-name="baby.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/baby.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="135" column="36" lean-forward="true" selection-start-line="135" selection-start-column="36" selection-end-line="135" selection-end-column="36" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name=".comment.ibby" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/.babygit/vers1/.comment.ibby">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <state relative-caret-position="187">
+                  <caret line="447" column="30" lean-forward="true" selection-start-line="447" selection-start-column="30" selection-end-line="447" selection-end-column="30" />
                   <folding />
                 </state>
               </provider>
@@ -108,8 +84,8 @@
           <file leaf-file-name="client.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/client.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="204">
-                  <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+                <state relative-caret-position="238">
+                  <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -122,8 +98,8 @@
           <file leaf-file-name="baby.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/baby.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2325">
-                  <caret line="604" column="0" lean-forward="false" selection-start-line="604" selection-start-column="0" selection-end-line="604" selection-end-column="0" />
+                <state relative-caret-position="2053">
+                  <caret line="480" column="21" lean-forward="false" selection-start-line="480" selection-start-column="21" selection-end-line="480" selection-end-column="21" />
                   <folding>
                     <element signature="e#302#322#0" expanded="true" />
                   </folding>
@@ -131,21 +107,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="HEAD.ibby" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/.babygit/HEAD.ibby">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
-                  <caret line="17" column="11" lean-forward="true" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="baby_server.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/baby_server.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="170">
-                  <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+                <state relative-caret-position="102">
+                  <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
                   <folding />
                 </state>
               </provider>
@@ -171,6 +137,8 @@
       <find>\\</find>
       <find>print</find>
       <find>pu</find>
+      <find>Pull</find>
+      <find>init</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -182,12 +150,13 @@
         <option value="$PROJECT_DIR$/.babygit/backupheadfortesting" />
         <option value="$PROJECT_DIR$/.babygit/HEAD" />
         <option value="$PROJECT_DIR$/client.py" />
-        <option value="$PROJECT_DIR$/baby_server.py" />
         <option value="$PROJECT_DIR$/.babygit/HEAD.bby" />
         <option value="$PROJECT_DIR$/.babygit/vers2/.comment.ibby" />
         <option value="$PROJECT_DIR$/testd/testfile2" />
         <option value="$PROJECT_DIR$/testd/testrepo3/testrepo4/testfile6" />
+        <option value="$PROJECT_DIR$/.babygit/vers1/.comment.ibby" />
         <option value="$PROJECT_DIR$/.babygit/HEAD.ibby" />
+        <option value="$PROJECT_DIR$/baby_server.py" />
         <option value="$PROJECT_DIR$/baby.py" />
       </list>
     </option>
@@ -228,19 +197,6 @@
               <item name="BabyGit" type="462c0819:PsiDirectoryNode" />
               <item name=".babygit" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="BabyGit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BabyGit" type="462c0819:PsiDirectoryNode" />
-              <item name=".babygit" type="462c0819:PsiDirectoryNode" />
-              <item name="vers1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BabyGit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BabyGit" type="462c0819:PsiDirectoryNode" />
-              <item name=".babygit" type="462c0819:PsiDirectoryNode" />
-              <item name="vers1" type="462c0819:PsiDirectoryNode" />
-              <item name="testd" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -256,8 +212,8 @@
       <recent name="C:\Users\Bryce\Documents\GitHub\457\Term Project\BabyGit\.babygit" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\github\457\Term Project\BabyGit\.babygit" />
       <recent name="D:\github\457\Term Project\BabyGit" />
+      <recent name="D:\github\457\Term Project\BabyGit\.babygit" />
       <recent name="C:\Users\Bryce\Documents\GitHub\457\Term Project\BabyGit\" />
     </key>
   </component>
@@ -394,11 +350,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12934783" sideWeight="0.49966952" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14851485" sideWeight="0.50231326" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26630434" sideWeight="0.4976867" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5445652" sideWeight="0.4976867" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.49966952" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33804348" sideWeight="0.4990086" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13913043" sideWeight="0.4990086" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3652174" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -630,7 +586,7 @@
     <entry file="file://$PROJECT_DIR$/.babygit/vers2/.comment.ibby" />
     <entry file="file://$PROJECT_DIR$/.babygit/vers7/.comment.ibby" />
     <entry file="file://$PROJECT_DIR$/testServerRepo/Brycevers6/vers6/.comment.ibby" />
-    <entry file="file://$PROJECT_DIR$/crib/.babygit/HEAD.ibby" />
+    <entry file="file://$PROJECT_DIR$/.babygit/HEAD.ibby" />
     <entry file="file://$PROJECT_DIR$/testd/fuck/fuckinfuck" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/_bootlocale.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -698,40 +654,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="238">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.babygit/vers1/.comment.ibby">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="119">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.babygit/HEAD.ibby">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="11" lean-forward="true" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+        <state relative-caret-position="425">
+          <caret line="25" column="5" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/baby_server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        <state relative-caret-position="102">
+          <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/baby.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="135" column="36" lean-forward="true" selection-start-line="135" selection-start-column="36" selection-end-line="135" selection-end-column="36" />
+        <state relative-caret-position="187">
+          <caret line="447" column="30" lean-forward="true" selection-start-line="447" selection-start-column="30" selection-end-line="447" selection-end-column="30" />
           <folding />
         </state>
       </provider>

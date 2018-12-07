@@ -1,11 +1,11 @@
 -LOCALHEAD
-vers4
+vers1
 -REMOTEHEAD
 vers0
 -USER
 Bryce
 -REPONAME
-repo
+crib
 -HOSTNAME
 localhost
 -LISTEDFILES
@@ -23,7 +23,5 @@ testrepo2
 testd
 -ENDDIRS
 -LASTVER
+vers0
 vers1
-vers2
-vers3
-vers4

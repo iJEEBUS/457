@@ -448,7 +448,7 @@ class Baby(Client):
         except Exception as e:
             print(e)
 
-        self.pushLoop(self.cwd + "/.babygit/", self.cwd + "/.babygit/")
+        self.__pushLoop(self.cwd + "/.babygit/", self.cwd + "/.babygit/")
         self.ftp.quit()
 
     def __pushLoop(self, file, curdir):
