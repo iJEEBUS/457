@@ -28,8 +28,7 @@ class Baby(Client):
         Args:
             init_args: command line arguments passed by user
         """
-        # todo: we can probably add most of these into two dictionaries.
-        # todo: dictionary header information, dict directory information.
+
         self.args = init_args
         command = self.args[0]
         self.host_address = "0.0.0.0"
@@ -130,7 +129,6 @@ class Baby(Client):
 
             print("Command list:\ninit: initialize a repo.\nstage: stage a file."
                   "\ncommit: commit changes.\npush: push changes to remote. \nuser: change user")
-            # todo add the rest of the commands as we complete them.
 
         else:
             print("Command not recognized. Use command \"help\" for more information.")
