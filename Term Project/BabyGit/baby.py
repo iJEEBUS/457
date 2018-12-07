@@ -15,7 +15,7 @@ import os
 import gzip
 import re
 import datetime
-import time
+import shutil
 
 
 class Baby(Client):
@@ -102,10 +102,13 @@ class Baby(Client):
             # get the user and name of the repository to pull
             remote_repo = self.args[1]
             self.user = self.args[2]
+            self.repo_name = remote_repo
 
             # pull the repo
             self.pull(remote_repo)
             pass
+        elif command == 'unzip':
+            self.decompressFiles()
         elif command == "user":
             self.head = os.getcwd() + '/.babygit/HEAD.ibby'
             print(self.head)
@@ -232,6 +235,13 @@ class Baby(Client):
             print(e)
         self.pullLoop()
 
+    def decompressFiles(self):
+        for file in os.listdir('.'):
+            if file[0] == '.':
+                pass
+            elif file[-4:] == '.bby':
+                with gzip.open(file, 'r') as f_in, open(file[:-6], 'wb') as f_out:
+                    shutil.copyfileobj(f_in, f_out)
 
 
 
@@ -251,7 +261,7 @@ class Baby(Client):
 
         try:
             super(Baby, self).__init__(self.host_address, self.user)
-            self.ftp.cwd(repo_name + '/' + self.user + '/')
+            self.ftp.cwd(repo_name + '/.babygit')
         except Exception as e:
             print(e)
 
@@ -276,8 +286,7 @@ class Baby(Client):
                 local_path = os.path.join(os.getcwd() + '/', filename)
                 f = open(local_path, 'wb')
                 self.ftp.retrbinary('RETR ' + filename, f.write)
-
-
+                f.close()
 
     def pushLoop(self, file, curdir):
         """ Recurse through all files in directory.
@@ -325,13 +334,7 @@ class Baby(Client):
             None
         """
         # Set head file location.
-        # Uses repo name for new inits.
-        # Otherwise you will already by in the baby git directory.
-        # if repo_name is not None:
-        #     self.head = os.getcwd() + "/" + repo_name + "/.babygit/HEAD.ibby"
-        # else:
-        #     self.head = os.getcwd() + "/.babygit/HEAD.ibby"
-
+        # self.head = os.getcwd() + '/HEAD.ibby'
         header = open(self.head, 'r')
         temp = header.read()
         contents = temp.split()
@@ -447,6 +450,7 @@ class Baby(Client):
             # Create template HEAD.ibby file
             head_file_path = absolute_path + "/HEAD.ibby"
             self.createInitialHeadFile(head_file_path)
+            self.head = head_file_path
 
         except Exception as e:
             print("This directory may already be initialized." +
@@ -470,8 +474,8 @@ class Baby(Client):
                 # Create remote directories
                 self.ftp.mkd(self.repo_name)
                 self.ftp.cwd(self.repo_name)
-                self.ftp.mkd(self.user)
-                self.ftp.cwd(self.user)
+                self.ftp.mkd('.babygit')
+                self.ftp.cwd('.babygit')
 
                 # Only try to send the head file if it exists
                 if os.path.isfile(head_file_path):
